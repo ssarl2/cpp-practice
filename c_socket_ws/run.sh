@@ -1,12 +1,17 @@
 #!/bin/bash
 
+if [ ! -d "build" ]
+then
+    mkdir build
+fi
+
 cd src
 
 file_name="${1%.*}"
 
-if [ -f build/${file_name} ]
+if [ -f ../build/${file_name} ]
 then
-    rm build/${file_name}
+    rm ../build/${file_name}
 fi
 
 echo "Run $1"
