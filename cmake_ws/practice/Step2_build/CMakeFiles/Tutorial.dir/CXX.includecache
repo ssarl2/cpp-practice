@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/hyunbin/test_folder/Tutorial/Step2/MathFunctions/MathFunctions.h
+
+/home/hyunbin/test_folder/Tutorial/Step2/tutorial.cxx
+cmath
+-
+iostream
+-
+string
+-
+TutorialConfig.h
+/home/hyunbin/test_folder/Tutorial/Step2/TutorialConfig.h
+MathFunctions.h
+/home/hyunbin/test_folder/Tutorial/Step2/MathFunctions.h
+
+TutorialConfig.h
+
