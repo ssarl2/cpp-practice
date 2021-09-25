@@ -326,7 +326,9 @@ int main(int argc, char *argv[])
     //  * a variable for counting overlapped claims
     //  * a function of comparing two claims whether they overlap
     //  * calculate overlapped claims and save it for the result
+    //  * calculate not overlapped claims and save it for the result (part2)
     //  * print a fabric with claims for fun
+    //  * print not overlapped claim numbers (part2)
 
     return 0;
 }
