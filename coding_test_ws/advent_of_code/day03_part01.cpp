@@ -8,15 +8,18 @@
 #include <map>
 #include <tuple>
 #include <algorithm>
-
+#include <iterator>
 class Claim
 {
 public:
     Claim(std::string claim);
+    int getClaimNumber();
     int getWidthClaim();
     int getHeightClaim();
     int getXFromLeft();
     int getYFromBottom();
+    bool isOverlapped(); // get is_overlapped_ variable
+    void isOverlapped(bool is_overlapped); // set is_overlapped_ variable
 private:
     std::vector<std::vector<int>> parseClaim(std::string claim, std::vector<char> delimiters);
 
@@ -25,9 +28,16 @@ private:
     int y_from_bottom_;
     int width_claim_;
     int height_claim_;
+    bool is_overlapped_;
 };
 
-Claim::Claim(std::string claim)
+Claim::Claim(std::string claim) :
+    claim_number_(0),
+    x_from_left_(0),
+    y_from_bottom_(0),
+    width_claim_(0),
+    height_claim_(0),
+    is_overlapped_(false)
 {
     std::vector<char> delimiters{'@', ',', ':', 'x', '\0'};
     std::vector<std::vector<int>> parsed = Claim::parseClaim(claim, delimiters);
@@ -39,6 +49,11 @@ Claim::Claim(std::string claim)
         width_claim_ = token[3];
         height_claim_ = token[4];
     }
+}
+
+int Claim::getClaimNumber()
+{
+    return claim_number_;
 }
 
 int Claim::getWidthClaim()
@@ -59,6 +74,16 @@ int Claim::getXFromLeft()
 int Claim::getYFromBottom()
 {
     return y_from_bottom_;
+}
+
+bool Claim::isOverlapped()
+{
+    return is_overlapped_;
+}
+
+void Claim::isOverlapped(bool is_overlapped)
+{
+    is_overlapped_ = is_overlapped;
 }
 
 std::vector<std::vector<int>> Claim::parseClaim(std::string claim, std::vector<char> delimiters)
@@ -102,11 +127,14 @@ public:
     Fabric(std::vector<Claim>& claims);
     int getOverlappedClaim();
     void printFabric();
+    void printClaimNumbersNotOverlapped();
 private:
     std::pair<int, int> calcFabricSize(std::vector<Claim>& claims);
-    int checkOverlappedClaim(std::vector<Claim>& claims);
+    std::vector<int> checkNotOverlappedClaimNumbers(std::vector<Claim>& claims);
+    int checkOverlappedClaims(std::vector<Claim>& claims);
 
     std::map<std::pair<int,int>,int> fabric_claim_;
+    std::vector<int> claim_numbers_not_overlapped_;
     int fabric_width_;
     int fabric_height_;
     int count_overlapped_claim_;
@@ -115,7 +143,8 @@ private:
 Fabric::Fabric(std::vector<Claim>& claims)
 {
     std::tie(fabric_width_, fabric_height_) = calcFabricSize(claims);
-    count_overlapped_claim_ = checkOverlappedClaim(claims);
+    count_overlapped_claim_ = checkOverlappedClaims(claims);
+    claim_numbers_not_overlapped_ = checkNotOverlappedClaimNumbers(claims);
 }
 
 int Fabric::getOverlappedClaim()
@@ -144,7 +173,7 @@ std::pair<int, int> Fabric::calcFabricSize(std::vector<Claim>& claims)
     return std::make_pair(longest_x, longest_y);
 }
 
-int Fabric::checkOverlappedClaim(std::vector<Claim>& claims)
+int Fabric::checkOverlappedClaims(std::vector<Claim>& claims)
 {
     int count_overlapped_claim = 0;
     int x = 0;
@@ -183,6 +212,48 @@ int Fabric::checkOverlappedClaim(std::vector<Claim>& claims)
     return count_overlapped_claim;
 }
 
+//* This looks similar to 'checkOverlappedClaims' ,but this had to be existing.
+//* Otherwise the previos overlapped claims are not checked as an overlapped.
+std::vector<int> Fabric::checkNotOverlappedClaimNumbers(std::vector<Claim>& claims)
+{
+    std::vector<int> claim_numbers_not_overlapped;
+    bool is_overlap_checked = false;
+    int x = 0;
+    int y = 0;
+
+    for(auto& claim : claims)
+    {
+        is_overlap_checked = false;
+        for (std::size_t i = 0; i < claim.getHeightClaim(); i++)
+        {
+            for (std::size_t j = 0; j < claim.getWidthClaim(); j++)
+            {
+                x = claim.getXFromLeft() + j;
+                y = claim.getYFromBottom() + i;
+
+                auto it = fabric_claim_.find(std::make_pair(x, y));
+                if(it != fabric_claim_.end())
+                {
+                    //* check if this claim is overlapped for the part2
+                    if(!is_overlap_checked && (it->second > 1))
+                    {
+                        claim.isOverlapped(true);
+                        is_overlap_checked = true;
+                        continue;
+                    }
+                }
+            }
+        }
+        
+        if(!claim.isOverlapped())
+        {
+            claim_numbers_not_overlapped.push_back(claim.getClaimNumber());
+        }
+    }
+
+    return claim_numbers_not_overlapped;
+}
+
 void Fabric::printFabric()
 {
     for (std::size_t i = 0; i < fabric_height_; i++)
@@ -208,6 +279,22 @@ void Fabric::printFabric()
     }
 }
 
+void Fabric::printClaimNumbersNotOverlapped()
+{
+    std::cout << "Not overlapped claim number(s) : {";
+    for (std::size_t i = 0; i < claim_numbers_not_overlapped_.size(); i++)
+    {
+        if(i == claim_numbers_not_overlapped_.size()-1)
+        {
+            std::cout << claim_numbers_not_overlapped_[i];
+            break;
+        }
+        std::cout << claim_numbers_not_overlapped_[i] << ", ";
+    }
+    
+    std::cout << "}" << std::endl;
+}
+
 int main(int argc, char *argv[])
 {
     std::string line;
@@ -224,6 +311,7 @@ int main(int argc, char *argv[])
     Fabric fabric{claims};
     fabric.printFabric();
     std::cout << "overlapped claims : " << fabric.getOverlappedClaim() << std::endl;
+    fabric.printClaimNumbersNotOverlapped();
 
     //* create n claim objects
     //  * details of the object
