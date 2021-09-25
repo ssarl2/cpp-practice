@@ -20,14 +20,13 @@ fi
 
 echo "Run $1"
 
-if [ "${file_name%_*}" == "part" ]
+if [[ "${file_name%%_*}" == day* ]]
 then
     gcc $1 -lstdc++ -o ${file_name}
-# elif [ "${file_name}" == "something" ]
-# then
-#     gcc $1 -o ${file_name} -lstdc++
-# else
-#     gcc $1 -o ${file_name} -lstdc++
+else
+    echo !!!!!!!!!!!!!!!!!! YOU HAVE TO PASS ONE CORRECT PARAMETER FILE !!!!!!!!!!!!!!!!!!
+    echo ex\) bash run.sh day03_part01.cpp
+    exit 0
 fi
 
 mv ${file_name} build/
