@@ -20,14 +20,12 @@ fi
 
 echo "Run $1"
 
-if [ "${file_name%%_*}" == "day01" ]
-then
-    gcc $1 -lstdc++ -o ${file_name}
-elif [ "${file_name%%_*}" == "day02" ]
+if [[ "${file_name%%_*}" == day* ]]
 then
     gcc $1 -lstdc++ -o ${file_name}
 else
-    echo !!!!!!!!!!!!!!!!!! YOU HAVE TO PASS AT LEAST ONE CORRECT PARAMETER FILE !!!!!!!!!!!!!!!!!!
+    echo !!!!!!!!!!!!!!!!!! YOU HAVE TO PASS ONE CORRECT PARAMETER FILE !!!!!!!!!!!!!!!!!!
+    echo ex\) bash run.sh day03_part01.cpp
     exit 0
 fi
 
