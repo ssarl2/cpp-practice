@@ -31,13 +31,13 @@ private:
     bool is_overlapped_;
 };
 
-Claim::Claim(std::string claim) :
-    claim_number_(0),
-    x_from_left_(0),
-    y_from_bottom_(0),
-    width_claim_(0),
-    height_claim_(0),
-    is_overlapped_(false)
+Claim::Claim(std::string claim)
+    : claim_number_(0)
+    , x_from_left_(0)
+    , y_from_bottom_(0)
+    , width_claim_(0)
+    , height_claim_(0)
+    , is_overlapped_(false)
 {
     std::vector<char> delimiters{'@', ',', ':', 'x', '\0'};
     std::vector<std::vector<int>> parsed = Claim::parseClaim(claim, delimiters);
@@ -141,6 +141,9 @@ private:
 };
 
 Fabric::Fabric(std::vector<Claim>& claims)
+: fabric_width_(0)
+, fabric_height_(0)
+, count_overlapped_claim_(0)
 {
     std::tie(fabric_width_, fabric_height_) = calcFabricSize(claims);
     count_overlapped_claim_ = checkOverlappedClaims(claims);
@@ -312,23 +315,6 @@ int main(int argc, char *argv[])
     fabric.printFabric();
     std::cout << "overlapped claims : " << fabric.getOverlappedClaim() << std::endl;
     fabric.printClaimNumbersNotOverlapped();
-
-    //* create n claim objects
-    //  * details of the object
-    //  * a variable of x for the starting point
-    //  * a variable of y for the starting point
-    //  * a variable of the fabric width
-    //  * a variable of the fabric height
-    //  * a function of printing a fabric (when it prints, reverse y value)
-    //* compare all each objects
-    //  * a variable of total width of a fabric
-    //  * a variable of total height of a fabric
-    //  * a variable for counting overlapped claims
-    //  * a function of comparing two claims whether they overlap
-    //  * calculate overlapped claims and save it for the result
-    //  * calculate not overlapped claims and save it for the result (part2)
-    //  * print a fabric with claims for fun
-    //  * print not overlapped claim numbers (part2)
 
     return 0;
 }
