@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     int count_different_letters = 0;
     bool found = false;
 
-    std::ifstream* contents = new std::ifstream("../input/day02_input01.txt");
+    std::ifstream* contents = new std::ifstream(argv[1]);
 
     //* parse lines
     while(*contents >> line)

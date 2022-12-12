@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
     std::vector<std::ifstream *> predefined_files;
     for (std::size_t i = 0; i < file_stored; i++)
     {
-        std::ifstream* f = new std::ifstream("../input/day01_input01.txt");
+        std::ifstream* f = new std::ifstream(argv[1]);
         predefined_files.push_back(f);
     }
 

@@ -5,7 +5,7 @@
 
 int main(int argc, char *argv[]) {
 
-    std::ifstream infile("../input/day01_input01.txt");
+    std::ifstream infile(argv[1]);
     int sum, i;
     sum = 0;
 

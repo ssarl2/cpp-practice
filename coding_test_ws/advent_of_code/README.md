@@ -1,8 +1,19 @@
+# How to build
+```
+advent_of_code$ mkdir build
+advent_of_code$ cd build
+advent_of_code$ cmake ..
+advent_of_code$ cmake --build .
+```
 # How to run
 
-For example, in a terminal
-
-`bash run.sh part_01.cpp`
+```
+advent_of_code/build$ ./day01_p01 path/to/day01_input01.txt
+advent_of_code/build$ ./day01_p02 path/to/day01_input01.txt
+advent_of_code/build$ ./day02_p01 path/to/day02_input01.txt
+advent_of_code/build$ ./day02_p02 path/to/day02_input01.txt
+advent_of_code/build$ ./day03 path/to/day03_input01.txt
+```
 
 # Days
 

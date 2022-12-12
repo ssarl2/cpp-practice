@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
     int appear_two_times = 0;
     int appear_three_times = 0;
 
-    std::ifstream* contents = new std::ifstream("../input/day02_input01.txt");
+    std::ifstream* contents = new std::ifstream(argv[1]);
 
     //* process lines
     while(*contents >> line)

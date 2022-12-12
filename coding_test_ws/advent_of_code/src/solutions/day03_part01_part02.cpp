@@ -301,7 +301,7 @@ void Fabric::printClaimNumbersNotOverlapped()
 int main(int argc, char *argv[])
 {
     std::string line;
-    std::ifstream* contents = new std::ifstream("../input/day03_input01.txt");
+    std::ifstream* contents = new std::ifstream(argv[1]);
     std::vector<Claim> claims;
 
     //* parse lines
