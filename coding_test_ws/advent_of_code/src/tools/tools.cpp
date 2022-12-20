@@ -44,3 +44,19 @@ void tools::sort(std::map<std::string, std::string>& M)
     // Sort using comparator function
     std::sort(A.begin(), A.end(), cmp);
 }
+
+std::vector<std::string> tools::readFileAsVecStr(char* file_path)
+{
+    std::string line;
+    std::vector<std::string> lines;
+
+    std::ifstream* contents = new std::ifstream(file_path);
+
+    //* parse lines
+    while(*contents >> line)
+    {
+        lines.push_back(line);
+    }
+
+    return lines;
+}
