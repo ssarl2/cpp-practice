@@ -14,6 +14,7 @@ advent_of_code/build$ ./day02_p01 path/to/day02_input01.txt
 advent_of_code/build$ ./day02_p02 path/to/day02_input01.txt
 advent_of_code/build$ ./day03 path/to/day03_input01.txt
 advent_of_code/build$ ./day04 path/to/day04_input01.txt
+advent_of_code/build$ ./day05 path/to/day05_input01.txt
 ```
 
 # Days
