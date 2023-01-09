@@ -27,4 +27,12 @@ bool cmp(std::pair<std::string, std::string>& a,
 void sort(std::map<std::string, std::string>& M);
 
 std::vector<std::string> readFileAsVecStr(char* file_path);
+
+std::vector<std::string> tokenizing(std::string str, std::string delimiters);
+
+std::map<int,int>::iterator minMapElement(std::map<int,int>& m);
+
+int countValues(std::map<int,int>& m, int value);
+
+int countValues(std::map<std::pair<int,int>,int>& m, int value);
 }
