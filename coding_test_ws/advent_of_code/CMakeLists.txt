@@ -15,6 +15,8 @@ add_executable(day02_p02 src/solutions/day02_part02.cpp)
 add_executable(day03 src/solutions/day03_part01_part02.cpp)
 add_executable(day04 src/solutions/day04_part01_part02.cpp)
 add_executable(day05 src/solutions/day05_part01_part02.cpp)
+add_executable(day06 src/solutions/day06_part01.cpp)
 
 target_link_libraries(day04 tools)
 target_link_libraries(day05 tools)
+target_link_libraries(day06 tools)

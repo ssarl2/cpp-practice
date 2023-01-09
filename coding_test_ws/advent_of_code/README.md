@@ -8,13 +8,14 @@ advent_of_code$ cmake --build .
 # How to run
 
 ```
-advent_of_code/build$ ./day01_p01 path/to/day01_input01.txt
-advent_of_code/build$ ./day01_p02 path/to/day01_input01.txt
-advent_of_code/build$ ./day02_p01 path/to/day02_input01.txt
-advent_of_code/build$ ./day02_p02 path/to/day02_input01.txt
-advent_of_code/build$ ./day03 path/to/day03_input01.txt
-advent_of_code/build$ ./day04 path/to/day04_input01.txt
-advent_of_code/build$ ./day05 path/to/day05_input01.txt
+advent_of_code/build$ ./day01_p01 ../input/day01_input01.txt
+advent_of_code/build$ ./day01_p02 ../input/day01_input01.txt
+advent_of_code/build$ ./day02_p01 ../input/day02_input01.txt
+advent_of_code/build$ ./day02_p02 ../input/day02_input01.txt
+advent_of_code/build$ ./day03 ../input/day03_input01.txt
+advent_of_code/build$ ./day04 ../input/day04_input01.txt
+advent_of_code/build$ ./day05 ../input/day05_input01.txt
+advent_of_code/build$ ./day06 ../input/day06_input01.txt
 ```
 
 # Days
