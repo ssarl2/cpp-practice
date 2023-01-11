@@ -5,6 +5,8 @@
 #include <fstream>
 #include <tools.h>
 
+#define TARGET_LOCATION_FOR_PART02 88 // a location of a total distance to all given coordinates of less than 10000
+
 tools::debug_level debug_mode = tools::normal;
 
 struct Boundary
@@ -55,9 +57,9 @@ public:
 
     void setCoordinatePoints(std::vector<Point>& coordinate_points, int boundary)
     {
-        for (size_t x = 0; x < boundary; x++)
+        for (int x = 0; x < boundary; x++)
         {
-            for (size_t y = 0; y < boundary; y++)
+            for (int y = 0; y < boundary; y++)
             {
                 Point cp{x,y};
                 coordinate_points.push_back(cp);
@@ -147,12 +149,42 @@ public:
         return std::count(v.begin(), v.end(), value);
     }
 
+    // a solution for part02
+    void findTotalDistancesWithinGivenRange(std::vector<Point>& coordinate_points, int total_distance)
+    {
+        for(auto& cp : coordinate_points)
+        {
+            std::vector<int> distances_to_target_locations;
+
+            for(const auto& lp : location_points_)
+            {
+                int distance_to_target_location = std::abs(cp.x - lp.x) + std::abs(cp.y - lp.y);
+                distances_to_target_locations.push_back(distance_to_target_location);
+            }
+
+            int sum_of_distances = 0;
+            for(const auto& d : distances_to_target_locations)
+            {
+                sum_of_distances += d;
+            }
+
+            if(sum_of_distances < total_distance)
+            {
+                cp.location_name = TARGET_LOCATION_FOR_PART02;
+            }
+            else
+            {
+                cp.location_name = 0;
+            }
+        }
+    }
+
     void solvePart01()
     {
         setCoordinatePoints(coordinate_points_part01_, 500);
         setShortestDistancesInCoordinatePoints(coordinate_points_part01_);
         deleteInfiniteAreaInCoordinatePoints(coordinate_points_part01_);
-        printInFile(coordinate_points_part01_, 400);
+        printInFile(coordinate_points_part01_, 400, "day06_part01");
 
         int largest_area = 0;
         int index = 0;
@@ -169,7 +201,21 @@ public:
         tools::log(debug_mode, "location number : " + std::to_string(index));
     }
 
-    void printInFile(std::vector<Point> points, int printing_size)
+    void solvePart02()
+    {
+        setCoordinatePoints(coordinate_points_part02_, 500);
+        findTotalDistancesWithinGivenRange(coordinate_points_part02_, 10000);
+        deleteInfiniteAreaInCoordinatePoints(coordinate_points_part02_);
+        printInFile(coordinate_points_part02_, 400, "day06_part02");
+
+
+        int target_area_for_part02 = countAreaOfTargetLocationNameInCoordinatePoints(coordinate_points_part02_, TARGET_LOCATION_FOR_PART02);
+
+        tools::log(debug_mode, "area size a total distance to all given coordinates of less than 10000 : ");
+        tools::log(debug_mode, std::to_string(target_area_for_part02));
+    }
+
+    void printInFile(std::vector<Point> points, int printing_size, std::string file_name)
     {
         std::map<std::pair<int,int>,int> map;
         for(auto p : points)
@@ -178,7 +224,7 @@ public:
         }
 
         std::ofstream file;
-        file.open("drawing_day06_part01.txt");
+        file.open("drawing_"+file_name+".txt");
         for (size_t i = 0; i < printing_size; i++)
         {
             for (size_t j = 0; j < printing_size; j++)
@@ -208,11 +254,13 @@ public:
         }
 
         file.close();
+        tools::log(debug_mode, "Drew "+file_name);
     }
 private:
     Boundary boundary_box_;
     std::vector<Point> location_points_; // array of target coordinates(x, y) and its name as an integer(location_name)
     std::vector<Point> coordinate_points_part01_; // array of a point of coordinates(x, y) and a closest target location(location_name)
+    std::vector<Point> coordinate_points_part02_; // array of a point of coordinates(x, y) and a closest target location(location_name)
 };
 
 int main(int argc, char *argv[])
@@ -223,8 +271,8 @@ int main(int argc, char *argv[])
 
     s.setBoundaries();
     s.solvePart01();
+    s.solvePart02();
 
-    tools::log(debug_mode, "Drew day06_part01");
     return 0;
 }
 /*
