@@ -53,22 +53,22 @@ public:
         boundary_box_.highest_y = *std::max_element(v_y.begin(), v_y.end());
     }
 
-    void setCoordinates(int boundary)
+    void setCoordinatePoints(std::vector<Point>& coordinate_points, int boundary)
     {
         for (size_t x = 0; x < boundary; x++)
         {
             for (size_t y = 0; y < boundary; y++)
             {
                 Point cp{x,y};
-                coordinate_points_.push_back(cp);
+                coordinate_points.push_back(cp);
             }
         }
     }
 
     // a solution for part01
-    void setShortestDistancesInCoordinatePoints()
+    void setShortestDistancesInCoordinatePoints(std::vector<Point>& coordinate_points)
     {
-        for(auto& cp : coordinate_points_)
+        for(auto& cp : coordinate_points)
         {
             /* key : index of location
              * value : distance to the location from the current coordinate
@@ -97,20 +97,20 @@ public:
         }
     }
 
-    void deleteInfiniteArea()
+    void deleteInfiniteAreaInCoordinatePoints(std::vector<Point>& coordinate_points)
     {
         for(const auto& lp : location_points_)
         {
-            if(isInfiniteInCoordinatePoints(lp.location_name))
+            if(isInfiniteInCoordinatePoints(coordinate_points, lp.location_name))
             {
-                deleteClosestPointInCoordinatePoints(lp.location_name);
+                deleteClosestPointInCoordinatePoints(coordinate_points, lp.location_name);
             }
         }
     }
 
-    bool isInfiniteInCoordinatePoints(int location_name)
+    bool isInfiniteInCoordinatePoints(std::vector<Point>& coordinate_points, int location_name)
     {
-        for(const auto &cp : coordinate_points_)
+        for(const auto& cp : coordinate_points)
         {
             if(cp.location_name == location_name)
             {
@@ -126,9 +126,9 @@ public:
         return false;
     }
 
-    void deleteClosestPointInCoordinatePoints(int target_location)
+    void deleteClosestPointInCoordinatePoints(std::vector<Point>& coordinate_points, int target_location)
     {
-        for(auto &cp : coordinate_points_)
+        for(auto& cp : coordinate_points)
         {
             if(cp.location_name == target_location)
             {
@@ -137,31 +137,30 @@ public:
         }
     }
 
-    int countAreaOfTargetLocationName(int value)
+    int countAreaOfTargetLocationNameInCoordinatePoints(std::vector<Point>& coordinate_points, int value)
     {
         std::vector<int> v;
-        for(const auto &cp : coordinate_points_)
+        for(const auto& cp : coordinate_points)
         {
             v.push_back(cp.location_name);
         }
         return std::count(v.begin(), v.end(), value);
     }
 
-    void run()
+    void solvePart01()
     {
-        setShortestDistancesInCoordinatePoints();
-
-        deleteInfiniteArea();
-
-        printInFile(coordinate_points_, 400);
+        setCoordinatePoints(coordinate_points_part01_, 500);
+        setShortestDistancesInCoordinatePoints(coordinate_points_part01_);
+        deleteInfiniteAreaInCoordinatePoints(coordinate_points_part01_);
+        printInFile(coordinate_points_part01_, 400);
 
         int largest_area = 0;
         int index = 0;
         for(auto lp : location_points_)
         {
-            if(countAreaOfTargetLocationName(lp.location_name) > largest_area)
+            if(countAreaOfTargetLocationNameInCoordinatePoints(coordinate_points_part01_, lp.location_name) > largest_area)
             {
-                largest_area = countAreaOfTargetLocationName(lp.location_name);
+                largest_area = countAreaOfTargetLocationNameInCoordinatePoints(coordinate_points_part01_, lp.location_name);
                 index = lp.location_name;
             }
         }
@@ -213,7 +212,7 @@ public:
 private:
     Boundary boundary_box_;
     std::vector<Point> location_points_; // array of target coordinates(x, y) and its name as an integer(location_name)
-    std::vector<Point> coordinate_points_; // array of a point of coordinates(x, y) and a closest target location(location_name)
+    std::vector<Point> coordinate_points_part01_; // array of a point of coordinates(x, y) and a closest target location(location_name)
 };
 
 int main(int argc, char *argv[])
@@ -223,8 +222,7 @@ int main(int argc, char *argv[])
     Solution s(vec_str);
 
     s.setBoundaries();
-    s.setCoordinates(500);
-    s.run();
+    s.solvePart01();
 
     tools::log(debug_mode, "Drew day06_part01");
     return 0;
