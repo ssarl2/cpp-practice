@@ -4,7 +4,6 @@
 #include <sstream>
 #include <fstream>
 #include <tools.h>
-#include <set>
 
 tools::debug_level debug_mode = tools::normal;
 
@@ -66,7 +65,50 @@ public:
         }
     }
 
-    bool isInfiniteInCP(int location_name)
+    // a solution for part01
+    void setShortestDistancesInCoordinatePoints()
+    {
+        for(auto& cp : coordinate_points_)
+        {
+            /* key : index of location
+             * value : distance to the location from the current coordinate
+             */
+            std::map<int, int> distances_to_target_locations;
+
+
+            for(const auto& lp : location_points_)
+            {
+                int distance_to_target_location = std::abs(cp.x - lp.x) + std::abs(cp.y - lp.y);
+                distances_to_target_locations.insert({lp.location_name, distance_to_target_location});
+            }
+
+            auto shortest_d = tools::minMapElement(distances_to_target_locations);
+
+            if(tools::countTargetIntegerValuesInMap(distances_to_target_locations, shortest_d->second) == 1)
+            {
+                // if there's only one that's the shortest distance to the target location from the coordinate
+                cp.location_name = shortest_d->first;
+            }
+            else
+            {
+                // there's no only one shortest distance or more than 1
+                cp.location_name = 0;
+            }
+        }
+    }
+
+    void deleteInfiniteArea()
+    {
+        for(const auto& lp : location_points_)
+        {
+            if(isInfiniteInCoordinatePoints(lp.location_name))
+            {
+                deleteClosestPointInCoordinatePoints(lp.location_name);
+            }
+        }
+    }
+
+    bool isInfiniteInCoordinatePoints(int location_name)
     {
         for(const auto &cp : coordinate_points_)
         {
@@ -84,7 +126,7 @@ public:
         return false;
     }
 
-    void changeLocation(int target_location)
+    void deleteClosestPointInCoordinatePoints(int target_location)
     {
         for(auto &cp : coordinate_points_)
         {
@@ -95,7 +137,7 @@ public:
         }
     }
 
-    int countValues(int value)
+    int countAreaOfTargetLocationName(int value)
     {
         std::vector<int> v;
         for(const auto &cp : coordinate_points_)
@@ -107,51 +149,20 @@ public:
 
     void run()
     {
-        for(auto& c_p : coordinate_points_)
-        {
-            /* key : index of location
-             * value : distance to the location from the current coordinate
-             */
-            std::map<int, int> distances;
+        setShortestDistancesInCoordinatePoints();
 
-
-            for(const auto& l_p : location_points_)
-            {
-                int distance = std::abs(c_p.x - l_p.x) + std::abs(c_p.y - l_p.y);
-                distances.insert({l_p.location_name, distance});
-            }
-
-            auto shortest_d = tools::minMapElement(distances);
-
-            if(tools::countValues(distances, shortest_d->second) > 1)
-            {
-                c_p.location_name = 0;
-            }
-            else
-            {
-                c_p.location_name = shortest_d->first;
-            }
-
-        }
-
-        for(const auto& l_p : location_points_)
-        {
-            if(isInfiniteInCP(l_p.location_name))
-            {
-                changeLocation(l_p.location_name);
-            }
-        }
+        deleteInfiniteArea();
 
         printInFile(coordinate_points_, 400);
 
         int largest_area = 0;
         int index = 0;
-        for(auto l_p : location_points_)
+        for(auto lp : location_points_)
         {
-            if(countValues(l_p.location_name) > largest_area)
+            if(countAreaOfTargetLocationName(lp.location_name) > largest_area)
             {
-                largest_area = countValues(l_p.location_name);
-                index = l_p.location_name;
+                largest_area = countAreaOfTargetLocationName(lp.location_name);
+                index = lp.location_name;
             }
         }
 
@@ -201,19 +212,13 @@ public:
     }
 private:
     Boundary boundary_box_;
-    std::vector<int> boundary_locations_;
-    std::vector<Point> location_points_;
-    std::vector<Point> coordinate_points_;
-    // std::map<int,std::pair<int,int>> locations_; // name of location, coordinate of location
-    int longest_distance_x_;
-    int longest_distance_y_;
-    std::map<std::pair<int,int>,int> distance_map_; // coordinate of location, closest index to a location
+    std::vector<Point> location_points_; // array of target coordinates(x, y) and its name as an integer(location_name)
+    std::vector<Point> coordinate_points_; // array of a point of coordinates(x, y) and a closest target location(location_name)
 };
 
 int main(int argc, char *argv[])
 {
-    // std::vector<std::string> vec_str = tools::readFileAsVecStr(argv[1]);
-    std::vector<std::string> vec_str = tools::readFileAsVecStr("../input/day06_input01.txt");
+    std::vector<std::string> vec_str = tools::readFileAsVecStr(argv[1]);
 
     Solution s(vec_str);
 

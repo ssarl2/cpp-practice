@@ -32,7 +32,7 @@ std::vector<std::string> tokenizing(std::string str, std::string delimiters);
 
 std::map<int,int>::iterator minMapElement(std::map<int,int>& m);
 
-int countValues(std::map<int,int>& m, int value);
+int countTargetIntegerValuesInMap(std::map<int,int>& m, int value);
 
-int countValues(std::map<std::pair<int,int>,int>& m, int value);
+int countTargetIntegerValuesInMap(std::map<std::pair<int,int>,int>& m, int value);
 }

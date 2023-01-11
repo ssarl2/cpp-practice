@@ -106,7 +106,7 @@ std::map<int,int>::iterator tools::minMapElement(std::map<int,int>& m)
         });
 }
 
-int tools::countValues(std::map<int,int>& m, int value)
+int tools::countTargetIntegerValuesInMap(std::map<int,int>& m, int value)
 {
     std::vector<int> v;
     for(const auto &c : m)
@@ -116,7 +116,7 @@ int tools::countValues(std::map<int,int>& m, int value)
     return std::count(v.begin(), v.end(), value);
 }
 
-int tools::countValues(std::map<std::pair<int,int>,int>& m, int value)
+int tools::countTargetIntegerValuesInMap(std::map<std::pair<int,int>,int>& m, int value)
 {
     std::vector<int> v;
     for(const auto &c : m)
