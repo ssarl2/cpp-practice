@@ -18,14 +18,14 @@ Window::Window(int width, int height, QWidget *parent)
     setFixedSize(window_size_.width, window_size_.height);
 
     // Create and position the button
-    m_button_ = new QPushButton("Bye World", this);
-    m_button_->setGeometry(exit_btn_size_.x, 
+    QPushButton *exit_btn = new QPushButton("Bye World", this);
+    exit_btn->setGeometry(exit_btn_size_.x, 
                            exit_btn_size_.y, 
                            exit_btn_size_.width, 
                            exit_btn_size_.height);
-    m_button_->setToolTip("Oh, you found me");
+    exit_btn->setToolTip("Oh, you found me");
 
-    connect(m_button_, SIGNAL(clicked()), QApplication::instance(), SLOT(quit()));
+    connect(exit_btn, SIGNAL(clicked()), QApplication::instance(), SLOT(quit()));
 }
 
 void Window::createProgressBar()
