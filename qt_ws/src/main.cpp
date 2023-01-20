@@ -13,6 +13,8 @@ int main(int argc, char* argv[])
     QApplication app(argc, argv);
 
     Window window1(500, 250);
+    window1.createExitButton();
+    window1.createCheckableButton();
     window1.createProgressBar();
     window1.show();
 

@@ -2,16 +2,30 @@
 #define __WINDOW_H__
 
 #include <QWidget>
+#include <QPushButton>
+#include <QProgressBar>
+#include <QSlider>
 #include "ui_size.h"
+
 
 class Window : public QWidget
 {
+Q_OBJECT
 public:
     explicit Window(int width, int height, QWidget *parent = 0);
+    void createExitButton();
+    void createCheckableButton();
     void createProgressBar();
+private slots:
+    void slotCheckableButtonClicked(bool checked);
 private:
+    QPushButton *exit_btn_;
+    QPushButton *checkable_btn_;
+    QProgressBar *progress_bar_;
+    QSlider *slider_;
     UI::UISize window_size_;
     UI::UISize exit_btn_size_;
+    UI::UISize checkable_btn_size_;
     UI::UISize progress_bar_size_;
     UI::UISize slider_size_;
 };

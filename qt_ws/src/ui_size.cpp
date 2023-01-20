@@ -4,7 +4,7 @@ namespace UI
 {
 UI::UISize setUISize(int width, 
                      int height, 
-                     int margin_up, 
+                     int margin_top, 
                      int margin_bottom, 
                      int margin_left, 
                      int margin_right)
@@ -12,7 +12,7 @@ UI::UISize setUISize(int width,
     UI::UISize ui_size{
         width,
         height,
-        margin_up,
+        margin_top,
         margin_bottom,
         margin_left,
         margin_right

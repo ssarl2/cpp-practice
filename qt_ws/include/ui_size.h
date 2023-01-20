@@ -7,7 +7,7 @@ struct UISize
 {
     int width;
     int height;
-    int margin_up;
+    int margin_top;
     int margin_bottom;
     int margin_left;
     int margin_right;
@@ -17,7 +17,7 @@ struct UISize
 
 UISize setUISize(int width, 
                  int height, 
-                 int margin_up, 
+                 int margin_top, 
                  int margin_bottom, 
                  int margin_left, 
                  int margin_right);
