@@ -14,9 +14,9 @@ Window::Window(int width, int height, QWidget *parent)
 
 void Window::createExitButton()
 {
-    exit_btn_size_ = UI::setUISize(80, 30, 0, 10, 0, 10);
-    exit_btn_size_.x = window_size_.width-exit_btn_size_.width-exit_btn_size_.margin_right;
-    exit_btn_size_.y = window_size_.height-exit_btn_size_.height-exit_btn_size_.margin_bottom;
+    exit_btn_size_ = UI::setUISize(80, 30, 0, 0, 0, 0);
+    exit_btn_size_.x = window_size_.width-exit_btn_size_.width-10;
+    exit_btn_size_.y = window_size_.height-exit_btn_size_.height-10;
 
     // Create and position the button
     exit_btn_ = new QPushButton("Bye World", this);
@@ -33,9 +33,9 @@ void Window::createCheckableButton()
 {
     checkable_btn_counter_ = 0;
 
-    checkable_btn_size_ = UI::setUISize(100, 30, 10, 0, 10, 0);
-    checkable_btn_size_.x = checkable_btn_size_.margin_left;
-    checkable_btn_size_.y = checkable_btn_size_.margin_top;
+    checkable_btn_size_ = UI::setUISize(100, 30, 0, 0, 0, 0);
+    checkable_btn_size_.x = 10;
+    checkable_btn_size_.y = 10;
 
     // Create and position the button
     checkable_btn_ = new QPushButton("World?", this);
@@ -47,6 +47,21 @@ void Window::createCheckableButton()
 
     connect(checkable_btn_, SIGNAL(clicked(bool)), this, SLOT(slotCheckableButtonClicked(bool)));
     connect(this, SIGNAL(checkableButtonCounterReached()), QApplication::instance(), SLOT(quit()));
+}
+
+void Window::createInfoButton()
+{
+    info_btn_size_ = UI::setUISize(80, 30, 0, 0, 0, 0);
+    info_btn_size_.x = 120;
+    info_btn_size_.y = 10;
+
+    info_btn_ = new QPushButton("Info", this);
+    info_btn_->setGeometry(info_btn_size_.x,
+                           info_btn_size_.y,
+                           info_btn_size_.width,
+                           info_btn_size_.height);
+
+    connect(info_btn_, SIGNAL(clicked()), QApplication::instance(), SLOT(aboutQt()));
 }
 
 void Window::createProgressBar()

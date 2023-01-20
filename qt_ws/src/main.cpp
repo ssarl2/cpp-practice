@@ -16,6 +16,7 @@ int main(int argc, char* argv[])
     window1.createExitButton();
     window1.createCheckableButton();
     window1.createProgressBar();
+    window1.createInfoButton();
     window1.show();
 
     return app.exec();
