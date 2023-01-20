@@ -31,6 +31,7 @@ void Window::createExitButton()
 
 void Window::createCheckableButton()
 {
+    checkable_btn_counter_ = 0;
 
     checkable_btn_size_ = UI::setUISize(100, 30, 10, 0, 10, 0);
     checkable_btn_size_.x = checkable_btn_size_.margin_left;
@@ -45,6 +46,7 @@ void Window::createCheckableButton()
     checkable_btn_->setCheckable(true);
 
     connect(checkable_btn_, SIGNAL(clicked(bool)), this, SLOT(slotCheckableButtonClicked(bool)));
+    connect(this, SIGNAL(checkableButtonCounterReached()), QApplication::instance(), SLOT(quit()));
 }
 
 void Window::createProgressBar()
@@ -94,12 +96,23 @@ void Window::createProgressBar()
 
 void Window::slotCheckableButtonClicked(bool checked)
 {
+    QString text;
+
     if(checked)
     {
-        checkable_btn_->setText("Pushed World");
+        text = "Pushed World";
+        checkable_btn_counter_++;
     }
     else
     {
-        checkable_btn_->setText("World is back");
+        text = "World is back";
     }
+
+    if(checkable_btn_counter_ == 10)
+    {
+        emit checkableButtonCounterReached();
+    }
+
+    text += QString(" ") + QString::number(checkable_btn_counter_);
+    checkable_btn_->setText(text);
 }

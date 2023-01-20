@@ -16,9 +16,12 @@ public:
     void createExitButton();
     void createCheckableButton();
     void createProgressBar();
+signals:
+    void checkableButtonCounterReached();
 private slots:
     void slotCheckableButtonClicked(bool checked);
 private:
+    int checkable_btn_counter_;
     QPushButton *exit_btn_;
     QPushButton *checkable_btn_;
     QProgressBar *progress_bar_;

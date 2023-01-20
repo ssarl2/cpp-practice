@@ -17,7 +17,7 @@ find_package(Qt5 REQUIRED
 
 set(SOURCES
     src/main.cpp
-    include/window.h ## In order to be able to recognize Q_OBJECT by automoc(meta object compiler), header should be added
+    include/window.h ## In order to be able to recognize Q_OBJECT by automoc(meta-object compiler), header should be added
     src/window.cpp
     src/ui_size.cpp
 )
