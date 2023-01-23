@@ -64,6 +64,29 @@ void Window::createInfoButton()
     connect(info_btn_, SIGNAL(clicked()), QApplication::instance(), SLOT(aboutQt()));
 }
 
+void Window::createButtonGroupBox()
+{
+    QGroupBox *btn_group_box = new QGroupBox("box", this);
+    btn_group_box->setGeometry(window_size_.width/2 - 125, 60, 250, 30);
+
+    QPushButton *btn_1 = new QPushButton("Apple", btn_group_box);
+    QPushButton *btn_2 = new QPushButton("Banana", btn_group_box);
+    QPushButton *btn_3 = new QPushButton("Carrot", btn_group_box);
+    btn_1->setGeometry(0,0,80,30);
+    btn_2->setGeometry(85,0,80,30);
+    btn_3->setGeometry(170,0,80,30);
+
+    btn_group_ = new QButtonGroup(btn_group_box);
+    btn_group_->addButton(btn_1);
+    btn_group_->addButton(btn_2);
+    btn_group_->addButton(btn_3);
+
+    btn_group_->setId(btn_1, 1);
+    btn_group_->setId(btn_2, 2);
+    btn_group_->setId(btn_3, 3);
+    connect(btn_group_, SIGNAL(buttonClicked(int)), this, SLOT(customSLOT(int)));
+}
+
 void Window::createProgressBar()
 {
     int progress_bar_side_margin = 10;
@@ -130,4 +153,9 @@ void Window::slotCheckableButtonClicked(bool checked)
 
     text += QString(" ") + QString::number(checkable_btn_counter_);
     checkable_btn_->setText(text);
+}
+
+void Window::customSLOT(int id)
+{
+    std::cout << "checked this id : " << id << std::endl;
 }

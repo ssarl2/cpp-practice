@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QPushButton>
+#include <QButtonGroup>
+#include <QGroupBox>
 #include <QProgressBar>
 #include <QSlider>
 #include "ui_size.h"
@@ -16,16 +18,19 @@ public:
     void createExitButton();
     void createCheckableButton();
     void createInfoButton();
+    void createButtonGroupBox();
     void createProgressBar();
 signals:
     void checkableButtonCounterReached();
 private slots:
     void slotCheckableButtonClicked(bool checked);
+    void customSLOT(int id);
 private:
     int checkable_btn_counter_;
     QPushButton *exit_btn_;
     QPushButton *checkable_btn_;
     QPushButton *info_btn_;
+    QButtonGroup *btn_group_;
     QProgressBar *progress_bar_;
     QSlider *slider_;
     UI::UISize window_size_;
