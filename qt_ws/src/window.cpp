@@ -33,7 +33,7 @@ void Window::createCheckableButton()
 {
     checkable_btn_counter_ = 0;
 
-    checkable_btn_size_ = UI::setUISize(100, 30, 0, 0, 0, 0);
+    checkable_btn_size_ = UI::setUISize(120, 30, 0, 0, 0, 0);
     checkable_btn_size_.x = 10;
     checkable_btn_size_.y = 10;
 
@@ -52,7 +52,7 @@ void Window::createCheckableButton()
 void Window::createInfoButton()
 {
     info_btn_size_ = UI::setUISize(80, 30, 0, 0, 0, 0);
-    info_btn_size_.x = 120;
+    info_btn_size_.x = 140;
     info_btn_size_.y = 10;
 
     info_btn_ = new QPushButton("Info", this);
@@ -62,6 +62,21 @@ void Window::createInfoButton()
                            info_btn_size_.height);
 
     connect(info_btn_, SIGNAL(clicked()), QApplication::instance(), SLOT(aboutQt()));
+}
+
+void Window::createEmailButton()
+{
+    email_btn_size_ = UI::setUISize(80, 30, 0, 0, 0, 0);
+    email_btn_size_.x = 230;
+    email_btn_size_.y = 10;
+
+    email_btn_ = new QPushButton("Email", this);
+    email_btn_->setGeometry(email_btn_size_.x,
+                           email_btn_size_.y,
+                           email_btn_size_.width,
+                           email_btn_size_.height);
+
+    connect(email_btn_, SIGNAL(clicked()), this, SLOT(emailWindowSLOT()));
 }
 
 void Window::createButtonGroupBox()
@@ -158,4 +173,16 @@ void Window::slotCheckableButtonClicked(bool checked)
 void Window::customSLOT(int id)
 {
     std::cout << "checked this id : " << id << std::endl;
+}
+
+void Window::emailWindowSLOT()
+{
+    QWidget *wdg = new QWidget();
+    wdg->setFixedSize(500, 600);
+    QPushButton *btn_1 = new QPushButton("Button", wdg);
+    btn_1->setGeometry(0,0,80,30);
+    wdg->show();
+    this->close();
+    connect(btn_1, SIGNAL(clicked()), wdg, SLOT(close()));
+    connect(btn_1, SIGNAL(clicked()), this, SLOT(show()));
 }

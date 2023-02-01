@@ -18,6 +18,7 @@ public:
     void createExitButton();
     void createCheckableButton();
     void createInfoButton();
+    void createEmailButton();
     void createButtonGroupBox();
     void createProgressBar();
 signals:
@@ -25,11 +26,13 @@ signals:
 private slots:
     void slotCheckableButtonClicked(bool checked);
     void customSLOT(int id);
+    void emailWindowSLOT();
 private:
     int checkable_btn_counter_;
     QPushButton *exit_btn_;
     QPushButton *checkable_btn_;
     QPushButton *info_btn_;
+    QPushButton *email_btn_;
     QButtonGroup *btn_group_;
     QProgressBar *progress_bar_;
     QSlider *slider_;
@@ -37,6 +40,7 @@ private:
     UI::UISize exit_btn_size_;
     UI::UISize checkable_btn_size_;
     UI::UISize info_btn_size_;
+    UI::UISize email_btn_size_;
     UI::UISize progress_bar_size_;
     UI::UISize slider_size_;
 };
