@@ -7,6 +7,8 @@
 #include <QGroupBox>
 #include <QProgressBar>
 #include <QSlider>
+#include <QLabel>
+#include <QTextEdit>
 #include "ui_size.h"
 
 
@@ -37,6 +39,9 @@ private:
     QButtonGroup *btn_group_;
     QProgressBar *progress_bar_;
     QSlider *slider_;
+    QTextEdit *to_te_;
+    QTextEdit *title_te_;
+    QTextEdit *content_te_;
     UI::UISize window_size_;
     UI::UISize exit_btn_size_;
     UI::UISize checkable_btn_size_;

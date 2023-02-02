@@ -194,9 +194,9 @@ void Window::slotEmailWindow()
 
         QPushButton *cancel_btn = new QPushButton("Cancel", wdg);
         cancel_btn->setGeometry(cancel_btn_size.x
-                        ,cancel_btn_size.y
-                        ,cancel_btn_size.width
-                        ,cancel_btn_size.height);
+                               ,cancel_btn_size.y
+                               ,cancel_btn_size.width
+                               ,cancel_btn_size.height);
 
         connect(cancel_btn, SIGNAL(clicked()), wdg, SLOT(close()));
         connect(cancel_btn, SIGNAL(clicked()), this, SLOT(show()));
@@ -212,11 +212,101 @@ void Window::slotEmailWindow()
 
         QPushButton *send_btn = new QPushButton("Send", wdg);
         send_btn->setGeometry(send_btn_size.x
-                        ,send_btn_size.y
-                        ,send_btn_size.width
-                        ,send_btn_size.height);
+                             ,send_btn_size.y
+                             ,send_btn_size.width
+                             ,send_btn_size.height);
 
         connect(send_btn, SIGNAL(clicked()), this, SLOT(slotSendEmail()));
+    }
+
+    { // To label
+        QLabel *to_label = new QLabel("To", wdg);
+        UI::UISize to_label_size;
+
+        to_label_size.width = 50;
+        to_label_size.height = 30;
+        to_label_size.x = 30;
+        to_label_size.y = 30;
+
+        to_label->setGeometry(to_label_size.x
+                             ,to_label_size.y
+                             ,to_label_size.width
+                             ,to_label_size.height);
+    }
+
+    { // To text edit
+        UI::UISize to_te_size;
+
+        to_te_size.width = window_size.width - 100*2;
+        to_te_size.height = 30;
+        to_te_size.x = 90;
+        to_te_size.y = 30;
+
+        to_te_ = new QTextEdit(wdg);
+        to_te_->setGeometry(to_te_size.x
+                           ,to_te_size.y
+                           ,to_te_size.width
+                           ,to_te_size.height);
+    }
+
+    { // Title label
+        QLabel *title_label = new QLabel("Title", wdg);
+        UI::UISize title_label_size;
+
+        title_label_size.width = 50;
+        title_label_size.height = 30;
+        title_label_size.x = 30;
+        title_label_size.y = 70;
+
+        title_label->setGeometry(title_label_size.x
+                                ,title_label_size.y
+                                ,title_label_size.width
+                                ,title_label_size.height);
+    }
+
+    { // Title text edit
+        UI::UISize title_te_size;
+
+        title_te_size.width = window_size.width - 100*2;
+        title_te_size.height = 30;
+        title_te_size.x = 90;
+        title_te_size.y = 70;
+
+        title_te_ = new QTextEdit(wdg);
+        title_te_->setGeometry(title_te_size.x
+                              ,title_te_size.y
+                              ,title_te_size.width
+                              ,title_te_size.height);
+    }
+
+    { // Content label
+        QLabel *content_label = new QLabel("Content", wdg);
+        UI::UISize content_label_size;
+
+        content_label_size.width = 50;
+        content_label_size.height = 30;
+        content_label_size.x = 30;
+        content_label_size.y = 110;
+
+        content_label->setGeometry(content_label_size.x
+                                  ,content_label_size.y
+                                  ,content_label_size.width
+                                  ,content_label_size.height);
+    }
+
+    { // Content text edit
+        UI::UISize content_te_size;
+
+        content_te_size.width = window_size.width - 100*2;
+        content_te_size.height = 200;
+        content_te_size.x = 90;
+        content_te_size.y = 110;
+
+        content_te_ = new QTextEdit(wdg);
+        content_te_->setGeometry(content_te_size.x
+                              ,content_te_size.y
+                              ,content_te_size.width
+                              ,content_te_size.height);
     }
 
     wdg->show();
@@ -226,4 +316,8 @@ void Window::slotEmailWindow()
 void Window::slotSendEmail()
 {
     std::cout << "Implement sending email here" << std::endl;
+    // std::cout << to_te_->toPlainText().toStdString() << std::endl;
+    to_te_->clear();
+    title_te_->clear();
+    content_te_->clear();
 }
