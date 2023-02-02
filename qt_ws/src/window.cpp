@@ -76,7 +76,7 @@ void Window::createEmailButton()
                            email_btn_size_.width,
                            email_btn_size_.height);
 
-    connect(email_btn_, SIGNAL(clicked()), this, SLOT(emailWindowSLOT()));
+    connect(email_btn_, SIGNAL(clicked()), this, SLOT(slotEmailWindow()));
 }
 
 void Window::createButtonGroupBox()
@@ -175,14 +175,55 @@ void Window::customSLOT(int id)
     std::cout << "checked this id : " << id << std::endl;
 }
 
-void Window::emailWindowSLOT()
+void Window::slotEmailWindow()
 {
+    UI::UISize window_size;
+    window_size.width = 500;
+    window_size.height = 600;
+
     QWidget *wdg = new QWidget();
-    wdg->setFixedSize(500, 600);
-    QPushButton *btn_1 = new QPushButton("Button", wdg);
-    btn_1->setGeometry(0,0,80,30);
+    wdg->setFixedSize(window_size.width, window_size.height);
+
+    { // Cancel button
+        UI::UISize cancel_btn_size;
+
+        cancel_btn_size.width = 80;
+        cancel_btn_size.height = 30;
+        cancel_btn_size.x = window_size.width - cancel_btn_size.width - 10;
+        cancel_btn_size.y = window_size.height - cancel_btn_size.height - 10;
+
+        QPushButton *cancel_btn = new QPushButton("Cancel", wdg);
+        cancel_btn->setGeometry(cancel_btn_size.x
+                        ,cancel_btn_size.y
+                        ,cancel_btn_size.width
+                        ,cancel_btn_size.height);
+
+        connect(cancel_btn, SIGNAL(clicked()), wdg, SLOT(close()));
+        connect(cancel_btn, SIGNAL(clicked()), this, SLOT(show()));
+    }
+
+    { // Send button
+        UI::UISize send_btn_size;
+
+        send_btn_size.width = 80;
+        send_btn_size.height = 30;
+        send_btn_size.x = window_size.width - send_btn_size.width - 90 - 10;
+        send_btn_size.y = window_size.height - send_btn_size.height - 10;
+
+        QPushButton *send_btn = new QPushButton("Send", wdg);
+        send_btn->setGeometry(send_btn_size.x
+                        ,send_btn_size.y
+                        ,send_btn_size.width
+                        ,send_btn_size.height);
+
+        connect(send_btn, SIGNAL(clicked()), this, SLOT(slotSendEmail()));
+    }
+
     wdg->show();
     this->close();
-    connect(btn_1, SIGNAL(clicked()), wdg, SLOT(close()));
-    connect(btn_1, SIGNAL(clicked()), this, SLOT(show()));
+}
+
+void Window::slotSendEmail()
+{
+    std::cout << "Implement sending email here" << std::endl;
 }

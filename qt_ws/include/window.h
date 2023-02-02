@@ -26,7 +26,8 @@ signals:
 private slots:
     void slotCheckableButtonClicked(bool checked);
     void customSLOT(int id);
-    void emailWindowSLOT();
+    void slotEmailWindow();
+    void slotSendEmail();
 private:
     int checkable_btn_counter_;
     QPushButton *exit_btn_;
