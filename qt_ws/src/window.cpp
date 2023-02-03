@@ -219,6 +219,36 @@ void Window::slotEmailWindow()
         connect(send_btn, SIGNAL(clicked()), this, SLOT(slotSendEmail()));
     }
 
+    { // From label
+        QLabel *from_label = new QLabel("From", wdg);
+        UI::UISize from_label_size;
+
+        from_label_size.width = 50;
+        from_label_size.height = 30;
+        from_label_size.x = 30;
+        from_label_size.y = 30;
+
+        from_label->setGeometry(from_label_size.x
+                             ,from_label_size.y
+                             ,from_label_size.width
+                             ,from_label_size.height);
+    }
+
+    { // From text edit
+        UI::UISize from_te_size;
+
+        from_te_size.width = window_size.width - 100*2;
+        from_te_size.height = 30;
+        from_te_size.x = 90;
+        from_te_size.y = 30;
+
+        from_te_ = new QTextEdit(wdg);
+        from_te_->setGeometry(from_te_size.x
+                           ,from_te_size.y
+                           ,from_te_size.width
+                           ,from_te_size.height);
+    }
+
     { // To label
         QLabel *to_label = new QLabel("To", wdg);
         UI::UISize to_label_size;
@@ -226,7 +256,7 @@ void Window::slotEmailWindow()
         to_label_size.width = 50;
         to_label_size.height = 30;
         to_label_size.x = 30;
-        to_label_size.y = 30;
+        to_label_size.y = 70;
 
         to_label->setGeometry(to_label_size.x
                              ,to_label_size.y
@@ -240,7 +270,7 @@ void Window::slotEmailWindow()
         to_te_size.width = window_size.width - 100*2;
         to_te_size.height = 30;
         to_te_size.x = 90;
-        to_te_size.y = 30;
+        to_te_size.y = 70;
 
         to_te_ = new QTextEdit(wdg);
         to_te_->setGeometry(to_te_size.x
@@ -256,7 +286,7 @@ void Window::slotEmailWindow()
         title_label_size.width = 50;
         title_label_size.height = 30;
         title_label_size.x = 30;
-        title_label_size.y = 70;
+        title_label_size.y = 110;
 
         title_label->setGeometry(title_label_size.x
                                 ,title_label_size.y
@@ -270,7 +300,7 @@ void Window::slotEmailWindow()
         title_te_size.width = window_size.width - 100*2;
         title_te_size.height = 30;
         title_te_size.x = 90;
-        title_te_size.y = 70;
+        title_te_size.y = 110;
 
         title_te_ = new QTextEdit(wdg);
         title_te_->setGeometry(title_te_size.x
@@ -286,7 +316,7 @@ void Window::slotEmailWindow()
         content_label_size.width = 50;
         content_label_size.height = 30;
         content_label_size.x = 30;
-        content_label_size.y = 110;
+        content_label_size.y = 150;
 
         content_label->setGeometry(content_label_size.x
                                   ,content_label_size.y
@@ -300,7 +330,7 @@ void Window::slotEmailWindow()
         content_te_size.width = window_size.width - 100*2;
         content_te_size.height = 200;
         content_te_size.x = 90;
-        content_te_size.y = 110;
+        content_te_size.y = 150;
 
         content_te_ = new QTextEdit(wdg);
         content_te_->setGeometry(content_te_size.x
@@ -317,6 +347,7 @@ void Window::slotSendEmail()
 {
     std::cout << "Implement sending email here" << std::endl;
     // std::cout << to_te_->toPlainText().toStdString() << std::endl;
+    from_te_->clear();
     to_te_->clear();
     title_te_->clear();
     content_te_->clear();

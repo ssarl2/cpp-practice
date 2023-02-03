@@ -39,6 +39,7 @@ private:
     QButtonGroup *btn_group_;
     QProgressBar *progress_bar_;
     QSlider *slider_;
+    QTextEdit *from_te_;
     QTextEdit *to_te_;
     QTextEdit *title_te_;
     QTextEdit *content_te_;
