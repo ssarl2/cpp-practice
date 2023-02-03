@@ -2,6 +2,14 @@
 
 ## Dependencies
 `sudo apt-get install qtcreator qt5-default`
+```
+git clone https://github.com/kisli/vmime.git
+sudo apt-get install
+\ libgsasl7-dev
+\ doxygen
+\ graphviz
+\ sendmail
+```
 
 ## Build
 ```
