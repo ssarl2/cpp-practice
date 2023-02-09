@@ -14,13 +14,25 @@ find_package(Qt5 REQUIRED
     Widgets
     PrintSupport
 )
+find_package(CURL REQUIRED)
+
+include_directories(${CURL_INCLUDE_DIR})
 
 set(SOURCES
     src/main.cpp
     src/window.cpp
     src/ui_size.cpp
+    src/email.cpp
     include/window.h ## In order to be able to recognize Q_OBJECT by automoc(meta-object compiler), header should be added
 )
 
+set(LIBS
+    Qt5::Core
+    Qt5::Gui
+    Qt5::Widgets
+    Qt5::PrintSupport
+    ${CURL_LIBRARIES}
+)
+
 add_executable(qt ${SOURCES})
-target_link_libraries(qt Qt5::Core Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
+target_link_libraries(qt ${LIBS})

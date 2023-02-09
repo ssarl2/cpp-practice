@@ -347,6 +347,11 @@ void Window::slotSendEmail()
 {
     std::cout << "Implement sending email here" << std::endl;
     // std::cout << to_te_->toPlainText().toStdString() << std::endl;
+
+    Email e("sender@gmail.com","apppassword");
+
+    e.sendEmail();
+
     from_te_->clear();
     to_te_->clear();
     title_te_->clear();

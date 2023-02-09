@@ -10,7 +10,7 @@
 #include <QLabel>
 #include <QTextEdit>
 #include "ui_size.h"
-
+#include "email.h"
 
 class Window : public QWidget
 {
