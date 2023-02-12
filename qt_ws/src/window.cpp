@@ -346,10 +346,16 @@ void Window::slotEmailWindow()
 void Window::slotSendEmail()
 {
     std::cout << "Implement sending email here" << std::endl;
-    // std::cout << to_te_->toPlainText().toStdString() << std::endl;
+
+    std::string id = from_te_->toPlainText().toStdString();
+    std::string passwd = title_te_->toPlainText().toStdString();
+    std::string receiver = to_te_->toPlainText().toStdString();
+    std::string content = content_te_->toPlainText().toStdString();
 
     Email e;
-
+    e.setAccount(id, passwd);
+    e.setReceiver(receiver);
+    e.setEmail("SMTP example", content);
     bool succeed = e.sendEmail();
     if(succeed)
     {

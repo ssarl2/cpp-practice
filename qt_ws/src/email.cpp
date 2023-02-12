@@ -1,78 +1,20 @@
 #include "email.h"
 #include <iostream>
+#include <sstream>
+#include <ctime>
 
-// static const char *payload_text =
-// "Date: Tue, 07 Feb 2023 01:23:12 +1100\r\n"
-// "To: " TO_MAIL "\r\n"
-// "From: " FROM_MAIL "\r\n"
-// "Message-ID: <dcd7cb36-11db-487a-9f3a-e652a9458efd@"
-// "rfcpedant.example.org>\r\n"
-// "Subject: SMTP example message\r\n"
-// "\r\n"
-// "The body of the message starts here.\r\n"
-// "\r\n"
-// "It could be a lot of lines, could be MIME encoded, whatever.\r\n"
-// "Check RFC5322.\r\n";
-
-
-static const char *payload_text =
-"Date: Tue, 07 Feb 2023 01:23:12 +1100\r\n"
-"To: " TO_MAIL "\r\n"
-"From: " FROM_MAIL "\r\n"
-"Cc: \r\n"
-"Message-ID: <dcd7cb36-11db-487a-9f3a-e652a9458efd@"
-"rfcpedant.example.org>\r\n"
-"Subject: SMTP example message\r\n"
-"\r\n"
-"The body of the message starts here.\r\n"
-"\r\n"
-"It could be a lot of lines, could be MIME encoded, whatever.\r\n"
-"Check RFC5322.\r\n";
-
-// struct upload_status
-// {
-//     size_t bytes_read;
-// };
-
-// static size_t payload_source(char *ptr, size_t size, size_t nmemb, void *userp)
-// {
-//     struct upload_status *upload_ctx = (struct upload_status *)userp;
-//     const char *data;
-//     size_t room = size*nmemb;
-
-//     if((size == 0) || (nmemb == 0) || ((size*nmemb) < 1))
-//     {
-//         return 0;
-//     }
-
-//     std::cout << "payload data" << std::endl;
-//     std::cout << upload_ctx->bytes_read << std::endl;
-//     data = &payload_text[upload_ctx->bytes_read];
-//     if(data)
-//     {
-//         size_t len = strlen(data);
-//         if(room < len)
-//             len = room;
-//         memcpy(ptr, data, len);
-//         upload_ctx->bytes_read += len;
-//         std::cout << len << std::endl;
-//         std::cout << ptr << std::endl;
-
-//         return len;
-//     }
-
-//     return 0;
-// }
-
-struct data_struct {
+struct data_struct
+{
     std::string data;
     size_t pos = 0;
 };
-
-static size_t payload_source(char* buffer, size_t size, size_t nitems, data_struct* data) {
+// https://github.com/yodasoda1219/web-server-test/blob/93d536bb6d7d0e62127d806ac566203a70ac047b/gui-client/src/util.cpp
+static size_t payload_source(char* buffer, size_t size, size_t nitems, data_struct* data)
+{
     std::string to_write = data->data.substr(data->pos, nitems * size);
     size_t bytes_written = 0;
-    for (size_t i = 0; i < to_write.length(); i++) {
+    for (size_t i = 0; i < to_write.length(); i++)
+    {
         buffer[i] = to_write[i];
         bytes_written++;
     }
@@ -87,59 +29,88 @@ Email::Email()
 Email::~Email()
 {}
 
-
-// static const char *payload_text;
-std::string payload_text_("");
-
-bool Email::setData()
+bool Email::setAccount(std::string id, std::string passwd)
 {
-    // struct upload_status upload_ctx = { 0 };
+    if(id.empty() || passwd.empty())
+    {
+        std::cout << "Either ID or password is empty!" << std::endl;
+        return false;
+    }
+
+    id_ = id;
+    passwd_ = passwd;
+    return true;
+}
 
 
-    payload_text_.append("Date: Tue, 07 Feb 2023 01:23:12 +1100\r\n");
-    payload_text_.append(std::string("To: ") + to_mail_ + std::string("\r\n"));
-    payload_text_.append(std::string("From: ") + from_mail_ + std::string("\r\n"));
-    payload_text_.append("Message-ID: <dcd7cb36-11db-487a-9f3a-e652a9458efd@");
-    payload_text_.append("rfcpedant.example.org>\r\n");
-    payload_text_.append("Subject: SMTP example message\r\n");
-    payload_text_.append("\r\n");
-    payload_text_.append("The body of the message starts here.\r\n");
-    payload_text_.append("\r\n");
-    payload_text_.append("It could be a lot of lines, could be MIME encoded, whatever.\r\n");
-    payload_text_.append("Check RFC5322.\r\n");
+bool Email::setReceiver(std::string receiver)
+{
+    if(receiver.empty())
+    {
+        std::cout << "Receiver is empty!" << std::endl;
+        return false;
+    }
 
-    // payload_text = payload_text_.c_str();
+    receiver_ = receiver;
+    return true;
+}
 
-    // std::cout << "Data" << std::endl;
-    // std::cout << payload_text << std::endl;
+bool Email::setEmail(std::string subject, std::string content)
+{
+    if(subject.empty() || content.empty())
+    {
+        std::cout << "Either title or content is empty!" << std::endl;
+        return false;
+    }
 
+    const std::string WEEKDAY[]={"Sun","Mon","Tue", "Wed","Thu","Fri","Sat"};
+    const std::string MONTH[]={"Jan","Feb","Mar", "Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
 
+    std::time_t t = std::time(0);
+    std::tm *now = std::localtime(&t);
+
+    std::stringstream ss;
+
+    if(id_.empty() || receiver_.empty())
+    {
+        std::cout << "Failed to set data! Addrs are not set." << std::endl;
+        return false;
+    }
+    std::string sender_name = tokenizing(id_, "@")[0];
+    std::string receiver_name = tokenizing(receiver_, "@")[0];
+    
+    ss
+    << "Date: "<< WEEKDAY[now->tm_wday] << ", " << now->tm_mday << " " << MONTH[now->tm_mon] << " " << now->tm_year + 1900 << " " << now->tm_hour << ":" << now->tm_min << ":" << now->tm_sec << " " << " +0000\r\n"
+    << "To: " << receiver_name << " " << receiver_ << "\r\n"
+    << "From: " << sender_name << " " << id_ << "\r\n"
+    << "Subject: " << subject << "\r\n"
+    << "\r\n"
+    << content << "\r\n";
+
+    email_ = ss.str();
+    return true;
 }
 
 bool Email::sendEmail()
 {
-    bool d = setData();
-    data_struct read, write;
-    read.data = payload_text_;
-    std::cout << "sendEmail" << std::endl;
+
+    data_struct read;
+    read.data = email_;
     CURL *curl;
     curl = curl_easy_init();
-    // struct upload_status upload_ctx = { 0 };
     if(curl)
     {
-        curl_easy_setopt(curl, CURLOPT_USERPWD, "sender@gmail.com:apppassword");
-        // curl_easy_setopt(curl, CURLOPT_USERNAME, "sender@gmail.com");
-        // curl_easy_setopt(curl, CURLOPT_USERPWD, "apppassword");
+        std::string account = id_+std::string(":")+passwd_;
+        curl_easy_setopt(curl, CURLOPT_USERPWD, account.c_str());
         curl_easy_setopt(curl, CURLOPT_URL, "smtp://smtp.gmail.com:587");
 
-        curl_easy_setopt(curl, CURLOPT_MAIL_FROM, FROM_ADDR);
+        curl_easy_setopt(curl, CURLOPT_MAIL_FROM, id_.c_str());
         curl_slist *recipients = NULL;
-        recipients = curl_slist_append(recipients, TO_ADDR);
+        recipients = curl_slist_append(recipients, receiver_.c_str());
         curl_easy_setopt(curl, CURLOPT_MAIL_RCPT, recipients);
-        std::cout << "before setData" << std::endl;
+
         curl_easy_setopt(curl, CURLOPT_READFUNCTION, payload_source);
         curl_easy_setopt(curl, CURLOPT_READDATA, &read);
-        // curl_easy_setopt(curl, CURLOPT_READDATA, &upload_ctx);
         curl_easy_setopt(curl, CURLOPT_UPLOAD, 1L);
         // curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
 
@@ -157,11 +128,9 @@ bool Email::sendEmail()
         }
         curl_slist_free_all(recipients);
         curl_easy_cleanup(curl);
-        return true;
     }
+    return true;
 }
-
-
 
 std::vector<std::string> Email::tokenizing(std::string str, std::string delimiters)
 {

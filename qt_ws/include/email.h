@@ -15,21 +15,18 @@ class Email
 public:
     Email();
     ~Email();
-    bool setData();
+    bool setAccount(std::string id, std::string passwd);
+    bool setReceiver(std::string receiver);
+    bool setEmail(std::string title, std::string content);
     bool sendEmail();
 private:
     std::vector<std::string> tokenizing(std::string str, std::string delimiters);
 
     std::string id_;
-    std::string pwd_;
-    std::string from_addr_;
-    std::string to_addr_;
-    std::string from_mail_;
-    std::string to_mail_;
-    std::string payload_text_;
-    // static const char *payload_text;
+    std::string passwd_;
+    std::string receiver_;
+    std::string email_;
     bool is_account_registered_;
-    bool is_recipient_ready_;
-    bool is_content_ready_;
-    bool is_ssl_set_;
+    bool are_addrs_ready_;
+    bool is_data_ready_;
 };
