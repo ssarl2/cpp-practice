@@ -17,6 +17,7 @@ int main(int argc, char* argv[])
     window1.createCheckableButton();
     window1.createProgressBar();
     window1.createInfoButton();
+    window1.createEmailButton();
     window1.createButtonGroupBox();
     window1.show();
 
