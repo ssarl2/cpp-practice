@@ -1,8 +1,4 @@
 #include "email.h"
-#include <iostream>
-#include <sstream>
-#include <ctime>
-
 struct data_struct
 {
     std::string data;
@@ -29,16 +25,16 @@ Email::Email()
 Email::~Email()
 {}
 
-bool Email::setAccount(std::string id, std::string passwd)
+bool Email::setAccount(std::string id, std::string app_pwd)
 {
-    if(id.empty() || passwd.empty())
+    if(id.empty() || app_pwd.empty())
     {
-        std::cout << "Either ID or password is empty!" << std::endl;
+        std::cout << "Either ID or app password is empty!" << std::endl;
         return false;
     }
 
     id_ = id;
-    passwd_ = passwd;
+    app_pwd_ = app_pwd;
     return true;
 }
 
@@ -59,7 +55,7 @@ bool Email::setEmail(std::string subject, std::string content)
 {
     if(subject.empty() || content.empty())
     {
-        std::cout << "Either title or content is empty!" << std::endl;
+        std::cout << "Either subject or content is empty!" << std::endl;
         return false;
     }
 
@@ -100,7 +96,7 @@ bool Email::sendEmail()
     curl = curl_easy_init();
     if(curl)
     {
-        std::string account = id_+std::string(":")+passwd_;
+        std::string account = id_+std::string(":")+app_pwd_;
         curl_easy_setopt(curl, CURLOPT_USERPWD, account.c_str());
         curl_easy_setopt(curl, CURLOPT_URL, "smtp://smtp.gmail.com:587");
 

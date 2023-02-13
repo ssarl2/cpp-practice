@@ -1,6 +1,7 @@
 #ifndef __WINDOW_H__
 #define __WINDOW_H__
 
+#include <QApplication>
 #include <QWidget>
 #include <QPushButton>
 #include <QButtonGroup>
@@ -39,9 +40,10 @@ private:
     QButtonGroup *btn_group_;
     QProgressBar *progress_bar_;
     QSlider *slider_;
-    QTextEdit *from_te_;
-    QTextEdit *to_te_;
-    QTextEdit *title_te_;
+    QTextEdit *id_te_;
+    QTextEdit *app_pwd_te_;
+    QTextEdit *receiver_te_;
+    QTextEdit *subject_te_;
     QTextEdit *content_te_;
     UI::UISize window_size_;
     UI::UISize exit_btn_size_;

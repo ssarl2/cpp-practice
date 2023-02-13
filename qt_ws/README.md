@@ -24,7 +24,7 @@ qt_ws/build$ ./qt
 ## Development notes
 - An email can be sent through ubuntu terminal.
   - [https://stackoverflow.com/questions/70730838/how-to-send-email-with-gmail-using-curl-in-c](https://stackoverflow.com/questions/70730838/how-to-send-email-with-gmail-using-curl-in-c)
-- If you'd like to send an email with a google account, [you need to set](https://support.google.com/mail/answer/185833?hl=en)
+- An email will be sent via the google SMTP server. A google account with app password are needed. [You need to set](https://support.google.com/mail/answer/185833?hl=en)
   1. 2-Step Verification 
   2. App password
    

@@ -1,5 +1,4 @@
 #include "window.h"
-#include <QApplication>
 #include <iostream>
 
 Window::Window(int width, int height, QWidget *parent)
@@ -39,10 +38,10 @@ void Window::createCheckableButton()
 
     // Create and position the button
     checkable_btn_ = new QPushButton("World?", this);
-    checkable_btn_->setGeometry(checkable_btn_size_.x, 
-                               checkable_btn_size_.y, 
-                               checkable_btn_size_.width, 
-                               checkable_btn_size_.height);
+    checkable_btn_->setGeometry(checkable_btn_size_.x,
+                                checkable_btn_size_.y,
+                                checkable_btn_size_.width, 
+                                checkable_btn_size_.height);
     checkable_btn_->setCheckable(true);
 
     connect(checkable_btn_, SIGNAL(clicked(bool)), this, SLOT(slotCheckableButtonClicked(bool)));
@@ -72,9 +71,9 @@ void Window::createEmailButton()
 
     email_btn_ = new QPushButton("Email", this);
     email_btn_->setGeometry(email_btn_size_.x,
-                           email_btn_size_.y,
-                           email_btn_size_.width,
-                           email_btn_size_.height);
+                            email_btn_size_.y,
+                            email_btn_size_.width,
+                            email_btn_size_.height);
 
     connect(email_btn_, SIGNAL(clicked()), this, SLOT(slotEmailWindow()));
 }
@@ -128,10 +127,10 @@ void Window::createProgressBar()
     progress_bar_ = new QProgressBar(this);
     progress_bar_->setRange(0, 100);
     progress_bar_->setValue(50);
-    progress_bar_->setGeometry(progress_bar_size_.x, 
-                              progress_bar_size_.y, 
-                              progress_bar_size_.width, 
-                              progress_bar_size_.height);
+    progress_bar_->setGeometry(progress_bar_size_.x,
+                               progress_bar_size_.y,
+                               progress_bar_size_.width, 
+                               progress_bar_size_.height);
 
     // Create a horizontal slider
     // with the range between 0 and 100, and a starting value of 0
@@ -139,10 +138,10 @@ void Window::createProgressBar()
     slider_->setOrientation(Qt::Horizontal);
     slider_->setRange(0, 100);
     slider_->setValue(50);
-    slider_->setGeometry(slider_size_.x, 
-                        slider_size_.y, 
-                        slider_size_.width, 
-                        slider_size_.height);
+    slider_->setGeometry(slider_size_.x,
+                         slider_size_.y,
+                         slider_size_.width, 
+                         slider_size_.height);
 
     connect(slider_, SIGNAL(valueChanged(int)), progress_bar_, SLOT(setValue(int)));
 }
@@ -219,104 +218,134 @@ void Window::slotEmailWindow()
         connect(send_btn, SIGNAL(clicked()), this, SLOT(slotSendEmail()));
     }
 
-    { // From label
-        QLabel *from_label = new QLabel("From", wdg);
-        UI::UISize from_label_size;
+    { // ID label
+        QLabel *id_label = new QLabel("ID", wdg);
+        UI::UISize id_label_size;
 
-        from_label_size.width = 50;
-        from_label_size.height = 30;
-        from_label_size.x = 30;
-        from_label_size.y = 30;
+        id_label_size.width = 70;
+        id_label_size.height = 30;
+        id_label_size.x = 30;
+        id_label_size.y = 30;
 
-        from_label->setGeometry(from_label_size.x
-                             ,from_label_size.y
-                             ,from_label_size.width
-                             ,from_label_size.height);
+        id_label->setGeometry(id_label_size.x
+                             ,id_label_size.y
+                             ,id_label_size.width
+                             ,id_label_size.height);
     }
 
-    { // From text edit
-        UI::UISize from_te_size;
+    { // ID text edit
+        UI::UISize id_te_size;
 
-        from_te_size.width = window_size.width - 100*2;
-        from_te_size.height = 30;
-        from_te_size.x = 90;
-        from_te_size.y = 30;
+        id_te_size.width = window_size.width - 100*2;
+        id_te_size.height = 30;
+        id_te_size.x = 110;
+        id_te_size.y = 30;
 
-        from_te_ = new QTextEdit(wdg);
-        from_te_->setGeometry(from_te_size.x
-                           ,from_te_size.y
-                           ,from_te_size.width
-                           ,from_te_size.height);
+        id_te_ = new QTextEdit(wdg);
+        id_te_->setGeometry(id_te_size.x
+                           ,id_te_size.y
+                           ,id_te_size.width
+                           ,id_te_size.height);
     }
 
-    { // To label
-        QLabel *to_label = new QLabel("To", wdg);
-        UI::UISize to_label_size;
+    { // App password label
+        QLabel *app_pwd_label = new QLabel("App\npassword", wdg);
+        UI::UISize app_pwd_label_size;
 
-        to_label_size.width = 50;
-        to_label_size.height = 30;
-        to_label_size.x = 30;
-        to_label_size.y = 70;
+        app_pwd_label_size.width = 70;
+        app_pwd_label_size.height = 45;
+        app_pwd_label_size.x = 30;
+        app_pwd_label_size.y = 62;
 
-        to_label->setGeometry(to_label_size.x
-                             ,to_label_size.y
-                             ,to_label_size.width
-                             ,to_label_size.height);
+        app_pwd_label->setGeometry(app_pwd_label_size.x
+                                  ,app_pwd_label_size.y
+                                  ,app_pwd_label_size.width
+                                  ,app_pwd_label_size.height);
     }
 
-    { // To text edit
-        UI::UISize to_te_size;
+    { // App password text edit
+        UI::UISize app_pwd_te_size;
 
-        to_te_size.width = window_size.width - 100*2;
-        to_te_size.height = 30;
-        to_te_size.x = 90;
-        to_te_size.y = 70;
+        app_pwd_te_size.width = window_size.width - 100*2;
+        app_pwd_te_size.height = 30;
+        app_pwd_te_size.x = 110;
+        app_pwd_te_size.y = 70;
 
-        to_te_ = new QTextEdit(wdg);
-        to_te_->setGeometry(to_te_size.x
-                           ,to_te_size.y
-                           ,to_te_size.width
-                           ,to_te_size.height);
+        app_pwd_te_ = new QTextEdit(wdg);
+        app_pwd_te_->setGeometry(app_pwd_te_size.x
+                                ,app_pwd_te_size.y
+                                ,app_pwd_te_size.width
+                                ,app_pwd_te_size.height);
     }
 
-    { // Title label
-        QLabel *title_label = new QLabel("Title", wdg);
-        UI::UISize title_label_size;
+    { // Receiver label
+        QLabel *receiver_label = new QLabel("Receiver", wdg);
+        UI::UISize receiver_label_size;
 
-        title_label_size.width = 50;
-        title_label_size.height = 30;
-        title_label_size.x = 30;
-        title_label_size.y = 110;
+        receiver_label_size.width = 70;
+        receiver_label_size.height = 30;
+        receiver_label_size.x = 30;
+        receiver_label_size.y = 110;
 
-        title_label->setGeometry(title_label_size.x
-                                ,title_label_size.y
-                                ,title_label_size.width
-                                ,title_label_size.height);
+        receiver_label->setGeometry(receiver_label_size.x
+                                   ,receiver_label_size.y
+                                   ,receiver_label_size.width
+                                   ,receiver_label_size.height);
     }
 
-    { // Title text edit
-        UI::UISize title_te_size;
+    { // Receiver text edit
+        UI::UISize receiver_te_size;
 
-        title_te_size.width = window_size.width - 100*2;
-        title_te_size.height = 30;
-        title_te_size.x = 90;
-        title_te_size.y = 110;
+        receiver_te_size.width = window_size.width - 100*2;
+        receiver_te_size.height = 30;
+        receiver_te_size.x = 110;
+        receiver_te_size.y = 110;
 
-        title_te_ = new QTextEdit(wdg);
-        title_te_->setGeometry(title_te_size.x
-                              ,title_te_size.y
-                              ,title_te_size.width
-                              ,title_te_size.height);
+        receiver_te_ = new QTextEdit(wdg);
+        receiver_te_->setGeometry(receiver_te_size.x
+                                 ,receiver_te_size.y
+                                 ,receiver_te_size.width
+                                 ,receiver_te_size.height);
+    }
+
+    { // Subject label
+        QLabel *subject_label = new QLabel("Subject", wdg);
+        UI::UISize subject_label_size;
+
+        subject_label_size.width = 70;
+        subject_label_size.height = 30;
+        subject_label_size.x = 30;
+        subject_label_size.y = 150;
+
+        subject_label->setGeometry(subject_label_size.x
+                                  ,subject_label_size.y
+                                  ,subject_label_size.width
+                                  ,subject_label_size.height);
+    }
+
+    { // Subject text edit
+        UI::UISize subject_te_size;
+
+        subject_te_size.width = window_size.width - 100*2;
+        subject_te_size.height = 30;
+        subject_te_size.x = 110;
+        subject_te_size.y = 150;
+
+        subject_te_ = new QTextEdit(wdg);
+        subject_te_->setGeometry(subject_te_size.x
+                                ,subject_te_size.y
+                                ,subject_te_size.width
+                                ,subject_te_size.height);
     }
 
     { // Content label
         QLabel *content_label = new QLabel("Content", wdg);
         UI::UISize content_label_size;
 
-        content_label_size.width = 50;
+        content_label_size.width = 70;
         content_label_size.height = 30;
         content_label_size.x = 30;
-        content_label_size.y = 150;
+        content_label_size.y = 190;
 
         content_label->setGeometry(content_label_size.x
                                   ,content_label_size.y
@@ -329,14 +358,14 @@ void Window::slotEmailWindow()
 
         content_te_size.width = window_size.width - 100*2;
         content_te_size.height = 200;
-        content_te_size.x = 90;
-        content_te_size.y = 150;
+        content_te_size.x = 110;
+        content_te_size.y = 190;
 
         content_te_ = new QTextEdit(wdg);
         content_te_->setGeometry(content_te_size.x
-                              ,content_te_size.y
-                              ,content_te_size.width
-                              ,content_te_size.height);
+                                ,content_te_size.y
+                                ,content_te_size.width
+                                ,content_te_size.height);
     }
 
     wdg->show();
@@ -347,15 +376,16 @@ void Window::slotSendEmail()
 {
     std::cout << "Implement sending email here" << std::endl;
 
-    std::string id = from_te_->toPlainText().toStdString();
-    std::string passwd = title_te_->toPlainText().toStdString();
-    std::string receiver = to_te_->toPlainText().toStdString();
+    std::string id = id_te_->toPlainText().toStdString();
+    std::string app_pwd = app_pwd_te_->toPlainText().toStdString();
+    std::string subject = subject_te_->toPlainText().toStdString();
+    std::string receiver = receiver_te_->toPlainText().toStdString();
     std::string content = content_te_->toPlainText().toStdString();
 
     Email e;
-    e.setAccount(id, passwd);
+    e.setAccount(id, app_pwd);
     e.setReceiver(receiver);
-    e.setEmail("SMTP example", content);
+    e.setEmail(subject, content);
     bool succeed = e.sendEmail();
     if(succeed)
     {
@@ -366,8 +396,9 @@ void Window::slotSendEmail()
         std::cout << "mail has not sent" << std::endl;
     }
 
-    from_te_->clear();
-    to_te_->clear();
-    title_te_->clear();
+    id_te_->clear();
+    app_pwd_te_->clear();
+    receiver_te_->clear();
+    subject_te_->clear();
     content_te_->clear();
 }
