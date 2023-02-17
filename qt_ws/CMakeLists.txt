@@ -6,6 +6,9 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 
+# set(CMAKE_BUILD_TYPE Debug) # non-optimized code with debug symbols
+set(CMAKE_BUILD_TYPE RelWithDebInfo) # optimized code with debug symbols
+
 include_directories(include)
 
 find_package(Qt5 REQUIRED
