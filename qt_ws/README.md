@@ -21,6 +21,21 @@ qt_ws/build$ cmake --build .
 qt_ws/build$ ./qt
 ```
 
+## Debug
+with gdb(GNU Debugger)  
+- After built  
+`qt_ws$ cd build`  
+`qt_ws/build$ cmake -DCMAKE_BUILD_TYPE=Debug ..` or (better for full debugging)  
+`qt_ws/build$ cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ..` or  
+`qt_ws/build$ cmake ..` (because the option is already set in CmakeLists.txt)  
+`qt_ws/build$ gdb ./qt` to start the gdb  
+(enter)  
+`(gdb) info sources -dirname qt_ws` to filter and to find sources in the program  
+`(gdb) b .../qt_ws/src/main.cpp:10` to set a breakpoint  
+`(gdb) r` to run the program  
+`(gdb) n or s` to continue to the next line  
+
+
 ## Development notes
 - An email can be sent through ubuntu terminal.
   - [https://stackoverflow.com/questions/70730838/how-to-send-email-with-gmail-using-curl-in-c](https://stackoverflow.com/questions/70730838/how-to-send-email-with-gmail-using-curl-in-c)
