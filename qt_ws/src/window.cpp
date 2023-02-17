@@ -174,6 +174,15 @@ void Window::customSLOT(int id)
     std::cout << "checked this id : " << id << std::endl;
 }
 
+void Window::createMenu()
+{
+    menu_bar_ = new QMenuBar;
+
+    file_menu_ = new QMenu(tr("&File"), this);
+    exit_action_ = file_menu_->addAction(tr("&Exit"));
+    menu_bar_->addMenu(file_menu_);
+}
+
 void Window::slotEmailWindow()
 {
     UI::UISize window_size;
@@ -181,6 +190,7 @@ void Window::slotEmailWindow()
     window_size.height = 600;
 
     QWidget *wdg = new QWidget();
+
     wdg->setFixedSize(window_size.width, window_size.height);
 
     { // Cancel button
@@ -401,4 +411,72 @@ void Window::slotSendEmail()
     receiver_te_->clear();
     subject_te_->clear();
     content_te_->clear();
+}
+
+void Window::createLayoutButton()
+{
+    UI::UISize layout_btn_size_ = UI::setUISize(80, 30, 0, 0, 0, 0);
+    layout_btn_size_.x = 320;
+    layout_btn_size_.y = 10;
+
+    // Create and position the button
+    QPushButton *layout_btn_ = new QPushButton("layout", this);
+    layout_btn_->setGeometry(layout_btn_size_.x,
+                             layout_btn_size_.y,
+                             layout_btn_size_.width,
+                             layout_btn_size_.height);
+
+    connect(layout_btn_, SIGNAL(clicked()), this, SLOT(slotLayoutWindow()));
+}
+
+void Window::slotLayoutWindow()
+{
+    UI::UISize window_size;
+    window_size.width = 500;
+    window_size.height = 600;
+    QWidget *wdg = new QWidget();
+    wdg->setFixedSize(window_size.width, window_size.height);
+
+    { // Cancel button
+        UI::UISize cancel_btn_size;
+
+        cancel_btn_size.width = 80;
+        cancel_btn_size.height = 30;
+        cancel_btn_size.x = window_size.width - cancel_btn_size.width - 10;
+        cancel_btn_size.y = window_size.height - cancel_btn_size.height - 10;
+
+        QPushButton *cancel_btn = new QPushButton("Cancel", wdg);
+        cancel_btn->setGeometry(cancel_btn_size.x
+                               ,cancel_btn_size.y
+                               ,cancel_btn_size.width
+                               ,cancel_btn_size.height);
+
+        connect(cancel_btn, SIGNAL(clicked()), wdg, SLOT(close()));
+        connect(cancel_btn, SIGNAL(clicked()), this, SLOT(show()));
+    }
+
+
+    menu_bar_ = new QMenuBar;
+
+    file_menu_ = new QMenu(tr("&File"), wdg);
+    exit_action_ = file_menu_->addAction(tr("&Exit"));
+    menu_bar_->addMenu(file_menu_);
+
+    connect(exit_action_, &QAction::triggered, this, &QApplication::quit);
+
+    main_layout_ = new QVBoxLayout;
+    main_layout_->setMenuBar(menu_bar_);
+    wdg->setLayout(main_layout_);
+
+    form_group_box_ = new QGroupBox(tr("Form layout"));
+    QFormLayout *layout = new QFormLayout;
+    layout->addRow(new QLabel(tr("Line 1:")), new QLineEdit);
+    layout->addRow(new QLabel(tr("Line 2, long text:")), new QComboBox);
+    layout->addRow(new QLabel(tr("Line 3:")), new QSpinBox);
+    form_group_box_->setLayout(layout);
+
+    main_layout_->addWidget(form_group_box_);
+
+    wdg->show();
+    this->close();
 }

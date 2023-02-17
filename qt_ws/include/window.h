@@ -13,6 +13,15 @@
 #include "ui_size.h"
 #include "email.h"
 
+#include <QFormLayout>
+#include <QLineEdit>
+#include <QVBoxLayout>
+#include <QMenu>
+#include <QMenuBar>
+#include <QAction>
+#include <QComboBox>
+#include <QSpinBox>
+
 class Window : public QWidget
 {
 Q_OBJECT
@@ -24,6 +33,8 @@ public:
     void createEmailButton();
     void createButtonGroupBox();
     void createProgressBar();
+    void createMenu();
+    void createLayoutButton();
 signals:
     void checkableButtonCounterReached();
 private slots:
@@ -31,6 +42,7 @@ private slots:
     void customSLOT(int id);
     void slotEmailWindow();
     void slotSendEmail();
+    void slotLayoutWindow();
 private:
     int checkable_btn_counter_;
     QPushButton *exit_btn_;
@@ -52,6 +64,12 @@ private:
     UI::UISize email_btn_size_;
     UI::UISize progress_bar_size_;
     UI::UISize slider_size_;
+
+    QVBoxLayout *main_layout_;
+    QGroupBox *form_group_box_;
+    QMenu *file_menu_;
+    QMenuBar *menu_bar_;
+    QAction *exit_action_;
 };
 
 #endif // __WINDOW_H__
