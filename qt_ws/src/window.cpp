@@ -437,25 +437,6 @@ void Window::slotLayoutWindow()
     QWidget *wdg = new QWidget();
     wdg->setFixedSize(window_size.width, window_size.height);
 
-    { // Cancel button
-        UI::UISize cancel_btn_size;
-
-        cancel_btn_size.width = 80;
-        cancel_btn_size.height = 30;
-        cancel_btn_size.x = window_size.width - cancel_btn_size.width - 10;
-        cancel_btn_size.y = window_size.height - cancel_btn_size.height - 10;
-
-        QPushButton *cancel_btn = new QPushButton("Cancel", wdg);
-        cancel_btn->setGeometry(cancel_btn_size.x
-                               ,cancel_btn_size.y
-                               ,cancel_btn_size.width
-                               ,cancel_btn_size.height);
-
-        connect(cancel_btn, SIGNAL(clicked()), wdg, SLOT(close()));
-        connect(cancel_btn, SIGNAL(clicked()), this, SLOT(show()));
-    }
-
-
     menu_bar_ = new QMenuBar;
 
     file_menu_ = new QMenu(tr("&File"), wdg);
@@ -475,7 +456,13 @@ void Window::slotLayoutWindow()
     layout->addRow(new QLabel(tr("Line 3:")), new QSpinBox);
     form_group_box_->setLayout(layout);
 
+    QPushButton *back_btn = new QPushButton("Back");
+
     main_layout_->addWidget(form_group_box_);
+    main_layout_->addWidget(back_btn);
+
+    connect(back_btn, SIGNAL(clicked()), wdg, SLOT(close()));
+    connect(back_btn, SIGNAL(clicked()), this, SLOT(show()));
 
     wdg->show();
     this->close();
