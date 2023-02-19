@@ -44,3 +44,6 @@ with gdb(GNU Debugger)
   2. App password
    
   The App password will be used for the curl command.
+
+## References
+- [Relationship between Qwidget and Qlayout](https://stackoverflow.com/questions/24262564/convert-between-qlayout-and-qwidget)
