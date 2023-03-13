@@ -1,13 +1,16 @@
 # Qt library practice(pronounced as "cute")
-
+## Purpose
+What needs : Qt C++ library  
+Help for : myself  
+How to achieve : write a lot of useful qt code
 ## Dependencies
+GNU/Linux 20.04
 ```
 sudo apt-get install \
 qtcreator \
 qt5-default \
 libcurl4-openssl-dev
 ```
-
 ## Build
 ```
 qt_ws$ mkdir build
@@ -15,11 +18,12 @@ qt_ws$ cd build
 qt_ws/build$ cmake ..
 qt_ws/build$ cmake --build .
 ```
-
 ## Run
+### Launch
 ```
 qt_ws/build$ ./qt
 ```
+### Test
 
 ## Debug
 with gdb(GNU Debugger)  
@@ -35,7 +39,55 @@ with gdb(GNU Debugger)
 `(gdb) r` to run the program  
 `(gdb) n or s` to continue to the next line  
 
-
+## Patterns
+With the UI implementations, MVC would be [good](https://stackoverflow.com/questions/9419147/which-software-design-patterns-do-common-gui-frameworks-exhibit). Frontend-Backend.  
+So, combination of below.  
+### Creational Design Pattern
+- Abstract Factory
+### Structural Design Pattern
+- **Bridge**
+### Behavioral Design Pattern
+- Observer
+## Diagrams
+### Class Diagram
+```mermaid
+---
+title: UI class diagram example
+---
+classDiagram
+    note "From Duck till Zebra"
+    Animal <|-- Duck
+    note for Duck "can fly\ncan swim\ncan dive\ncan help in debugging"
+    Animal <|-- Fish
+    Animal <|-- Zebra
+    Animal : +int age
+    Animal : +String gender
+    Animal: +isMammal()
+    Animal: +mate()
+    class Duck{
+        +String beakColor
+        +swim()
+        +quack()
+    }
+    class Fish{
+        -int sizeInFeet
+        -canEat()
+    }
+    class Zebra{
+        +bool is_wild
+        +run()
+    }
+```
+### Sequence Diagram
+```mermaid
+---
+title: UI Sequence diagram example
+---
+sequenceDiagram
+    Alice->>John: Hello John, how are you?
+    John-->>Alice: Great!
+    Alice-)John: See you later!
+```
 ## Development notes
 - An email can be sent through ubuntu terminal.
   - [https://stackoverflow.com/questions/70730838/how-to-send-email-with-gmail-using-curl-in-c](https://stackoverflow.com/questions/70730838/how-to-send-email-with-gmail-using-curl-in-c)
