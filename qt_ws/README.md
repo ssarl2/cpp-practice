@@ -55,27 +55,77 @@ So, combination of below.
 title: UI class diagram example
 ---
 classDiagram
-    note "From Duck till Zebra"
-    Animal <|-- Duck
-    note for Duck "can fly\ncan swim\ncan dive\ncan help in debugging"
-    Animal <|-- Fish
-    Animal <|-- Zebra
-    Animal : +int age
-    Animal : +String gender
-    Animal: +isMammal()
-    Animal: +mate()
-    class Duck{
-        +String beakColor
-        +swim()
-        +quack()
+    note "Abstact Factory, Observer, Bridge"
+    MenuBarFactorySubscriber <--o MenuBarPublisher
+    MenuBarFactorySubscriber <|.. Home
+    MenuBarFactorySubscriber <|.. ProgressBar
+    MenuBarFactorySubscriber <|.. Layout
+    EventBridge <|-- Home
+    EventBridge <|-- ProgressBar
+    EventBridge <|-- Layout
+    EventBridge o--> OSBridge
+    OSBridge <|.. Windows
+    OSBridge <|.. Linux
+    OSBridge <|.. Laptop
+
+    class MenuBarPublisher{
+        -subscribers: Subscriber[]
+        -mainState
+        +subscribe()
+        +unsubscribe()
+        +notify()
     }
-    class Fish{
-        -int sizeInFeet
-        -canEat()
+    class MenuBarFactorySubscriber{
+        <<interface>>
+        +signal()
+        +slot()
+        +menuBarUpdate()
+        +goHome()
+        +exitApp()
     }
-    class Zebra{
-        +bool is_wild
-        +run()
+    class Home{
+        +signal()
+        +slot()
+        +menuBarUpdate()
+        +goHome()
+        +exitApp()
+    }
+    class ProgressBar{
+        +signal()
+        +slot()
+        +menuBarUpdate()
+        +goHome()
+        +exitApp()
+    }
+    class Layout{
+        +signal()
+        +slot()
+        +menuBarUpdate()
+        +goHome()
+        +exitApp()
+    }
+    class EventBridge{
+        +event1()
+        +event2()
+        +event3()
+    }
+    class OSBridge{
+        <<interface>>
+        -Windows
+        -Linux
+        -Laptop?
+        +setVolume()
+        +setScreenBrightness()
+        +drawLayout()
+    }
+    class Windows{
+
+    }
+    class Linux{
+
+    }
+    class Laptop{
+
     }
 ```
 ### Sequence Diagram
