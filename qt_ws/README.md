@@ -134,13 +134,14 @@ classDiagram
 title: UI State diagram example
 ---
 stateDiagram-v2
-    [*] --> Still
-    Still --> [*]
-
-    Still --> Moving
-    Moving --> Still
-    Moving --> Crash
-    Crash --> [*]
+    [*] --> Home
+    Home --> MenuBar
+    Home --> ProgressBar
+    Home --> Layout
+    ProgressBar --> MenuBar
+    Layout --> MenuBar
+    MenuBar --> Home: goHome()
+    MenuBar --> [*]: exitApp()
 ```
 ## Development notes
 - An email can be sent through ubuntu terminal.
