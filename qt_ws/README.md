@@ -39,6 +39,11 @@ with gdb(GNU Debugger)
 `(gdb) r` to run the program  
 `(gdb) n or s` to continue to the next line  
 
+### GDB tips
+`qt_ws/build$ gdb -tui ./qt` or pressing Ctrl+X+A in `(gdb)` shows code  
+`(gdb) print variable_name` shows the value of the 'variable_name' during running the app  
+Ctrl+X+A in `(gdb)` changes the active window and it's possible to scroll up down with arrow keys  
+
 ## Patterns
 With the UI implementations, MVC would be [good](https://stackoverflow.com/questions/9419147/which-software-design-patterns-do-common-gui-frameworks-exhibit). Frontend-Backend.  
 So, combination of below.  
