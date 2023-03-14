@@ -128,15 +128,19 @@ classDiagram
 
     }
 ```
-### Sequence Diagram
+### State Diagram
 ```mermaid
 ---
-title: UI Sequence diagram example
+title: UI State diagram example
 ---
-sequenceDiagram
-    Alice->>John: Hello John, how are you?
-    John-->>Alice: Great!
-    Alice-)John: See you later!
+stateDiagram-v2
+    [*] --> Still
+    Still --> [*]
+
+    Still --> Moving
+    Moving --> Still
+    Moving --> Crash
+    Crash --> [*]
 ```
 ## Development notes
 - An email can be sent through ubuntu terminal.
