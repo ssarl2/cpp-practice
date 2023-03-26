@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
     std::vector<std::ifstream *> predefined_files;
     for (std::size_t i = 0; i < file_stored; i++)
     {
-        std::ifstream* f = new std::ifstream("../input/input01.txt");
+        std::ifstream* f = new std::ifstream(argv[1]);
         predefined_files.push_back(f);
     }
 
@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
             sum += x;
             std::cout << "sum : " << sum << std::endl;
 
-            // set doesn't allow to have duplicated values. This is a way to find a value existing.
+            //* set doesn't allow to have duplicated values. This is a way to find a value existing.
             if(find_same_sum.find(sum) != find_same_sum.end())
             {
                 std::cout << "Duplicated!" << std::endl;
@@ -45,16 +45,16 @@ int main(int argc, char *argv[]) {
     std::cout << "sum " << i << " times" << std::endl;
     std::cout << "\nSum result : " << sum << std::endl;
 
-    // clear vector with one of below way
+    //* clear vector with one of below way
     {
         predefined_files.clear();
         predefined_files.shrink_to_fit();
         std::vector<std::ifstream *>().swap(predefined_files);
     }
-    // clear unordered_set with one of below way
+    //* clear unordered_set with one of below way
     {
         find_same_sum.rehash(0);
-        // std::unordered_set<int>().swap(find_same_sum);
+        // std::unordered_set<int>().swap(find_same_sum); //* debug
     }
 
     return 0;
