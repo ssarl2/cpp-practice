@@ -66,5 +66,7 @@ int main(int argc, char** argv)
         std::cout << "Case #"<<i+1<< ": " << results[i] << "\n";
     }
 
+    delete[] results;
+
     return 0;
 }

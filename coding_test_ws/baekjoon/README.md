@@ -1,5 +1,6 @@
 ## Build
-`g++ -o 11021 -g -std=c++11 11021.cpp`
+`g++ -o 11021 -g -std=c++11 11021.cpp`  
+`g++ -o 11021 -g -std=c++11 11022.cpp`
 
 ### Build options
 `-o` output of executable binary name  
@@ -7,4 +8,5 @@
 `-std=c++11` compile with c++11  
 
 ## Run
-`./11021`
+`./11021`  
+`./11022`
