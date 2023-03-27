@@ -4,7 +4,8 @@ https://www.acmicpc.net/
 `g++ -o 11021 -g -std=c++11 11021.cpp`  
 `g++ -o 11022 -g -std=c++11 11022.cpp`  
 `g++ -o 2438 -g -std=c++11 2438.cpp`  
-`g++ -o 2439 -g -std=c++11 2439.cpp`
+`g++ -o 2439 -g -std=c++11 2439.cpp`  
+`g++ -o 10952 -g -std=c++11 10952.cpp`
 
 ### Build options
 `-o` output of executable binary name  
@@ -15,4 +16,5 @@ https://www.acmicpc.net/
 `./11021`  
 `./11022`  
 `./2438`  
-`./2439`
+`./2439`  
+`./10952`
