@@ -5,16 +5,21 @@ https://www.acmicpc.net/
 `g++ -o 11022 -g -std=c++11 11022.cpp`  
 `g++ -o 2438 -g -std=c++11 2438.cpp`  
 `g++ -o 2439 -g -std=c++11 2439.cpp`  
-`g++ -o 10952 -g -std=c++11 10952.cpp`
+`g++ -o 10952 -g -std=c++11 10952.cpp`  
+`g++ -o 10951 -g -std=c++11 -Wall -Wextra -Werror 10951.cpp`
 
 ### Build options
 `-o` output of executable binary name  
 `-g` enable debugging mode  
 `-std=c++11` compile with c++11  
+`-Wall` print all(many) warnings  
+`-Wextra`  print extra warnings  
+`-Werror`  warning as an error. Cannot compile if there is a warning  
 
 ## Run
 `./11021`  
 `./11022`  
 `./2438`  
 `./2439`  
-`./10952`
+`./10952`  
+`./10951` could not solve yet
