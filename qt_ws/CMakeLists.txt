@@ -10,6 +10,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_BUILD_TYPE RelWithDebInfo) # optimized code with debug symbols
 
 include_directories(include)
+include_directories(interface)
 
 find_package(Qt5 REQUIRED
     Core
@@ -23,10 +24,12 @@ include_directories(${CURL_INCLUDE_DIR})
 
 set(SOURCES
     src/main.cpp
+    src/Home.cpp
     src/window.cpp
     src/ui_size.cpp
     src/email.cpp
     include/window.h ## In order to be able to recognize Q_OBJECT by automoc(meta-object compiler), header should be added
+    include/Home.h
 )
 
 set(LIBS
