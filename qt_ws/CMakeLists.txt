@@ -25,11 +25,12 @@ include_directories(${CURL_INCLUDE_DIR})
 set(SOURCES
     src/main.cpp
     src/Home.cpp
+    src/MenuBarBase.cpp
     src/window.cpp
     src/ui_size.cpp
     src/email.cpp
     include/window.h ## In order to be able to recognize Q_OBJECT by automoc(meta-object compiler), header should be added
-    include/Home.h
+    interface/IMenuBarFactorySubscriber.h ## In order to be able to recognize Q_OBJECT by automoc(meta-object compiler), header should be added
 )
 
 set(LIBS

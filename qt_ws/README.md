@@ -66,9 +66,10 @@ title: UI class diagram example
 classDiagram
     note "Abstact Factory, Observer, Bridge"
     MenuBarFactorySubscriber <--o MenuBarPublisher
-    MenuBarFactorySubscriber <|.. Home
-    MenuBarFactorySubscriber <|.. ProgressBar
-    MenuBarFactorySubscriber <|.. Layout
+    MenuBarFactorySubscriber <|.. MenuBarBase
+    MenuBarBase <|-- Home
+    MenuBarBase <|-- ProgressBar
+    MenuBarBase <|-- Layout
     EventBridge <|-- Home
     EventBridge <|-- ProgressBar
     EventBridge <|-- Layout
@@ -89,29 +90,29 @@ classDiagram
         +signal()
         +slot()
         +menuBarUpdate()
-        +goHome()
-        +exitApp()
+        +createMenuBar()
+        +createMenu()
+        +createAction()
+    }
+    class MenuBarBase{
+        +createMenuBar()
+        +createMenu()
+        +createAction()
     }
     class Home{
         +signal()
         +slot()
         +menuBarUpdate()
-        +goHome()
-        +exitApp()
     }
     class ProgressBar{
         +signal()
         +slot()
         +menuBarUpdate()
-        +goHome()
-        +exitApp()
     }
     class Layout{
         +signal()
         +slot()
         +menuBarUpdate()
-        +goHome()
-        +exitApp()
     }
     class EventBridge{
         +event1()

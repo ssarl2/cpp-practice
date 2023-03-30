@@ -1,10 +1,23 @@
+#ifndef __I_MENU_BAR_FACTORY_SUBSCRIBER_H__
+#define __I_MENU_BAR_FACTORY_SUBSCRIBER_H__
 
-class IMenuBarFactorySubscriber
+#include <QAction>
+#include <QMenu>
+#include <QMenuBar>
+#include <QObject>
+#include <QWidget>
+class IMenuBarFactorySubscriber : public QObject
 {
+    Q_OBJECT
 public:
-    virtual void signal()        = 0;
-    virtual void slot()          = 0;
-    virtual void menuBarUpdate() = 0;
-    virtual void goHome()        = 0;
-    virtual void exitApp()       = 0;
+    virtual QMenuBar* createMenuBar(QWidget* widget) = 0;
+    virtual void      signal()                       = 0;
+    virtual void      slot()                         = 0;
+    virtual void      menuBarUpdate()                = 0;
+
+private:
+    virtual QMenu*   createMenu(QMenuBar* menu_bar, std::string menu_name) = 0;
+    virtual QAction* createAction(QMenu* menu, std::string action_name)    = 0;
 };
+
+#endif // __I_MENU_BAR_FACTORY_SUBSCRIBER_H__

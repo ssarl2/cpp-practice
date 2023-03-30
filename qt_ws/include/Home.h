@@ -1,15 +1,14 @@
 #include "IMenuBarFactorySubscriber.h"
+#include "MenuBarBase.h"
 
-#include <QWidget>
-
-class Home : public QWidget, public IMenuBarFactorySubscriber
+class Home : public QWidget, public MenuBarBase
 {
-Q_OBJECT
 public:
-    explicit Home(int width, int height, QWidget *parent = 0);
+    explicit Home(int width, int height, QWidget* parent = 0);
     void signal() override;
     void slot() override;
     void menuBarUpdate() override;
-    void goHome () override;
-    void exitApp() override;
+
+private:
+    QMenuBar* menu_bar_;
 };
