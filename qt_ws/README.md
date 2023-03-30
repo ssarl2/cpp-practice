@@ -46,7 +46,8 @@ with gdb(GNU Debugger)
 `(gdb) info b` to see breakpoints or `(gdb) i b`  
 `(gdb) del <num>` to delete breakpoint(s) or `(gdb) del 1-4`  
 
-
+## Format
+[clang-format](.clang-format). After coding, press `Ctrl + Shift + I` for auto formatting.  
 ## Patterns
 With the UI implementations, MVC would be [good](https://stackoverflow.com/questions/9419147/which-software-design-patterns-do-common-gui-frameworks-exhibit). Frontend-Backend.  
 So, combination of below.  
