@@ -41,10 +41,16 @@ with gdb(GNU Debugger)
 
 ### GDB tips
 `qt_ws/build$ gdb -tui ./qt` or pressing `Ctrl+X A` in `(gdb)` shows code  
-`(gdb) print variable_name` shows the value of the 'variable_name' during running the app  
 `Ctrl+X A` in `(gdb)` changes the active window and it's possible to scroll up down with arrow keys  
+`Ctrl+X O` in `(gdb)` focuses on the next window  
+`Ctrl+X N` in `(gdb)` switches to the next source file  
+`Ctrl+X S` in `(gdb)` Opens a new source file  
+`(gdb) print variable_name` shows the value of the 'variable_name' during running the app  
 `(gdb) info b` to see breakpoints or `(gdb) i b`  
 `(gdb) del <num>` to delete breakpoint(s) or `(gdb) del 1-4`  
+`(gdb) directory ../src` to set a search point of directory  
+`(gdb) list Home (tap)(tap)` to see a code snippet after above directory setting  
+
 
 ## Format
 [clang-format](.clang-format). After coding, press `Ctrl + Shift + I` for auto formatting.  
@@ -100,16 +106,19 @@ classDiagram
         +createAction()
     }
     class Home{
+        +Home()
         +signal()
         +slot()
         +menuBarUpdate()
     }
     class ProgressBar{
+        +ProgressBar()
         +signal()
         +slot()
         +menuBarUpdate()
     }
     class Layout{
+        +Layout()
         +signal()
         +slot()
         +menuBarUpdate()

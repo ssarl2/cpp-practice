@@ -25,12 +25,20 @@ include_directories(${CURL_INCLUDE_DIR})
 set(SOURCES
     src/main.cpp
     src/Home.cpp
+    src/ProgressBar.cpp
     src/MenuBarBase.cpp
-    src/window.cpp
+    # src/window.cpp
     src/ui_size.cpp
     src/email.cpp
-    include/window.h ## In order to be able to recognize Q_OBJECT by automoc(meta-object compiler), header should be added
-    interface/IMenuBarFactorySubscriber.h ## In order to be able to recognize Q_OBJECT by automoc(meta-object compiler), header should be added
+)
+
+set(HEADERS_FOR_QOBJECT
+    ## In order to be able to recognize Q_OBJECT 
+    ## by automoc(meta-object compiler), 
+    ## header should be added
+    include/Home.h 
+    include/ProgressBar.h
+    # include/window.h
 )
 
 set(LIBS
@@ -41,5 +49,5 @@ set(LIBS
     ${CURL_LIBRARIES}
 )
 
-add_executable(qt ${SOURCES})
+add_executable(qt ${SOURCES} ${HEADERS_FOR_QOBJECT})
 target_link_libraries(qt ${LIBS})

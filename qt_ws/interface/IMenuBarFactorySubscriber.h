@@ -4,15 +4,11 @@
 #include <QAction>
 #include <QMenu>
 #include <QMenuBar>
-#include <QObject>
 #include <QWidget>
-class IMenuBarFactorySubscriber : public QObject
+class IMenuBarFactorySubscriber
 {
-    Q_OBJECT
 public:
     virtual QMenuBar* createMenuBar(QWidget* widget) = 0;
-    virtual void      signal()                       = 0;
-    virtual void      slot()                         = 0;
     virtual void      menuBarUpdate()                = 0;
 
 private:
