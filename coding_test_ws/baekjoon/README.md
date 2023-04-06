@@ -6,7 +6,10 @@ https://www.acmicpc.net/
 `g++ -o 2438 -g -std=c++11 2438.cpp`  
 `g++ -o 2439 -g -std=c++11 2439.cpp`  
 `g++ -o 10952 -g -std=c++11 10952.cpp`  
-`g++ -o 10951 -g -std=c++11 -Wall -Wextra -Werror 10951.cpp`
+`g++ -o 10951 -g -std=c++11 -Wall -Wextra -Werror 10951.cpp`  
+`g++ -o 10807 -g -std=c++11 -Wall -Wextra -Werror 10807.cpp`  
+`g++ -o 10871 -g -std=c++11 -Wall -Wextra -Werror 10871.cpp`  
+`g++ -o 10818 -g -std=c++11 -Wall -Wextra -Werror 10818.cpp`
 
 ### Build options
 `-o` output of executable binary name  
@@ -22,4 +25,7 @@ https://www.acmicpc.net/
 `./2438`  
 `./2439`  
 `./10952`  
-`./10951` could not solve yet
+`./10951` could not solve yet  
+`./10807`  
+`./10871`  
+`./10818`
