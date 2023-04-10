@@ -10,7 +10,9 @@ https://www.acmicpc.net/
 `g++ -o 10807 -g -std=c++11 -Wall -Wextra -Werror 10807.cpp`  
 `g++ -o 10871 -g -std=c++11 -Wall -Wextra -Werror 10871.cpp`  
 `g++ -o 10818 -g -std=c++11 -Wall -Wextra -Werror 10818.cpp`  
-`g++ -o 2562 -g -std=c++11 -Wall -Wextra -Werror 2562.cpp`
+`g++ -o 2562 -g -std=c++11 -Wall -Wextra -Werror 2562.cpp`  
+`g++ -o 10810 -g -std=c++11 -Wall -Wextra -Werror 10810.cpp`  
+`g++ -o 10810 -g -std=c++11 -Wall -Wextra -Werror 10813.cpp`
 
 ### Build options
 `-o` output of executable binary name  
@@ -30,4 +32,6 @@ https://www.acmicpc.net/
 `./10807`  
 `./10871`  
 `./10818`  
-`./2562`
+`./2562`  
+`./10810`  
+`./10813`
