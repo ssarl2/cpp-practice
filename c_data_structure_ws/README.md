@@ -3,9 +3,11 @@
 ## Build
 - `g++ -o single_linked_list LinkedList/LinkedList.c LinkedList/LinkedList.h LinkedList/Test_LinkedList.c`  
 - `g++ -o doubly_linked_list DoublyLinkedList/DoublyLinkedList.c DoublyLinkedList/DoublyLinkedList.h DoublyLinkedList/Test_DoublyLinkedList.c`  
-- `g++ -o circular_doubly_linked_list CirCularDoublyLinkedList/CirCularDoublyLinkedList.c CirCularDoublyLinkedList/CirCularDoublyLinkedList.h CirCularDoublyLinkedList/Test_CirCularDoublyLinkedList.c`
+- `g++ -o circular_doubly_linked_list CirCularDoublyLinkedList/CirCularDoublyLinkedList.c CirCularDoublyLinkedList/CirCularDoublyLinkedList.h CirCularDoublyLinkedList/Test_CirCularDoublyLinkedList.c`  
+- `g++ -o array_stcak ArrayStack/ArrayStack.c ArrayStack/ArrayStack.h ArrayStack/Test_ArrayStack.c`
 
 ## Run
 `./single_linked_list`  
 `./doubly_linked_list`  
-`./circular_doubly_linked_list`
+`./circular_doubly_linked_list`  
+`./array_stcak`
