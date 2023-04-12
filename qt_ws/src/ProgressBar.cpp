@@ -1,7 +1,6 @@
 #include <ProgressBar.h>
 
 #include <QDebug>
-#include <QPushButton>
 #include <iostream>
 #include <sstream>
 

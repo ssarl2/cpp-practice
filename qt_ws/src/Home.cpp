@@ -1,10 +1,6 @@
 #include <Home.h>
 
-#include <QApplication>
 #include <QDebug>
-#include <QLabel>
-#include <QPushButton>
-#include <QStyleOptionButton>
 #include <iostream>
 #include <sstream>
 
@@ -40,7 +36,7 @@ void Home::resizeEvent(QResizeEvent* event)
     progress_bar_btn_->resize(width_btn, height_btn);
 }
 
-QPushButton* Home::getProgressBarBtnObj()
+QPushButton* Home::getProgressBarBtnObj() const
 {
     return progress_bar_btn_;
 }

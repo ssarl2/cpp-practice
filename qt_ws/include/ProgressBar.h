@@ -3,7 +3,6 @@
 
 #include <IMenuBarFactorySubscriber.h>
 #include <MenuBarBase.h>
-#include <QCloseEvent>
 #include <QPushButton>
 
 class ProgressBar : public QWidget, public MenuBarBase
@@ -19,8 +18,8 @@ protected:
     void resizeEvent(QResizeEvent* event) override;
 
 private:
-    QPushButton* home_btn_;
     QMenuBar*    menu_bar_;
+    QPushButton* home_btn_;
 };
 
 #endif //  __PROGRESS_BAR_H__
