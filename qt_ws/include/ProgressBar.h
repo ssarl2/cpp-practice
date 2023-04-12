@@ -12,12 +12,15 @@ class ProgressBar : public QWidget, public MenuBarBase
 public:
     explicit ProgressBar(QWidget* parent = 0);
     virtual ~ProgressBar();
-    void menuBarUpdate() override;
-    // void closeEvent(QCloseEvent* event);
-    QPushButton* getButtonObj() const;
+    void         menuBarUpdate() override;
+    QPushButton* getHomeBtnObj() const;
+
+protected:
+    void resizeEvent(QResizeEvent* event) override;
 
 private:
-    QPushButton* button_;
+    QPushButton* home_btn_;
+    QMenuBar*    menu_bar_;
 };
 
 #endif //  __PROGRESS_BAR_H__

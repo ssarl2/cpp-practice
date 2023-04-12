@@ -8,10 +8,11 @@
 #include <Home.h>
 #include <ProgressBar.h>
 #include <QApplication>
-#include <window.h>
-#include <QStackedWidget>
-#include <QPushButton>
 #include <QLabel>
+#include <QPushButton>
+#include <QStackedWidget>
+#include <SubMain.h>
+#include <window.h>
 int main(int argc, char* argv[])
 {
     //     QApplication app(argc, argv);
@@ -34,22 +35,24 @@ int main(int argc, char* argv[])
     // // Set the current widget to be displayed
     // stackedWidget.setCurrentIndex(0);
 
-
-    // // Connect the button clicks to the function that switches the current widget
-    // QObject::connect(button1, &QPushButton::clicked, [&stackedWidget]() {
+    // // Connect the button clicks to the function that switches the current
+    // widget QObject::connect(button1, &QPushButton::clicked,
+    // [&stackedWidget]() {
     //     stackedWidget.setCurrentIndex(2);
     // });
     // QObject::connect(button2, &QPushButton::clicked, [&stackedWidget]() {
     //     stackedWidget.setCurrentIndex(0);
     // });
 
-
     // // Show the stacked widget
     // stackedWidget.show();
 
     QApplication app(argc, argv);
 
-    Home home;
-    home.show();
+    // Home home;
+    // home.show();
+    SubMain sm;
+    sm.show();
+
     return app.exec();
 }

@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QStyleOptionButton>
 #include <iostream>
+#include <sstream>
 
 Home::Home(QWidget* parent) : QWidget(parent)
 {
@@ -13,81 +14,38 @@ Home::Home(QWidget* parent) : QWidget(parent)
     QMenu*   test_menu   = createMenu(menu_bar_, "test_menu");
     QAction* test_action = createAction(test_menu, "test_action");
 
-    container_widget_ = new QWidget(this);
-    container_widget_->setFixedSize(width(), height());
-    container_widget_->move(10, 20);
-    QVBoxLayout* layout = new QVBoxLayout(container_widget_);
-    stacked_widget_     = new QStackedWidget(this);
-    stacked_widget_->move(0, menu_bar_->height());
-    stacked_widget_->setStyleSheet("background-color: yellow;");
-    stacked_widget_->setFixedSize(width(), height());
+    progress_bar_btn_ = new QPushButton("pb_btn", this);
+    progress_bar_btn_->move(20, 40);
+    progress_bar_btn_->setStyleSheet("background-color: blue;");
 
-    stacked_widget_->addWidget(container_widget_);
+    qDebug() << "Home ctor";
+}
 
-    QPushButton* progress_bar_btn =
-        new QPushButton("ProgressBar", container_widget_);
-
-    layout->addWidget(progress_bar_btn);
-
-    progress_bar_btn->move(20, 50);
-    progress_bar_btn->setStyleSheet("background-color: blue;");
-
-    qDebug() << "before" << stacked_widget_->count()
-             << stacked_widget_->currentIndex();
-
-    qDebug() << menu_bar_->width() << menu_bar_->height();
-
-    pb_ = new ProgressBar;
-    stacked_widget_->addWidget(pb_);
-
-    QObject::connect(
-        progress_bar_btn, &QPushButton::clicked, this, &Home::openProgressBar);
-    QObject::connect(pb_, &QObject::destroyed, this, &Home::comeBackHome);
+Home::~Home()
+{
+    qDebug() << "Home dtor";
 }
 
 void Home::resizeEvent(QResizeEvent* event)
 {
     QWidget::resizeEvent(event);
-    container_widget_->setFixedSize(width(), height());
-    stacked_widget_->setFixedSize(width(), height());
+    int width_btn  = static_cast<int>(static_cast<double>(width()) * 0.2);
+    int height_btn = static_cast<int>(static_cast<double>(height()) * 0.2);
+    int x_btn      = static_cast<int>(static_cast<double>(width()) * 0.07);
+    int y_btn      = static_cast<int>(static_cast<double>(height()) * 0.1) + 20;
+    int font_size  = static_cast<int>(static_cast<double>(width_btn) * 0.18);
+    std::stringstream ss;
+    ss << "QPushButton {font-size:" << font_size
+       << "px; background-color: blue;}";
+    progress_bar_btn_->setStyleSheet(ss.str().c_str());
+    progress_bar_btn_->resize(width_btn, height_btn);
+}
+
+QPushButton* Home::getProgressBarBtnObj()
+{
+    return progress_bar_btn_;
 }
 
 void Home::menuBarUpdate()
 {
-}
-
-void Home::createLayout()
-{
-    container_widget_ = new QWidget(this);
-    stacked_widget_   = new QStackedWidget(this);
-    stacked_widget_->addWidget(container_widget_);
-
-    QPushButton* progress_bar_btn =
-        new QPushButton("ProgressBar", container_widget_);
-
-    progress_bar_btn->move(20, 50);
-    progress_bar_btn->setStyleSheet("background-color: blue;");
-
-    qDebug() << "before" << stacked_widget_->count()
-             << stacked_widget_->currentIndex();
-
-    pb_ = new ProgressBar;
-    stacked_widget_->addWidget(pb_);
-
-    QObject::connect(
-        progress_bar_btn, &QPushButton::clicked, this, &Home::openProgressBar);
-}
-
-void Home::openProgressBar()
-{
-    pb_->setFixedSize(width(), height());
-
-    stacked_widget_->setCurrentIndex(1);
-    QObject::connect(
-        pb_->getButtonObj(), &QPushButton::clicked, this, &Home::comeBackHome);
-}
-
-void Home::comeBackHome()
-{
-    stacked_widget_->setCurrentIndex(0);
 }
