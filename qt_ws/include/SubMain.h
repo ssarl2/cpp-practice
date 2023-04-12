@@ -2,6 +2,7 @@
 #define __SUBMAIN_H__
 
 #include <Home.h>
+#include <Layout.h>
 #include <ProgressBar.h>
 
 class SubMain : public QWidget

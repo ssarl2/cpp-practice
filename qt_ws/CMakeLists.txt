@@ -25,12 +25,11 @@ include_directories(${CURL_INCLUDE_DIR})
 set(SOURCES
     src/main.cpp
     src/SubMain.cpp
+    src/MenuBarBase.cpp
     src/Home.cpp
     src/ProgressBar.cpp
-    src/MenuBarBase.cpp
+    src/Layout.cpp
     # src/window.cpp
-    src/ui_size.cpp
-    src/email.cpp
 )
 
 set(HEADERS_FOR_QOBJECT
@@ -39,6 +38,7 @@ set(HEADERS_FOR_QOBJECT
     ## header should be added
     include/Home.h 
     include/ProgressBar.h
+    include/Layout.h
     include/SubMain.h
     # include/window.h
 )

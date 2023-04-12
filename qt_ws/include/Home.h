@@ -13,6 +13,7 @@ public:
     virtual ~Home();
     void         menuBarUpdate() override;
     QPushButton* getProgressBarBtnObj() const;
+    QPushButton* getLayoutBtnObj() const;
 
 protected:
     void resizeEvent(QResizeEvent* event) override;
@@ -20,6 +21,7 @@ protected:
 private:
     QMenuBar*    menu_bar_;
     QPushButton* progress_bar_btn_;
+    QPushButton* layout_btn_;
 };
 
 #endif //  __HOME_H__
