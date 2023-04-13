@@ -11,7 +11,7 @@ class Layout : public QWidget, public MenuBarBase
 public:
     explicit Layout(QWidget* parent = 0);
     virtual ~Layout();
-    void         menuBarUpdate() override;
+    void         menuBarUpdate(std::string data) override;
     QPushButton* getHomeBtnObj() const;
 
 protected:
@@ -21,6 +21,5 @@ private:
     QMenuBar*    menu_bar_;
     QPushButton* home_btn_;
 };
-
 
 #endif //  __LAYOUT_H__

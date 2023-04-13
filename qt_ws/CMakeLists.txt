@@ -26,6 +26,7 @@ set(SOURCES
     src/main.cpp
     src/SubMain.cpp
     src/MenuBarBase.cpp
+    src/MenuBarPublisher.cpp
     src/Home.cpp
     src/ProgressBar.cpp
     src/Layout.cpp

@@ -4,6 +4,7 @@
 #include <Home.h>
 #include <Layout.h>
 #include <ProgressBar.h>
+#include <MenuBarPublisher.h>
 
 class SubMain : public QWidget
 {

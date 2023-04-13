@@ -11,7 +11,7 @@ class Home : public QWidget, public MenuBarBase
 public:
     explicit Home(QWidget* parent = 0);
     virtual ~Home();
-    void         menuBarUpdate() override;
+    void         menuBarUpdate(std::string data) override;
     QPushButton* getProgressBarBtnObj() const;
     QPushButton* getLayoutBtnObj() const;
 

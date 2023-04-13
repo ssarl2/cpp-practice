@@ -41,6 +41,8 @@ void ProgressBar::resizeEvent(QResizeEvent* event)
     home_btn_->resize(width_btn, height_btn);
 }
 
-void ProgressBar::menuBarUpdate()
+void ProgressBar::menuBarUpdate(std::string data)
 {
+    qDebug() << data.c_str();
+    qDebug() << "Hello, it's ProgressBar here";
 }

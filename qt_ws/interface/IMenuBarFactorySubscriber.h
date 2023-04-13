@@ -5,11 +5,12 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QWidget>
+#include <string>
 class IMenuBarFactorySubscriber
 {
 public:
-    virtual QMenuBar* createMenuBar(QWidget* widget) = 0;
-    virtual void      menuBarUpdate()                = 0;
+    virtual QMenuBar* createMenuBar(QWidget* widget)  = 0;
+    virtual void      menuBarUpdate(std::string data) = 0;
 
 private:
     virtual QMenu*   createMenu(QMenuBar* menu_bar, std::string menu_name) = 0;

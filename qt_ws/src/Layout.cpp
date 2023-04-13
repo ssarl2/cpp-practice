@@ -41,6 +41,8 @@ void Layout::resizeEvent(QResizeEvent* event)
     home_btn_->resize(width_btn, height_btn);
 }
 
-void Layout::menuBarUpdate()
+void Layout::menuBarUpdate(std::string data)
 {
+    qDebug() << data.c_str();
+    qDebug() << "Hello, it's Home here";
 }

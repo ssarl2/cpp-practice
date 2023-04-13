@@ -66,6 +66,8 @@ QPushButton* Home::getLayoutBtnObj() const
     return layout_btn_;
 }
 
-void Home::menuBarUpdate()
+void Home::menuBarUpdate(std::string data)
 {
+    qDebug() << data.c_str();
+    qDebug() << "Hello, it's Home here";
 }
