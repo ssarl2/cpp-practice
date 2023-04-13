@@ -10,10 +10,11 @@ SubMain::SubMain(QWidget* parent) : QWidget(parent)
     ProgressBar*    pb             = new ProgressBar();
     Layout*         lo             = new Layout();
 
-    MenuBarPublisher* mbp = new MenuBarPublisher();
-    mbp->subscribe(home);
-    mbp->subscribe(pb);
-    // mbp->subscribe(lo);
+    MenuBarAction* mbp = new MenuBarAction();
+    mbp->subscribe("changeBackgroundColor", home);
+    mbp->subscribe("exitApp", home);
+    mbp->subscribe("goHome", pb);
+    mbp->subscribe("goHome", lo);
 
     stacked_layout->addWidget(home);
     stacked_layout->addWidget(pb);
@@ -25,31 +26,27 @@ SubMain::SubMain(QWidget* parent) : QWidget(parent)
         [=]()
         {
             stacked_layout->setCurrentIndex(0);
-            mbp->notify("Hello there. It's from SubMain. I am moving to "
-                        "Home from ProgressBar");
+            mbp->goHome();
         });
     QObject::connect(
         home->getProgressBarBtnObj(), &QPushButton::clicked, this,
         [=]()
         {
             stacked_layout->setCurrentIndex(1);
-            mbp->notify("Hello there. It's from SubMain. I am moving to "
-                        "ProgressBar from Home");
+            mbp->changeBackgroundColor();
         });
     QObject::connect(
         lo->getHomeBtnObj(), &QPushButton::clicked, this,
         [=]()
         {
             stacked_layout->setCurrentIndex(0);
-            mbp->notify("Hello there. It's from SubMain. I am moving to "
-                        "Home from Layout");
+            mbp->goHome();
         });
     QObject::connect(
         home->getLayoutBtnObj(), &QPushButton::clicked, this,
         [=]()
         {
             stacked_layout->setCurrentIndex(2);
-            mbp->notify("Hello there. It's from SubMain. I am moving to "
-                        "Layout from Home");
+            mbp->exitApp();
         });
 }

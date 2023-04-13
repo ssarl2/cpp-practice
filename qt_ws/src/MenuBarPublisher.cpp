@@ -1,19 +1,28 @@
 #include <MenuBarPublisher.h>
 
-void MenuBarPublisher::subscribe(IMenuBarFactorySubscriber* sub)
+void MenuBarPublisher::subscribe(
+    std::string event_type, IMenuBarFactorySubscriber* sub)
 {
-    subscribers_.push_back(sub);
+    subscribers_.insert({event_type, sub});
 }
 
-void MenuBarPublisher::unsubscribe(IMenuBarFactorySubscriber* sub)
+void MenuBarPublisher::unsubscribe(
+    std::string event_type, IMenuBarFactorySubscriber* sub)
 {
-    subscribers_.remove(sub);
+    auto it = subscribers_.find(event_type);
+    if (it != subscribers_.end() && it->second == sub)
+    {
+        subscribers_.erase(it);
+    }
 }
 
-void MenuBarPublisher::notify(std::string data)
+void MenuBarPublisher::notify(std::string event_type, std::string data)
 {
     for (auto sub : subscribers_)
     {
-        sub->menuBarUpdate(data);
+        if (sub.first == event_type)
+        {
+            sub.second->menuBarUpdate(data);
+        }
     }
 }

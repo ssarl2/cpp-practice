@@ -30,6 +30,7 @@ set(SOURCES
     src/Home.cpp
     src/ProgressBar.cpp
     src/Layout.cpp
+    src/MenuBarAction.cpp
     # src/window.cpp
 )
 
