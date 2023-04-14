@@ -96,13 +96,12 @@ classDiagram
 
     class MenuBarAction{
         +events: MenuBarPublisher
+        +goHome()
         +changeBackgroundColor()
         +exitApp()
-        +goHome()
     }
     class MenuBarPublisher{
         -subscribers: Subscriber[]
-        -mainState
         +subscribe()
         +unsubscribe()
         +notify()

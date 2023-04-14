@@ -1,5 +1,6 @@
 #include <Home.h>
 
+#include <QApplication>
 #include <QDebug>
 #include <iostream>
 #include <sstream>
@@ -9,6 +10,7 @@ Home::Home(QWidget* parent) : QWidget(parent)
     menu_bar_      = createMenuBar(this);
     QMenu* menu1   = createMenu(menu_bar_, "Menu1");
     change_bg_act_ = createAction(menu1, "ChangeBgColor - Reset");
+    exit_app_act_  = createAction(menu1, "Exit");
 
     progress_bar_btn_ = new QPushButton("Progress Bar", this);
     layout_btn_       = new QPushButton("Layout Bar", this);
@@ -72,12 +74,18 @@ void Home::menuBarUpdate(std::string event_type, std::string data)
     {
         setStyleSheet(data.c_str());
     }
-    qDebug() << data.c_str();
-    qDebug() << "Hello, it's Home here";
-    qDebug();
+    else if (event_type == "exitApp")
+    {
+        QApplication::quit();
+    }
 }
 
 QAction* Home::getChangeBgColorActionObj()
 {
     return change_bg_act_;
+}
+
+QAction* Home::getExitAppActionObj()
+{
+    return exit_app_act_;
 }

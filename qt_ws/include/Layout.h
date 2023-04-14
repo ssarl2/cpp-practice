@@ -11,9 +11,10 @@ class Layout : public QWidget, public MenuBarBase
 public:
     explicit Layout(QWidget* parent = 0);
     virtual ~Layout();
-    void         menuBarUpdate(std::string event_type, std::string data) override;
-    QAction*     getGoHomeActionObj();
-    QAction*     getChangeBgColorActionObj();
+    void     menuBarUpdate(std::string event_type, std::string data) override;
+    QAction* getGoHomeActionObj();
+    QAction* getChangeBgColorActionObj();
+    QAction* getExitAppActionObj();
     QPushButton* getBtnObj() const;
 
 protected:
@@ -23,6 +24,7 @@ private:
     QMenuBar*    menu_bar_;
     QAction*     go_home_act_;
     QAction*     change_bg_act_;
+    QAction*     exit_app_act_;
     QPushButton* button_;
 };
 

@@ -1,5 +1,6 @@
 #include <ProgressBar.h>
 
+#include <QApplication>
 #include <QDebug>
 #include <iostream>
 #include <sstream>
@@ -10,6 +11,7 @@ ProgressBar::ProgressBar(QWidget* parent) : QWidget(parent)
     QMenu* menu1   = createMenu(menu_bar_, "Menu1");
     go_home_act_   = createAction(menu1, "GoHome");
     change_bg_act_ = createAction(menu1, "ChangeBgColor");
+    exit_app_act_  = createAction(menu1, "Exit");
 
     button_ = new QPushButton("Button", this);
 }
@@ -48,9 +50,10 @@ void ProgressBar::menuBarUpdate(std::string event_type, std::string data)
     {
         setStyleSheet(data.c_str());
     }
-    qDebug() << data.c_str();
-    qDebug() << "Hello, it's ProgressBar here";
-    qDebug();
+    else if (event_type == "exitApp")
+    {
+        QApplication::quit();
+    }
 }
 
 QAction* ProgressBar::getGoHomeActionObj()
@@ -61,4 +64,9 @@ QAction* ProgressBar::getGoHomeActionObj()
 QAction* ProgressBar::getChangeBgColorActionObj()
 {
     return change_bg_act_;
+}
+
+QAction* ProgressBar::getExitAppActionObj()
+{
+    return exit_app_act_;
 }

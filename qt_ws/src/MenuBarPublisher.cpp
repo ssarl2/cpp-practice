@@ -20,8 +20,6 @@ void MenuBarPublisher::notify(std::string event_type, std::string data)
 {
     for (auto sub : subscribers_)
     {
-        qDebug() << sub.first.c_str() << " " << sub.second << " "
-                 << event_type.c_str();
         if (sub.first == event_type)
         {
             sub.second->menuBarUpdate(event_type, data);

@@ -14,9 +14,11 @@ SubMain::SubMain(QWidget* parent) : QWidget(parent)
     mbp->subscribe("changeBgColor", home);
     mbp->subscribe("changeBgColor", pb);
     mbp->subscribe("changeBgColor", lo);
-    mbp->subscribe("exitApp", home);
     mbp->subscribe("goHome", pb);
     mbp->subscribe("goHome", lo);
+    mbp->subscribe("exitApp", home);
+    mbp->subscribe("exitApp", pb);
+    mbp->subscribe("exitApp", lo);
 
     stacked_layout->addWidget(home);
     stacked_layout->addWidget(pb);
@@ -53,4 +55,13 @@ SubMain::SubMain(QWidget* parent) : QWidget(parent)
     QObject::connect(
         lo->getChangeBgColorActionObj(), &QAction::triggered, this,
         [=]() { mbp->changeBgColor("yellow"); });
+    QObject::connect(
+        home->getExitAppActionObj(), &QAction::triggered, this,
+        [=]() { mbp->exitApp(); });
+    QObject::connect(
+        pb->getExitAppActionObj(), &QAction::triggered, this,
+        [=]() { mbp->exitApp(); });
+    QObject::connect(
+        lo->getExitAppActionObj(), &QAction::triggered, this,
+        [=]() { mbp->exitApp(); });
 }
