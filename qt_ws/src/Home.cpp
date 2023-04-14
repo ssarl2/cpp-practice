@@ -8,7 +8,7 @@ Home::Home(QWidget* parent) : QWidget(parent)
 {
     menu_bar_            = createMenuBar(this);
     QMenu*   test_menu   = createMenu(menu_bar_, "test_menu");
-    QAction* test_action = createAction(test_menu, "test_action");
+    test_act_ = createAction(test_menu, "test_action");
 
     progress_bar_btn_ = new QPushButton("Progress Bar", this);
     layout_btn_       = new QPushButton("Layout Bar", this);
@@ -70,4 +70,9 @@ void Home::menuBarUpdate(std::string data)
 {
     qDebug() << data.c_str();
     qDebug() << "Hello, it's Home here";
+}
+
+QAction* Home::getMenuBarActionObj()
+{
+    return test_act_;
 }

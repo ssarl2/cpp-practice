@@ -12,14 +12,16 @@ public:
     explicit ProgressBar(QWidget* parent = 0);
     virtual ~ProgressBar();
     void         menuBarUpdate(std::string data) override;
-    QPushButton* getHomeBtnObj() const;
+    QAction*     getGoHomeActionObj();
+    QPushButton* getBtnObj() const;
 
 protected:
     void resizeEvent(QResizeEvent* event) override;
 
 private:
     QMenuBar*    menu_bar_;
-    QPushButton* home_btn_;
+    QAction*     go_home_act_;
+    QPushButton* button_;
 };
 
 #endif //  __PROGRESS_BAR_H__

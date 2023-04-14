@@ -22,13 +22,6 @@ SubMain::SubMain(QWidget* parent) : QWidget(parent)
     setLayout(stacked_layout);
 
     QObject::connect(
-        pb->getHomeBtnObj(), &QPushButton::clicked, this,
-        [=]()
-        {
-            stacked_layout->setCurrentIndex(0);
-            mbp->goHome();
-        });
-    QObject::connect(
         home->getProgressBarBtnObj(), &QPushButton::clicked, this,
         [=]()
         {
@@ -36,17 +29,25 @@ SubMain::SubMain(QWidget* parent) : QWidget(parent)
             mbp->changeBackgroundColor();
         });
     QObject::connect(
-        lo->getHomeBtnObj(), &QPushButton::clicked, this,
+        home->getLayoutBtnObj(), &QPushButton::clicked, this,
+        [=]()
+        {
+            stacked_layout->setCurrentIndex(2);
+            mbp->exitApp();
+        });
+
+    QObject::connect(
+        pb->getGoHomeActionObj(), &QAction::triggered, this,
         [=]()
         {
             stacked_layout->setCurrentIndex(0);
             mbp->goHome();
         });
     QObject::connect(
-        home->getLayoutBtnObj(), &QPushButton::clicked, this,
+        lo->getGoHomeActionObj(), &QAction::triggered, this,
         [=]()
         {
-            stacked_layout->setCurrentIndex(2);
-            mbp->exitApp();
+            stacked_layout->setCurrentIndex(0);
+            mbp->goHome();
         });
 }
