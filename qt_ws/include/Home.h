@@ -11,8 +11,8 @@ class Home : public QWidget, public MenuBarBase
 public:
     explicit Home(QWidget* parent = 0);
     virtual ~Home();
-    void         menuBarUpdate(std::string data) override;
-    QAction*     getMenuBarActionObj();
+    void         menuBarUpdate(std::string event_type, std::string data) override;
+    QAction*     getChangeBgColorActionObj();
     QPushButton* getProgressBarBtnObj() const;
     QPushButton* getLayoutBtnObj() const;
 
@@ -21,7 +21,7 @@ protected:
 
 private:
     QMenuBar*    menu_bar_;
-    QAction*     test_act_;
+    QAction*     change_bg_act_;
     QPushButton* progress_bar_btn_;
     QPushButton* layout_btn_;
 };

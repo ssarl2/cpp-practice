@@ -9,8 +9,8 @@
 class IMenuBarFactorySubscriber
 {
 public:
-    virtual QMenuBar* createMenuBar(QWidget* widget)  = 0;
-    virtual void      menuBarUpdate(std::string data) = 0;
+    virtual QMenuBar* createMenuBar(QWidget* widget)                     = 0;
+    virtual void menuBarUpdate(std::string event_type, std::string data) = 0;
 
 private:
     virtual QMenu*   createMenu(QMenuBar* menu_bar, std::string menu_name) = 0;

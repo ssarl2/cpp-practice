@@ -15,7 +15,7 @@ protected:
     void notify(std::string event_type, std::string data);
 
 private:
-    std::map<std::string, IMenuBarFactorySubscriber*> subscribers_;
+    std::multimap<std::string, IMenuBarFactorySubscriber*> subscribers_;
 };
 
 #endif // __MENU_BAR_PUBLISHER_H__

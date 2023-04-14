@@ -6,9 +6,10 @@
 
 Layout::Layout(QWidget* parent) : QWidget(parent)
 {
-    menu_bar_    = createMenuBar(this);
-    QMenu* menu1 = createMenu(menu_bar_, "Menu1");
-    go_home_act_ = createAction(menu1, "GoHome");
+    menu_bar_      = createMenuBar(this);
+    QMenu* menu1   = createMenu(menu_bar_, "Menu1");
+    go_home_act_   = createAction(menu1, "GoHome");
+    change_bg_act_ = createAction(menu1, "ChangeBgColor");
 
     button_ = new QPushButton("Button", this);
 }
@@ -41,13 +42,23 @@ void Layout::resizeEvent(QResizeEvent* event)
     button_->resize(width_btn, height_btn);
 }
 
-void Layout::menuBarUpdate(std::string data)
+void Layout::menuBarUpdate(std::string event_type, std::string data)
 {
+    if (event_type == "changeBgColor")
+    {
+        setStyleSheet(data.c_str());
+    }
     qDebug() << data.c_str();
-    qDebug() << "Hello, it's Home here";
+    qDebug() << "Hello, it's Layout here";
+    qDebug();
 }
 
 QAction* Layout::getGoHomeActionObj()
 {
     return go_home_act_;
+}
+
+QAction* Layout::getChangeBgColorActionObj()
+{
+    return change_bg_act_;
 }

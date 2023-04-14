@@ -11,7 +11,9 @@ SubMain::SubMain(QWidget* parent) : QWidget(parent)
     Layout*         lo             = new Layout();
 
     MenuBarAction* mbp = new MenuBarAction();
-    mbp->subscribe("changeBackgroundColor", home);
+    mbp->subscribe("changeBgColor", home);
+    mbp->subscribe("changeBgColor", pb);
+    mbp->subscribe("changeBgColor", lo);
     mbp->subscribe("exitApp", home);
     mbp->subscribe("goHome", pb);
     mbp->subscribe("goHome", lo);
@@ -23,18 +25,10 @@ SubMain::SubMain(QWidget* parent) : QWidget(parent)
 
     QObject::connect(
         home->getProgressBarBtnObj(), &QPushButton::clicked, this,
-        [=]()
-        {
-            stacked_layout->setCurrentIndex(1);
-            mbp->changeBackgroundColor();
-        });
+        [=]() { stacked_layout->setCurrentIndex(1); });
     QObject::connect(
         home->getLayoutBtnObj(), &QPushButton::clicked, this,
-        [=]()
-        {
-            stacked_layout->setCurrentIndex(2);
-            mbp->exitApp();
-        });
+        [=]() { stacked_layout->setCurrentIndex(2); });
 
     QObject::connect(
         pb->getGoHomeActionObj(), &QAction::triggered, this,
@@ -50,4 +44,13 @@ SubMain::SubMain(QWidget* parent) : QWidget(parent)
             stacked_layout->setCurrentIndex(0);
             mbp->goHome();
         });
+    QObject::connect(
+        home->getChangeBgColorActionObj(), &QAction::triggered, this,
+        [=]() { mbp->changeBgColor("normal"); });
+    QObject::connect(
+        pb->getChangeBgColorActionObj(), &QAction::triggered, this,
+        [=]() { mbp->changeBgColor("blue"); });
+    QObject::connect(
+        lo->getChangeBgColorActionObj(), &QAction::triggered, this,
+        [=]() { mbp->changeBgColor("yellow"); });
 }

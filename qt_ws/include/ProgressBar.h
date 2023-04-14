@@ -11,8 +11,9 @@ class ProgressBar : public QWidget, public MenuBarBase
 public:
     explicit ProgressBar(QWidget* parent = 0);
     virtual ~ProgressBar();
-    void         menuBarUpdate(std::string data) override;
+    void         menuBarUpdate(std::string event_type, std::string data) override;
     QAction*     getGoHomeActionObj();
+    QAction*     getChangeBgColorActionObj();
     QPushButton* getBtnObj() const;
 
 protected:
@@ -21,6 +22,7 @@ protected:
 private:
     QMenuBar*    menu_bar_;
     QAction*     go_home_act_;
+    QAction*     change_bg_act_;
     QPushButton* button_;
 };
 

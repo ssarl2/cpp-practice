@@ -6,9 +6,10 @@
 
 ProgressBar::ProgressBar(QWidget* parent) : QWidget(parent)
 {
-    menu_bar_            = createMenuBar(this);
-    QMenu* menu1 = createMenu(menu_bar_, "Menu1");
-    go_home_act_     = createAction(menu1, "GoHome");
+    menu_bar_      = createMenuBar(this);
+    QMenu* menu1   = createMenu(menu_bar_, "Menu1");
+    go_home_act_   = createAction(menu1, "GoHome");
+    change_bg_act_ = createAction(menu1, "ChangeBgColor");
 
     button_ = new QPushButton("Button", this);
 }
@@ -41,13 +42,23 @@ void ProgressBar::resizeEvent(QResizeEvent* event)
     button_->resize(width_btn, height_btn);
 }
 
-void ProgressBar::menuBarUpdate(std::string data)
+void ProgressBar::menuBarUpdate(std::string event_type, std::string data)
 {
+    if (event_type == "changeBgColor")
+    {
+        setStyleSheet(data.c_str());
+    }
     qDebug() << data.c_str();
     qDebug() << "Hello, it's ProgressBar here";
+    qDebug();
 }
 
 QAction* ProgressBar::getGoHomeActionObj()
 {
     return go_home_act_;
+}
+
+QAction* ProgressBar::getChangeBgColorActionObj()
+{
+    return change_bg_act_;
 }

@@ -1,5 +1,5 @@
 #include <MenuBarPublisher.h>
-
+#include <QDebug>
 void MenuBarPublisher::subscribe(
     std::string event_type, IMenuBarFactorySubscriber* sub)
 {
@@ -20,9 +20,11 @@ void MenuBarPublisher::notify(std::string event_type, std::string data)
 {
     for (auto sub : subscribers_)
     {
+        qDebug() << sub.first.c_str() << " " << sub.second << " "
+                 << event_type.c_str();
         if (sub.first == event_type)
         {
-            sub.second->menuBarUpdate(data);
+            sub.second->menuBarUpdate(event_type, data);
         }
     }
 }

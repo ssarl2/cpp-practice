@@ -4,7 +4,7 @@ class MenuBarAction : public MenuBarPublisher
 {
 public:
     MenuBarAction();
-    void changeBackgroundColor();
+    void changeBgColor(std::string color);
     void exitApp();
     void goHome();
 };
