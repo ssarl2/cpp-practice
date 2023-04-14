@@ -21,11 +21,6 @@ ProgressBar::~ProgressBar()
     qDebug() << "Progressbar dtor";
 }
 
-QPushButton* ProgressBar::getBtnObj() const
-{
-    return button_;
-}
-
 void ProgressBar::resizeEvent(QResizeEvent* event)
 {
     QWidget::resizeEvent(event);
@@ -56,17 +51,22 @@ void ProgressBar::menuBarUpdate(std::string event_type, std::string data)
     }
 }
 
-QAction* ProgressBar::getGoHomeActionObj()
+QAction* ProgressBar::getGoHomeActionObj() const
 {
     return go_home_act_;
 }
 
-QAction* ProgressBar::getChangeBgColorActionObj()
+QAction* ProgressBar::getChangeBgColorActionObj() const
 {
     return change_bg_act_;
 }
 
-QAction* ProgressBar::getExitAppActionObj()
+QAction* ProgressBar::getExitAppActionObj() const
 {
     return exit_app_act_;
+}
+
+QPushButton* ProgressBar::getBtnObj() const
+{
+    return button_;
 }

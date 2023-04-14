@@ -58,16 +58,6 @@ void Home::resizeEvent(QResizeEvent* event)
     layout_btn_->resize(lo_btn_width, lo_btn_height);
 }
 
-QPushButton* Home::getProgressBarBtnObj() const
-{
-    return progress_bar_btn_;
-}
-
-QPushButton* Home::getLayoutBtnObj() const
-{
-    return layout_btn_;
-}
-
 void Home::menuBarUpdate(std::string event_type, std::string data)
 {
     if (event_type == "changeBgColor")
@@ -80,12 +70,22 @@ void Home::menuBarUpdate(std::string event_type, std::string data)
     }
 }
 
-QAction* Home::getChangeBgColorActionObj()
+QAction* Home::getChangeBgColorActionObj() const
 {
     return change_bg_act_;
 }
 
-QAction* Home::getExitAppActionObj()
+QAction* Home::getExitAppActionObj() const
 {
     return exit_app_act_;
+}
+
+QPushButton* Home::getProgressBarBtnObj() const
+{
+    return progress_bar_btn_;
+}
+
+QPushButton* Home::getLayoutBtnObj() const
+{
+    return layout_btn_;
 }

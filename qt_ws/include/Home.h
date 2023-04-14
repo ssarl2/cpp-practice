@@ -12,8 +12,8 @@ public:
     explicit Home(QWidget* parent = 0);
     virtual ~Home();
     void     menuBarUpdate(std::string event_type, std::string data) override;
-    QAction* getChangeBgColorActionObj();
-    QAction* getExitAppActionObj();
+    QAction* getChangeBgColorActionObj() const;
+    QAction* getExitAppActionObj() const;
     QPushButton* getProgressBarBtnObj() const;
     QPushButton* getLayoutBtnObj() const;
 

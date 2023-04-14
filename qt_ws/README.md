@@ -97,7 +97,7 @@ classDiagram
     class MenuBarAction{
         +events: MenuBarPublisher
         +goHome()
-        +changeBackgroundColor()
+        +changeBgColor()
         +exitApp()
     }
     class MenuBarPublisher{

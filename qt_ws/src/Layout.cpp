@@ -21,11 +21,6 @@ Layout::~Layout()
     qDebug() << "Layout dtor";
 }
 
-QPushButton* Layout::getBtnObj() const
-{
-    return button_;
-}
-
 void Layout::resizeEvent(QResizeEvent* event)
 {
     QWidget::resizeEvent(event);
@@ -56,17 +51,22 @@ void Layout::menuBarUpdate(std::string event_type, std::string data)
     }
 }
 
-QAction* Layout::getGoHomeActionObj()
+QAction* Layout::getGoHomeActionObj() const
 {
     return go_home_act_;
 }
 
-QAction* Layout::getChangeBgColorActionObj()
+QAction* Layout::getChangeBgColorActionObj() const
 {
     return change_bg_act_;
 }
 
-QAction* Layout::getExitAppActionObj()
+QAction* Layout::getExitAppActionObj() const
 {
     return exit_app_act_;
+}
+
+QPushButton* Layout::getBtnObj() const
+{
+    return button_;
 }
