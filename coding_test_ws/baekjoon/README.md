@@ -12,7 +12,11 @@ https://www.acmicpc.net/
 `g++ -o 10818 -g -std=c++11 -Wall -Wextra -Werror 10818.cpp`  
 `g++ -o 2562 -g -std=c++11 -Wall -Wextra -Werror 2562.cpp`  
 `g++ -o 10810 -g -std=c++11 -Wall -Wextra -Werror 10810.cpp`  
-`g++ -o 10810 -g -std=c++11 -Wall -Wextra -Werror 10813.cpp`
+`g++ -o 10813 -g -std=c++11 -Wall -Wextra -Werror 10813.cpp`  
+`g++ -o 5597 -g -std=c++11 -Wall -Wextra -Werror 5597.cpp`  
+`g++ -o 3052 -g -std=c++11 -Wall -Wextra -Werror 3052.cpp`  
+`g++ -o 10811 -g -std=c++11 -Wall -Wextra -Werror 10811.cpp`  
+`g++ -o 1546 -g -std=c++11 -Wall -Wextra -Werror 1546.cpp`  
 
 ### Build options
 `-o` output of executable binary name  
@@ -34,4 +38,8 @@ https://www.acmicpc.net/
 `./10818`  
 `./2562`  
 `./10810`  
-`./10813`
+`./10813`  
+`./5597`  
+`./3052`  
+`./10811`  
+`./1546`  
