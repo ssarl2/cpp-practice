@@ -6,10 +6,12 @@
 - `g++ -o circular_doubly_linked_list CirCularDoublyLinkedList/CirCularDoublyLinkedList.c CirCularDoublyLinkedList/CirCularDoublyLinkedList.h CirCularDoublyLinkedList/Test_CirCularDoublyLinkedList.c`  
 - `g++ -o array_stcak ArrayStack/ArrayStack.c ArrayStack/ArrayStack.h ArrayStack/Test_ArrayStack.c`  
 - `g++ -o linked_list_stack LinkedListStack/LinkedListStack.c LinkedListStack/LinkedListStack.h LinkedListStack/Test_LinkedListStack.c`
+- `g++ -o postfix_expression_calculator LinkedListStack/LinkedListStack.c LinkedListStack/LinkedListStack.h Calculator/Calculator.c Calculator/Calculator.h Calculator/Test_Calculator.c`  
 
 ## Run
 `./single_linked_list`  
 `./doubly_linked_list`  
 `./circular_doubly_linked_list`  
 `./array_stcak`  
-`./linked_list_stack`
+`./linked_list_stack`  
+`./postfix_expression_calculator`  
