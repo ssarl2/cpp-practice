@@ -1,15 +1,21 @@
-#include "IMenuBarFactorySubscriber.h"
+#ifndef __MENU_BAR_PUBLISHER_H__
+#define __MENU_BAR_PUBLISHER_H__
 
-#include <list>
+#include <IMenuBarFactorySubscriber.h>
+
+#include <map>
 
 class MenuBarPublisher
 {
 public:
-    MenuBarPublisher();
-    void subscribe(IMenuBarFactorySubscriber* subscriber);
-    void unsubscribe(IMenuBarFactorySubscriber* subscriber);
-    void notify();
+    void subscribe(std::string event_type, IMenuBarFactorySubscriber* sub);
+    void unsubscribe(std::string event_type, IMenuBarFactorySubscriber* sub);
+
+protected:
+    void notify(std::string event_type, std::string data);
 
 private:
-    std::list<IMenuBarFactorySubscriber*> list_subscriber_;
+    std::multimap<std::string, IMenuBarFactorySubscriber*> subscribers_;
 };
+
+#endif // __MENU_BAR_PUBLISHER_H__

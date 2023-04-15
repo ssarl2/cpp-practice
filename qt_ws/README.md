@@ -70,8 +70,17 @@ So, combination of below.
 title: UI class diagram example
 ---
 classDiagram
-    note "Abstact Factory, Observer, Bridge"
-    MenuBarFactorySubscriber <--o MenuBarPublisher
+    note "Abstact Factory
+    MenuBarFactorySubscriber, MenuBarBase, 
+    Home, ProgressBar, Layout"
+    note "Observer
+    MenuBarAction, MenuBarPublisher, 
+    MenuBarFactorySubscriber, MenuBarBase"
+    note "Bridge
+    ControlBridge, OSBridge, 
+    Home, ProgressBar, Layout"
+    MenuBarPublisher "1" <--o "*" MenuBarAction
+    MenuBarFactorySubscriber "*" <--o "1" MenuBarPublisher
     MenuBarFactorySubscriber <|.. MenuBarBase
     MenuBarBase <|-- Home
     MenuBarBase <|-- ProgressBar
@@ -84,17 +93,21 @@ classDiagram
     OSBridge <|.. Linux
     OSBridge <|.. Laptop
 
+
+    class MenuBarAction{
+        +events: MenuBarPublisher
+        +goHome()
+        +changeBgColor()
+        +exitApp()
+    }
     class MenuBarPublisher{
         -subscribers: Subscriber[]
-        -mainState
         +subscribe()
         +unsubscribe()
         +notify()
     }
     class MenuBarFactorySubscriber{
         <<interface>>
-        +signal()
-        +slot()
         +menuBarUpdate()
         +createMenuBar()
         +createMenu()
@@ -107,20 +120,14 @@ classDiagram
     }
     class Home{
         +Home()
-        +signal()
-        +slot()
         +menuBarUpdate()
     }
     class ProgressBar{
         +ProgressBar()
-        +signal()
-        +slot()
         +menuBarUpdate()
     }
     class Layout{
         +Layout()
-        +signal()
-        +slot()
         +menuBarUpdate()
     }
     class EventBridge{

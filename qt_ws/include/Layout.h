@@ -1,31 +1,31 @@
-#ifndef __HOME_H__
-#define __HOME_H__
+#ifndef __LAYOUT_H__
+#define __LAYOUT_H__
 
 #include <IMenuBarFactorySubscriber.h>
 #include <MenuBarBase.h>
 #include <QPushButton>
 
-class Home : public QWidget, public MenuBarBase
+class Layout : public QWidget, public MenuBarBase
 {
     Q_OBJECT
 public:
-    explicit Home(QWidget* parent = 0);
-    virtual ~Home();
+    explicit Layout(QWidget* parent = 0);
+    virtual ~Layout();
     void     menuBarUpdate(std::string event_type, std::string data) override;
+    QAction* getGoHomeActionObj() const;
     QAction* getChangeBgColorActionObj() const;
     QAction* getExitAppActionObj() const;
-    QPushButton* getProgressBarBtnObj() const;
-    QPushButton* getLayoutBtnObj() const;
+    QPushButton* getBtnObj() const;
 
 protected:
     void resizeEvent(QResizeEvent* event) override;
 
 private:
     QMenuBar*    menu_bar_;
+    QAction*     go_home_act_;
     QAction*     change_bg_act_;
     QAction*     exit_app_act_;
-    QPushButton* progress_bar_btn_;
-    QPushButton* layout_btn_;
+    QPushButton* button_;
 };
 
-#endif //  __HOME_H__
+#endif //  __LAYOUT_H__

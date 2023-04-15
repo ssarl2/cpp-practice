@@ -6,15 +6,6 @@
 QMenuBar* MenuBarBase::createMenuBar(QWidget* widget)
 {
     QMenuBar* menu_bar  = new QMenuBar(widget);
-    QMenu*    file_menu = new QMenu(QObject::tr("&File"), menu_bar);
-    QAction*  exit_action;
-
-    menu_bar->addMenu(file_menu);
-    exit_action = file_menu->addAction(QObject::tr("&Exit"));
-
-    QObject::connect(
-        exit_action, SIGNAL(triggered()), QApplication::instance(),
-        SLOT(quit()));
 
     return menu_bar;
 }

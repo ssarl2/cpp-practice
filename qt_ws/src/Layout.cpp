@@ -1,11 +1,11 @@
-#include <ProgressBar.h>
+#include <Layout.h>
 
 #include <QApplication>
 #include <QDebug>
 #include <iostream>
 #include <sstream>
 
-ProgressBar::ProgressBar(QWidget* parent) : QWidget(parent)
+Layout::Layout(QWidget* parent) : QWidget(parent)
 {
     menu_bar_      = createMenuBar(this);
     QMenu* menu1   = createMenu(menu_bar_, "Menu1");
@@ -16,12 +16,12 @@ ProgressBar::ProgressBar(QWidget* parent) : QWidget(parent)
     button_ = new QPushButton("Button", this);
 }
 
-ProgressBar::~ProgressBar()
+Layout::~Layout()
 {
-    qDebug() << "Progressbar dtor";
+    qDebug() << "Layout dtor";
 }
 
-void ProgressBar::resizeEvent(QResizeEvent* event)
+void Layout::resizeEvent(QResizeEvent* event)
 {
     QWidget::resizeEvent(event);
     int width_btn  = static_cast<int>(static_cast<double>(width()) * 0.2);
@@ -39,7 +39,7 @@ void ProgressBar::resizeEvent(QResizeEvent* event)
     button_->resize(width_btn, height_btn);
 }
 
-void ProgressBar::menuBarUpdate(std::string event_type, std::string data)
+void Layout::menuBarUpdate(std::string event_type, std::string data)
 {
     if (event_type == "changeBgColor")
     {
@@ -51,22 +51,22 @@ void ProgressBar::menuBarUpdate(std::string event_type, std::string data)
     }
 }
 
-QAction* ProgressBar::getGoHomeActionObj() const
+QAction* Layout::getGoHomeActionObj() const
 {
     return go_home_act_;
 }
 
-QAction* ProgressBar::getChangeBgColorActionObj() const
+QAction* Layout::getChangeBgColorActionObj() const
 {
     return change_bg_act_;
 }
 
-QAction* ProgressBar::getExitAppActionObj() const
+QAction* Layout::getExitAppActionObj() const
 {
     return exit_app_act_;
 }
 
-QPushButton* ProgressBar::getBtnObj() const
+QPushButton* Layout::getBtnObj() const
 {
     return button_;
 }

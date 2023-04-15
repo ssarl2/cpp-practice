@@ -6,8 +6,8 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 
-# set(CMAKE_BUILD_TYPE Debug) # non-optimized code with debug symbols
-set(CMAKE_BUILD_TYPE RelWithDebInfo) # optimized code with debug symbols
+set(CMAKE_BUILD_TYPE Debug) # non-optimized code with debug symbols
+# set(CMAKE_BUILD_TYPE RelWithDebInfo) # optimized code with debug symbols
 
 include_directories(include)
 include_directories(interface)
@@ -24,12 +24,14 @@ include_directories(${CURL_INCLUDE_DIR})
 
 set(SOURCES
     src/main.cpp
+    src/SubMain.cpp
+    src/MenuBarBase.cpp
+    src/MenuBarPublisher.cpp
     src/Home.cpp
     src/ProgressBar.cpp
-    src/MenuBarBase.cpp
+    src/Layout.cpp
+    src/MenuBarAction.cpp
     # src/window.cpp
-    src/ui_size.cpp
-    src/email.cpp
 )
 
 set(HEADERS_FOR_QOBJECT
@@ -38,6 +40,8 @@ set(HEADERS_FOR_QOBJECT
     ## header should be added
     include/Home.h 
     include/ProgressBar.h
+    include/Layout.h
+    include/SubMain.h
     # include/window.h
 )
 

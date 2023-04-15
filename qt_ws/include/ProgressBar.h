@@ -3,7 +3,6 @@
 
 #include <IMenuBarFactorySubscriber.h>
 #include <MenuBarBase.h>
-#include <QCloseEvent>
 #include <QPushButton>
 
 class ProgressBar : public QWidget, public MenuBarBase
@@ -12,11 +11,20 @@ class ProgressBar : public QWidget, public MenuBarBase
 public:
     explicit ProgressBar(QWidget* parent = 0);
     virtual ~ProgressBar();
-    void menuBarUpdate() override;
-    // void closeEvent(QCloseEvent* event);
-    QPushButton* getButtonObj() const;
+    void     menuBarUpdate(std::string event_type, std::string data) override;
+    QAction* getGoHomeActionObj() const;
+    QAction* getChangeBgColorActionObj() const;
+    QAction* getExitAppActionObj() const;
+    QPushButton* getBtnObj() const;
+
+protected:
+    void resizeEvent(QResizeEvent* event) override;
 
 private:
+    QMenuBar*    menu_bar_;
+    QAction*     go_home_act_;
+    QAction*     change_bg_act_;
+    QAction*     exit_app_act_;
     QPushButton* button_;
 };
 
