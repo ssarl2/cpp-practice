@@ -43,6 +43,7 @@ unsigned int GetNextToken(char *Expression, char *Token, int *TYPE)
     }
 
     Token[++i] = '\0';
+    return i;
 }
 
 int GetPriority(char Operator, int InStack)
