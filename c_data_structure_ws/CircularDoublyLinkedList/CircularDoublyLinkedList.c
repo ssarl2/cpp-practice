@@ -1,4 +1,4 @@
-#include "CirCularDoublyLinkedList.h"
+#include "CircularDoublyLinkedList.h"
 
 Node *CDLL_CreateNode(ElementType NewData)
 {
