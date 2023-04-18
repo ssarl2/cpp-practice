@@ -8,6 +8,7 @@
 - `g++ -o linked_list_stack LinkedListStack/LinkedListStack.c LinkedListStack/Test_LinkedListStack.c`
 - `g++ -o postfix_expression_calculator LinkedListStack/LinkedListStack.c Calculator/Calculator.c Calculator/Test_Calculator.c`
 - `g++ -o circular_queue CircularQueue/CircularQueue.c CircularQueue/Test_CircularQueue.c`
+- `g++ -o linked_queue LinkedQueue/LinkedQueue.c LinkedQueue/Test_LinkedQueue.c`
 
 ## Run
 `./single_linked_list`  
@@ -17,3 +18,4 @@
 `./linked_list_stack`  
 `./postfix_expression_calculator`  
 `./circular_queue`  
+`./linked_queue`  
