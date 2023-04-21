@@ -27,6 +27,7 @@ Windows10
   - https://www.qt.io/try
 - curl `8.0.1`
   - `choco install curl --version=8.0.1 -y`
+- If any problems running on windows, try to check dependencies with this [tool](https://github.com/lucasg/Dependencies)
 
 ## Build
 GNU/Linux 20.04
