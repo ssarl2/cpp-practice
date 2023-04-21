@@ -1,5 +1,13 @@
 cmake_minimum_required(VERSION 3.10)
 
+if(WIN32)
+    message("WIN32")
+    # https://gitlab.kitware.com/cmake/community/-/wikis/FAQ#method-3-avoid-use-set
+    set(CMAKE_GENERATOR "MinGW Makefiles")
+    set(CMAKE_C_COMPILER "C:/ProgramData/chocolatey/bin/gcc.exe")
+    set(CMAKE_PREFIX_PATH "C:/ProgramData/chocolatey/lib/curl/tools/curl-8.0.1_1-win64-mingw") # in order to find libraries installed with chocolatey
+endif()
+
 project(qt_beginner)
 
 set(CMAKE_CXX_STANDARD 11)
@@ -54,4 +62,10 @@ set(LIBS
 )
 
 add_executable(qt ${SOURCES} ${HEADERS_FOR_QOBJECT})
-target_link_libraries(qt ${LIBS})
+
+# https://stackoverflow.com/a/54436838
+if(MINGW)
+    target_link_libraries(qt ${LIBS} -static-libstdc++)
+else()
+    target_link_libraries(qt ${LIBS})
+endif()
