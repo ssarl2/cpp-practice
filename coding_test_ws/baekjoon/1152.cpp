@@ -13,22 +13,24 @@ int main()
     std::cin.getline(S, sizeof(S));
     size_t len = strlen(S);
 
-    for (size_t i = 1; i < len; i++)
+    for (size_t i = 0; i < len; i++)
     {
-        if (S[i] == ' ' && S[i + 1] != '\0')
+        if (S[i] == ' ')
         {
             count++;
         }
     }
 
-    if (len > 1)
+    if (S[0] == ' ')
     {
-        std::cout << count << '\n';
+        count--;
     }
-    else
+    if (S[len - 1] == ' ')
     {
-        std::cout << count - 1 << '\n';
+        count--;
     }
+
+    std::cout << count << '\n';
 
     return 0;
 }
