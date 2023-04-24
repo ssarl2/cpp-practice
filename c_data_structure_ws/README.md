@@ -9,7 +9,8 @@
 - `g++ -o postfix_expression_calculator LinkedListStack/LinkedListStack.c Calculator/Calculator.c Calculator/Test_Calculator.c`
 - `g++ -o circular_queue CircularQueue/CircularQueue.c CircularQueue/Test_CircularQueue.c`
 - `g++ -o linked_queue LinkedQueue/LinkedQueue.c LinkedQueue/Test_LinkedQueue.c`
-- `g++ -o linked_queue LCRSTree/LCRSTree.c LCRSTree/Test_LCRSTree.c`
+- `g++ -o lcrs_tree LCRSTree/LCRSTree.c LCRSTree/Test_LCRSTree.c`
+- `g++ -o binary_tree BinaryTree/BinaryTree.c BinaryTree/Test_BinaryTree.c`
 
 ## Run
 `./single_linked_list`  
@@ -21,3 +22,4 @@
 `./circular_queue`  
 `./linked_queue`  
 `./lcrs_tree`  
+`./binary_tree`  
