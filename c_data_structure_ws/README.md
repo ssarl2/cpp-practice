@@ -11,6 +11,7 @@
 - `g++ -o linked_queue LinkedQueue/LinkedQueue.c LinkedQueue/Test_LinkedQueue.c`
 - `g++ -o lcrs_tree LCRSTree/LCRSTree.c LCRSTree/Test_LCRSTree.c`
 - `g++ -o binary_tree BinaryTree/BinaryTree.c BinaryTree/Test_BinaryTree.c`
+- `g++ -o expression_tree ExpressionTree/ExpressionTree.c ExpressionTree/Test_ExpressionTree.c`
 
 ## Run
 `./single_linked_list`  
@@ -23,3 +24,4 @@
 `./linked_queue`  
 `./lcrs_tree`  
 `./binary_tree`  
+`./expression_tree`  
