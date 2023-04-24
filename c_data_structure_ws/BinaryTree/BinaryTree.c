@@ -62,7 +62,7 @@ void SBT_DestroyTree(SBTNode *Node)
         return;
     }
 
-    SBT_DestroyNode(Node->Left);
-    SBT_DestroyNode(Node->Right);
+    SBT_DestroyTree(Node->Left);
+    SBT_DestroyTree(Node->Right);
     SBT_DestroyNode(Node);
 }
