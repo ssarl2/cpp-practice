@@ -26,13 +26,13 @@ void Home::resizeEvent(QResizeEvent* event)
     QWidget::resizeEvent(event);
     std::stringstream ss;
 
-    menu_bar_->resize(width(), 22);
+    menu_bar_->resize(width(), 25);
 
     // progress bar button
     int pb_btn_width  = static_cast<int>(static_cast<double>(width()) * 0.2);
     int pb_btn_height = static_cast<int>(static_cast<double>(height()) * 0.12);
     int pb_btn_x      = static_cast<int>(static_cast<double>(width()) * 0.07);
-    int pb_btn_y = static_cast<int>(static_cast<double>(height()) * 0.1) + 20;
+    int pb_btn_y = static_cast<int>(static_cast<double>(height()) * 0.1) + 25;
     int pb_font_size =
         static_cast<int>(static_cast<double>(pb_btn_width) * 0.13);
     ss << "QPushButton {font-size:" << (pb_font_size > 0 ? pb_font_size : 1)
@@ -47,7 +47,7 @@ void Home::resizeEvent(QResizeEvent* event)
     int lo_btn_height = static_cast<int>(static_cast<double>(height()) * 0.12);
     int lo_btn_x      = static_cast<int>(static_cast<double>(width()) * 0.07) +
                    pb_btn_width + pb_btn_x + 20;
-    int lo_btn_y = static_cast<int>(static_cast<double>(height()) * 0.1) + 20;
+    int lo_btn_y = static_cast<int>(static_cast<double>(height()) * 0.1) + 25;
     int lo_font_size =
         static_cast<int>(static_cast<double>(lo_btn_width) * 0.16);
     ss << "QPushButton {font-size:" << (lo_font_size > 0 ? lo_font_size : 1)
