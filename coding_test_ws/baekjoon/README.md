@@ -13,6 +13,3 @@ https://www.acmicpc.net/
 
 ## Run
 `./<question_number>`  
-
-## Unsolved
-- 10951
