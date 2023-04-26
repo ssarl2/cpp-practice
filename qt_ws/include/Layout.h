@@ -3,7 +3,13 @@
 
 #include <IMenuBarFactorySubscriber.h>
 #include <MenuBarBase.h>
+#include <QComboBox>
+#include <QFormLayout>
+#include <QGroupBox>
+#include <QLabel>
+#include <QLineEdit>
 #include <QPushButton>
+#include <QSpinBox>
 
 class Layout : public QWidget, public MenuBarBase
 {

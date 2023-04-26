@@ -14,6 +14,21 @@ Layout::Layout(QWidget* parent) : QWidget(parent)
     exit_app_act_  = createAction(menu1, "Exit");
 
     button_ = new QPushButton("Button", this);
+
+    QVBoxLayout* qvb_layout;
+    qvb_layout = new QVBoxLayout;
+    // qvb_layout->setMenuBar(menu_bar_);
+    setLayout(qvb_layout);
+
+    QGroupBox* qg_box;
+    qg_box                 = new QGroupBox(tr("Form qf_layout"));
+    QFormLayout* qf_layout = new QFormLayout;
+    qf_layout->addRow(new QLabel(tr("Line 1:")), new QLineEdit);
+    qf_layout->addRow(new QLabel(tr("Line 2, long text:")), new QComboBox);
+    qf_layout->addRow(new QLabel(tr("Line 3:")), new QSpinBox);
+    qg_box->setLayout(qf_layout);
+
+    qvb_layout->addWidget(qg_box);
 }
 
 Layout::~Layout()
