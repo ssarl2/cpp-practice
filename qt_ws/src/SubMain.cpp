@@ -3,8 +3,9 @@
 #include <QVBoxLayout>
 #include <SubMain.h>
 
-SubMain::SubMain(QWidget* parent) : QWidget(parent)
+SubMain::SubMain(QWidget* parent) : QMainWindow(parent)
 {
+    QWidget*        content_widget = new QWidget;
     QStackedLayout* stacked_layout = new QStackedLayout();
     Home*           home           = new Home();
     ProgressBar*    pb             = new ProgressBar();
@@ -23,7 +24,8 @@ SubMain::SubMain(QWidget* parent) : QWidget(parent)
     stacked_layout->addWidget(home);
     stacked_layout->addWidget(pb);
     stacked_layout->addWidget(lo);
-    setLayout(stacked_layout);
+    content_widget->setLayout(stacked_layout);
+    setCentralWidget(content_widget);
 
     QObject::connect(
         home->getProgressBarBtnObj(), &QPushButton::clicked, this,

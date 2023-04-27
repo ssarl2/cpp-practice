@@ -5,7 +5,7 @@
 #include <iostream>
 #include <sstream>
 
-Home::Home(QWidget* parent) : QWidget(parent)
+Home::Home(QWidget* parent) : QMainWindow(parent)
 {
     menu_bar_      = createMenuBar(this);
     QMenu* menu1   = createMenu(menu_bar_, "Menu1");
@@ -13,7 +13,7 @@ Home::Home(QWidget* parent) : QWidget(parent)
     exit_app_act_  = createAction(menu1, "Exit");
 
     progress_bar_btn_ = new QPushButton("Progress Bar", this);
-    layout_btn_       = new QPushButton("Layout Bar", this);
+    layout_btn_       = new QPushButton("Layout", this);
 }
 
 Home::~Home()

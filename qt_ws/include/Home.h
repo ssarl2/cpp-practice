@@ -3,9 +3,10 @@
 
 #include <IMenuBarFactorySubscriber.h>
 #include <MenuBarBase.h>
+#include <QMainWindow>
 #include <QPushButton>
 
-class Home : public QWidget, public MenuBarBase
+class Home : public QMainWindow, public MenuBarBase
 {
     Q_OBJECT
 public:

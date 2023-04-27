@@ -5,7 +5,7 @@
 #include <iostream>
 #include <sstream>
 
-ProgressBar::ProgressBar(QWidget* parent) : QWidget(parent)
+ProgressBar::ProgressBar(QWidget* parent) : QMainWindow(parent)
 {
     menu_bar_      = createMenuBar(this);
     QMenu* menu1   = createMenu(menu_bar_, "Menu1");

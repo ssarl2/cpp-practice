@@ -3,9 +3,10 @@
 
 #include <IMenuBarFactorySubscriber.h>
 #include <MenuBarBase.h>
+#include <QMainWindow>
 #include <QPushButton>
 
-class ProgressBar : public QWidget, public MenuBarBase
+class ProgressBar : public QMainWindow, public MenuBarBase
 {
     Q_OBJECT
 public:

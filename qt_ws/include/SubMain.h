@@ -5,8 +5,9 @@
 #include <Layout.h>
 #include <ProgressBar.h>
 #include <MenuBarAction.h>
+#include <QMainWindow>
 
-class SubMain : public QWidget
+class SubMain : public QMainWindow
 {
     Q_OBJECT
 public:
