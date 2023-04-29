@@ -2,10 +2,12 @@
 
 #include <QApplication>
 #include <QDebug>
+#include <QDialogButtonBox>
+#include <QPoint>
 #include <iostream>
 #include <sstream>
 
-Layout::Layout(QWidget* parent) : QWidget(parent)
+Layout::Layout(QWidget* parent) : QMainWindow(parent)
 {
     menu_bar_      = createMenuBar(this);
     QMenu* menu1   = createMenu(menu_bar_, "Menu1");
@@ -13,7 +15,31 @@ Layout::Layout(QWidget* parent) : QWidget(parent)
     change_bg_act_ = createAction(menu1, "ChangeBgColor");
     exit_app_act_  = createAction(menu1, "Exit");
 
-    button_ = new QPushButton("Button", this);
+    content_widget_              = new QWidget(this);
+    QVBoxLayout*      qvb_layout = new QVBoxLayout(content_widget_);
+    QGroupBox*        qg_box     = new QGroupBox(tr("Form qf_layout"));
+    QFormLayout*      qf_layout  = new QFormLayout;
+    QDialogButtonBox* qd_btn_box = new QDialogButtonBox;
+    QPushButton*      ok_btn     = qd_btn_box->addButton(QDialogButtonBox::Ok);
+    QSpacerItem*      v_spacer   = new QSpacerItem(
+        10, width(), QSizePolicy::Minimum, QSizePolicy::Expanding);
+    qd_btn_box->addButton(QDialogButtonBox::Cancel);
+    ok_btn->setText("Submit");
+    qf_layout->addRow(new QLabel(tr("Line 1:")), new QLineEdit);
+    qf_layout->addRow(new QLabel(tr("Line 2, long text:")), new QComboBox);
+    qf_layout->addRow(new QLabel(tr("Line 3:")), new QSpinBox);
+    qf_layout->addItem(v_spacer);
+    qf_layout->addRow(qd_btn_box);
+
+    qg_box->setLayout(qf_layout);
+    qvb_layout->addWidget(qg_box);
+
+    QObject::connect(
+        qd_btn_box, &QDialogButtonBox::accepted, this,
+        std::bind(&Layout::popUp, this, "Submitted!"));
+    QObject::connect(
+        qd_btn_box, &QDialogButtonBox::rejected, this,
+        std::bind(&Layout::popUp, this, "Cancelled!"));
 }
 
 Layout::~Layout()
@@ -24,19 +50,10 @@ Layout::~Layout()
 void Layout::resizeEvent(QResizeEvent* event)
 {
     QWidget::resizeEvent(event);
-    int width_btn  = static_cast<int>(static_cast<double>(width()) * 0.2);
-    int height_btn = static_cast<int>(static_cast<double>(height()) * 0.12);
-    int x_btn      = static_cast<int>(static_cast<double>(width()) * 0.07);
-    int y_btn      = static_cast<int>(static_cast<double>(height()) * 0.1) + 20;
-    int font_size  = static_cast<int>(static_cast<double>(width_btn) * 0.18);
-    std::stringstream ss;
-    ss << "QPushButton {font-size:" << font_size
-       << "px; background-color: red;}";
 
-    menu_bar_->resize(width(), 22);
-    button_->setStyleSheet(ss.str().c_str());
-    button_->move(x_btn, y_btn);
-    button_->resize(width_btn, height_btn);
+    menu_bar_->resize(width(), 25);
+
+    content_widget_->setGeometry(0, 25, width(), height() - 25);
 }
 
 void Layout::menuBarUpdate(std::string event_type, std::string data)
@@ -69,4 +86,17 @@ QAction* Layout::getExitAppActionObj() const
 QPushButton* Layout::getBtnObj() const
 {
     return button_;
+}
+
+void Layout::popUp(std::string msg)
+{
+    QPoint       q_pos  = mapToGlobal(pos());
+    QWidget*     w      = new QWidget;
+    QLabel*      label  = new QLabel(msg.c_str());
+    QVBoxLayout* layout = new QVBoxLayout(w);
+    layout->addWidget(label);
+    w->show();
+    w->move(
+        q_pos.x() + (width() - w->width()) / 2,
+        q_pos.y() + (height() - w->height()) / 2);
 }

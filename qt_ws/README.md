@@ -11,17 +11,48 @@ qtcreator \
 qt5-default \
 libcurl4-openssl-dev
 ```
+Windows10
+- chocolatey
+  - https://chocolatey.org/install
+  - https://youtu.be/t6YQ8MousWo
+- Git Bash
+- MinGW gcc, g++ `more than 8.1.0` due to Qt 5.15.2 compatibility
+  - `choco install mingw -y`
+- MinGW make
+  - `choco install make -y`
+- CMake
+  - https://cmake.org/
+- Qt5 `5.15.2 MinGW 8.1.0 64-bit`
+  - https://stackoverflow.com/questions/60245433/how-to-install-qt5-libraries-for-windows-10-for-cmake-development
+  - https://www.qt.io/try
+- curl `8.0.1`
+  - `choco install curl --version=8.0.1 -y`
+- If any problems running on windows, try to check dependencies with this [tool](https://github.com/lucasg/Dependencies)
+
 ## Build
+GNU/Linux 20.04
 ```
 qt_ws$ mkdir build
 qt_ws$ cd build
 qt_ws/build$ cmake ..
 qt_ws/build$ cmake --build .
 ```
+Windows10
+```
+qt_ws$ mkdir build
+qt_ws$ cd build
+qt_ws/build$ cmake -G "MinGW Makefiles" ..
+qt_ws/build$ cmake --build .
+```
 ## Run
 ### Launch
+GNU/Linux 20.04
 ```
 qt_ws/build$ ./qt
+```
+Windows10
+```
+qt_ws/build$ ./qt.exe
 ```
 ### Test
 

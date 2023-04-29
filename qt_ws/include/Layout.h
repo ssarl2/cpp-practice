@@ -3,9 +3,16 @@
 
 #include <IMenuBarFactorySubscriber.h>
 #include <MenuBarBase.h>
+#include <QComboBox>
+#include <QFormLayout>
+#include <QGroupBox>
+#include <QLabel>
+#include <QLineEdit>
+#include <QMainWindow>
 #include <QPushButton>
+#include <QSpinBox>
 
-class Layout : public QWidget, public MenuBarBase
+class Layout : public QMainWindow, public MenuBarBase
 {
     Q_OBJECT
 public:
@@ -19,13 +26,15 @@ public:
 
 protected:
     void resizeEvent(QResizeEvent* event) override;
-
+private slots:
+    void popUp(std::string msg);
 private:
     QMenuBar*    menu_bar_;
     QAction*     go_home_act_;
     QAction*     change_bg_act_;
     QAction*     exit_app_act_;
     QPushButton* button_;
+    QWidget*     content_widget_;
 };
 
 #endif //  __LAYOUT_H__
