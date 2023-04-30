@@ -1,4 +1,4 @@
-// https://www.acmicpc.net/problem/10951
+// https://www.acmicpc.net/problem/11718
 
 #include <iostream>
 
@@ -7,17 +7,15 @@ int main()
     std::ios::sync_with_stdio(false);
     std::cin.tie(NULL);
 
-    int A = 0;
-    int B = 0;
+    char line[102];
 
-    while (1)
+    while (std::cin.getline(line, sizeof(line)))
     {
-        std::cin >> A >> B;
+        std::cout << line << '\n';
         if (std::cin.eof())
         {
             break;
         }
-        std::cout << A + B << '\n';
     }
 
     return 0;
