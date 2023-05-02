@@ -3,15 +3,11 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <sstream>
 
 int main()
 {
     std::ios::sync_with_stdio(false);
     std::cin.tie(NULL);
-
-    std::string str;
-    std::stringstream ss;
 
     std::string course_name;
     double grade;
@@ -22,11 +18,7 @@ int main()
 
     for (int i = 0; i < 20; i++)
     {
-        std::getline(std::cin, str);
-        ss.str(str);
-
-        ss >> course_name >> grade >> score;
-        ss.clear();
+        std::cin >> course_name >> grade >> score;
 
         if (score == "A+")
         {
