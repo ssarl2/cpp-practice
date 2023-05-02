@@ -3,7 +3,6 @@
 #include <QApplication>
 #include <QDebug>
 #include <iostream>
-#include <sstream>
 
 ProgressBar::ProgressBar(QWidget* parent) : QMainWindow(parent)
 {
