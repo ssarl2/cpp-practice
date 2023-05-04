@@ -1,9 +1,13 @@
 // https://www.acmicpc.net/problem/2745
 
 #include <algorithm>
-#include <cmath>
 #include <iostream>
 #include <string>
+
+int own_pow(int b, int e)
+{
+    return (e == 0) ? 1 : b * own_pow(b, e - 1);
+}
 
 int main()
 {
@@ -11,8 +15,8 @@ int main()
     std::cin.tie(NULL);
 
     std::string N;
-    long int    B;
-    long int    sum = 0;
+    int         B;
+    int         sum = 0;
 
     std::cin >> N >> B;
     std::reverse(N.begin(), N.end());
@@ -20,15 +24,19 @@ int main()
     int n = 0;
     for (int i = 0; i < N.size(); i++)
     {
-        n = static_cast<int>(N[i]);
+        n = N[i] - static_cast<int>('0');
+
         if (n > 9)
         {
-            n += 10 - static_cast<int>('A');
+            n = static_cast<int>(N[i]) - static_cast<int>('A') + 10;
         }
-        sum += (n * std::pow(B, i));
+        sum += (n * own_pow(B, i));
     }
 
-    std::cout << sum << "\n";
+    if (sum <= 1000000000)
+    {
+        std::cout << sum << "\n";
+    }
 
     return 0;
 }
