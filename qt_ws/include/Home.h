@@ -17,6 +17,7 @@ public:
     QAction* getExitAppActionObj() const;
     QPushButton* getProgressBarBtnObj() const;
     QPushButton* getLayoutBtnObj() const;
+    QPushButton* getTabBtnObj() const;
 
 protected:
     void resizeEvent(QResizeEvent* event) override;
@@ -27,6 +28,7 @@ private:
     QAction*     exit_app_act_;
     QPushButton* progress_bar_btn_;
     QPushButton* layout_btn_;
+    QPushButton* tab_btn_;
 };
 
 #endif //  __HOME_H__

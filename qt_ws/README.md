@@ -133,16 +133,18 @@ classDiagram
     MenuBarFactorySubscriber, MenuBarBase"
     note "Bridge
     ControlBridge, OSBridge, 
-    Home, ProgressBar, Layout"
+    Home, ProgressBar, Layout, Tab"
     MenuBarPublisher "1" <--o "*" MenuBarAction
     MenuBarFactorySubscriber "*" <--o "1" MenuBarPublisher
     MenuBarFactorySubscriber <|.. MenuBarBase
     MenuBarBase <|-- Home
     MenuBarBase <|-- ProgressBar
     MenuBarBase <|-- Layout
+    MenuBarBase <|-- Tab
     EventBridge <|-- Home
     EventBridge <|-- ProgressBar
     EventBridge <|-- Layout
+    EventBridge <|-- Tab
     EventBridge o--> OSBridge
     OSBridge <|.. Windows
     OSBridge <|.. Linux
@@ -185,6 +187,10 @@ classDiagram
         +Layout()
         +menuBarUpdate()
     }
+    class Tab{
+        +Tab()
+        +menuBarUpdate()
+    }
     class EventBridge{
         +event1()
         +event2()
@@ -219,8 +225,10 @@ stateDiagram-v2
     Home --> MenuBar
     Home --> ProgressBar
     Home --> Layout
+    Home --> Tab
     ProgressBar --> MenuBar
     Layout --> MenuBar
+    Tab --> MenuBar
     MenuBar --> Home: goHome()
     MenuBar --> [*]: exitApp()
 ```

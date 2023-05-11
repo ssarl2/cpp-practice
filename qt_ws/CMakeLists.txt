@@ -38,6 +38,7 @@ set(SOURCES
     src/Home.cpp
     src/ProgressBar.cpp
     src/Layout.cpp
+    src/Tab.cpp
     src/MenuBarAction.cpp
     # src/window.cpp
 )
@@ -46,10 +47,11 @@ set(HEADERS_FOR_QOBJECT
     ## In order to be able to recognize Q_OBJECT 
     ## by automoc(meta-object compiler), 
     ## header should be added
+    include/SubMain.h
     include/Home.h 
     include/ProgressBar.h
     include/Layout.h
-    include/SubMain.h
+    include/Tab.h
     # include/window.h
 )
 

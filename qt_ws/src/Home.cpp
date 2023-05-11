@@ -14,6 +14,7 @@ Home::Home(QWidget* parent) : QMainWindow(parent)
 
     progress_bar_btn_ = new QPushButton("Progress Bar", this);
     layout_btn_       = new QPushButton("Layout", this);
+    tab_btn_          = new QPushButton("Tab", this);
 }
 
 Home::~Home()
@@ -56,6 +57,21 @@ void Home::resizeEvent(QResizeEvent* event)
     layout_btn_->setStyleSheet(ss.str().c_str());
     layout_btn_->move(lo_btn_x, lo_btn_y);
     layout_btn_->resize(lo_btn_width, lo_btn_height);
+
+    // tab button
+    int tb_btn_width  = static_cast<int>(static_cast<double>(width()) * 0.2);
+    int tb_btn_height = static_cast<int>(static_cast<double>(height()) * 0.12);
+    int tb_btn_x      = static_cast<int>(static_cast<double>(width()) * 0.07) +
+                   lo_btn_width + lo_btn_x + 20;
+    int tb_btn_y = static_cast<int>(static_cast<double>(height()) * 0.1) + 25;
+    int tb_font_size =
+        static_cast<int>(static_cast<double>(tb_btn_width) * 0.16);
+    ss << "QPushButton {font-size:" << (tb_font_size > 0 ? tb_font_size : 1)
+       << "px; background-color: green;}";
+
+    tab_btn_->setStyleSheet(ss.str().c_str());
+    tab_btn_->move(tb_btn_x, tb_btn_y);
+    tab_btn_->resize(tb_btn_width, tb_btn_height);
 }
 
 void Home::menuBarUpdate(std::string event_type, std::string data)
@@ -88,4 +104,9 @@ QPushButton* Home::getProgressBarBtnObj() const
 QPushButton* Home::getLayoutBtnObj() const
 {
     return layout_btn_;
+}
+
+QPushButton* Home::getTabBtnObj() const
+{
+    return tab_btn_;
 }
