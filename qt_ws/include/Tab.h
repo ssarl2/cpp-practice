@@ -3,7 +3,10 @@
 
 #include <IMenuBarFactorySubscriber.h>
 #include <MenuBarBase.h>
+
 #include <QMainWindow>
+#include <QTabWidget>
+#include <QTextEdit>
 
 class Tab : public QMainWindow, public MenuBarBase
 {
@@ -20,11 +23,14 @@ protected:
     void resizeEvent(QResizeEvent* event) override;
 
 private:
-    QMenuBar* menu_bar_;
-    QAction*  go_home_act_;
-    QAction*  change_bg_act_;
-    QAction*  exit_app_act_;
-    QWidget*  content_widget_;
+    QMenuBar*   menu_bar_;
+    QAction*    go_home_act_;
+    QAction*    change_bg_act_;
+    QAction*    exit_app_act_;
+    QWidget*    content_widget_;
+    QTabWidget* tab_widget_;
+    QTextEdit*  te1_;
+    QTextEdit*  te2_;
 };
 
 #endif // __TAB_H__
