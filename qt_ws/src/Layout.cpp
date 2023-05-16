@@ -1,11 +1,18 @@
 #include <Layout.h>
 
 #include <QApplication>
+#include <QComboBox>
 #include <QDebug>
 #include <QDialogButtonBox>
+#include <QFormLayout>
+#include <QGroupBox>
+#include <QLabel>
+#include <QLineEdit>
 #include <QPoint>
+#include <QPushButton>
+#include <QSpinBox>
+#include <QVBoxLayout>
 #include <iostream>
-#include <sstream>
 
 Layout::Layout(QWidget* parent) : QMainWindow(parent)
 {
@@ -81,11 +88,6 @@ QAction* Layout::getChangeBgColorActionObj() const
 QAction* Layout::getExitAppActionObj() const
 {
     return exit_app_act_;
-}
-
-QPushButton* Layout::getBtnObj() const
-{
-    return button_;
 }
 
 void Layout::popUp(std::string msg)

@@ -4,7 +4,8 @@
 #include <IMenuBarFactorySubscriber.h>
 #include <MenuBarBase.h>
 #include <QMainWindow>
-#include <QPushButton>
+#include <QProgressBar>
+#include <QSlider>
 
 class ProgressBar : public QMainWindow, public MenuBarBase
 {
@@ -16,17 +17,18 @@ public:
     QAction* getGoHomeActionObj() const;
     QAction* getChangeBgColorActionObj() const;
     QAction* getExitAppActionObj() const;
-    QPushButton* getBtnObj() const;
 
 protected:
     void resizeEvent(QResizeEvent* event) override;
 
 private:
-    QMenuBar*    menu_bar_;
-    QAction*     go_home_act_;
-    QAction*     change_bg_act_;
-    QAction*     exit_app_act_;
-    QPushButton* button_;
+    QMenuBar*     menu_bar_;
+    QAction*      go_home_act_;
+    QAction*      change_bg_act_;
+    QAction*      exit_app_act_;
+    QWidget*      content_widget_;
+    QProgressBar* pb_bar_;
+    QSlider*      slider_;
 };
 
 #endif //  __PROGRESS_BAR_H__

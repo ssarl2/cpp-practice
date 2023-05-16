@@ -3,8 +3,10 @@
 
 #include <Home.h>
 #include <Layout.h>
-#include <ProgressBar.h>
 #include <MenuBarAction.h>
+#include <ProgressBar.h>
+#include <Tab.h>
+
 #include <QMainWindow>
 
 class SubMain : public QMainWindow

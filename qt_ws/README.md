@@ -84,7 +84,31 @@ with gdb(GNU Debugger)
 
 
 ## Format
-[clang-format](.clang-format). After coding, press `Ctrl + Shift + I` for auto formatting.  
+[clang-format](.clang-format)
+### Linux
+`sudo apt-get install llvm -y` to install  
+`Ctrl + Shift + P`  
+`C/C++: Edit Configurations (JSON)`  
+Add this (example)  
+```
+"clang-format.executable": "/usr/bin/clang-format",
+"clang-format.style": "file",
+"clang-format.fallbackStyle": "none",
+"formatting": true
+```
+`Ctrl + Shift + I` to auto-format  
+### Windows
+`choco install llvm -y` to install  
+`Ctrl + Shift + P`  
+`C/C++: Edit Configurations (JSON)`  
+Add this (example)  
+```
+"clang_format.executable": "C:\\Program Files\\LLVM\\bin\\clang-format.exe",
+"clang-format.style": "file",
+"clang-format.fallbackStyle": "none",
+"formatting": true
+```
+`Shift + Alt + F` to auto-format  
 ## Patterns
 With the UI implementations, MVC would be [good](https://stackoverflow.com/questions/9419147/which-software-design-patterns-do-common-gui-frameworks-exhibit). Frontend-Backend.  
 So, combination of below.  
@@ -109,16 +133,18 @@ classDiagram
     MenuBarFactorySubscriber, MenuBarBase"
     note "Bridge
     ControlBridge, OSBridge, 
-    Home, ProgressBar, Layout"
+    Home, ProgressBar, Layout, Tab"
     MenuBarPublisher "1" <--o "*" MenuBarAction
     MenuBarFactorySubscriber "*" <--o "1" MenuBarPublisher
     MenuBarFactorySubscriber <|.. MenuBarBase
     MenuBarBase <|-- Home
     MenuBarBase <|-- ProgressBar
     MenuBarBase <|-- Layout
+    MenuBarBase <|-- Tab
     EventBridge <|-- Home
     EventBridge <|-- ProgressBar
     EventBridge <|-- Layout
+    EventBridge <|-- Tab
     EventBridge o--> OSBridge
     OSBridge <|.. Windows
     OSBridge <|.. Linux
@@ -161,6 +187,10 @@ classDiagram
         +Layout()
         +menuBarUpdate()
     }
+    class Tab{
+        +Tab()
+        +menuBarUpdate()
+    }
     class EventBridge{
         +event1()
         +event2()
@@ -195,8 +225,10 @@ stateDiagram-v2
     Home --> MenuBar
     Home --> ProgressBar
     Home --> Layout
+    Home --> Tab
     ProgressBar --> MenuBar
     Layout --> MenuBar
+    Tab --> MenuBar
     MenuBar --> Home: goHome()
     MenuBar --> [*]: exitApp()
 ```

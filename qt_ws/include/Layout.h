@@ -3,14 +3,7 @@
 
 #include <IMenuBarFactorySubscriber.h>
 #include <MenuBarBase.h>
-#include <QComboBox>
-#include <QFormLayout>
-#include <QGroupBox>
-#include <QLabel>
-#include <QLineEdit>
 #include <QMainWindow>
-#include <QPushButton>
-#include <QSpinBox>
 
 class Layout : public QMainWindow, public MenuBarBase
 {
@@ -22,7 +15,6 @@ public:
     QAction* getGoHomeActionObj() const;
     QAction* getChangeBgColorActionObj() const;
     QAction* getExitAppActionObj() const;
-    QPushButton* getBtnObj() const;
 
 protected:
     void resizeEvent(QResizeEvent* event) override;
@@ -33,7 +25,6 @@ private:
     QAction*     go_home_act_;
     QAction*     change_bg_act_;
     QAction*     exit_app_act_;
-    QPushButton* button_;
     QWidget*     content_widget_;
 };
 
