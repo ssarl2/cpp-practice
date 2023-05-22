@@ -10,11 +10,11 @@ int main(void)
     Vertex *V4 = CreateVertex('4');
     Vertex *V5 = CreateVertex('5');
 
-    Addvertex(G, V1);
-    Addvertex(G, V2);
-    Addvertex(G, V3);
-    Addvertex(G, V4);
-    Addvertex(G, V5);
+    AddVertex(G, V1);
+    AddVertex(G, V2);
+    AddVertex(G, V3);
+    AddVertex(G, V4);
+    AddVertex(G, V5);
 
     AddEdge(V1, CreateEdge(V1, V2, 0));
     AddEdge(V1, CreateEdge(V1, V3, 0));

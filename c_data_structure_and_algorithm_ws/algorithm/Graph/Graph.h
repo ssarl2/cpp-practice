@@ -45,7 +45,7 @@ void DestroyVertex(Vertex *V);
 Edge *CreateEdge(Vertex *From, Vertex *Target, int Weight);
 void DestroyEdge(Edge *E);
 
-void Addvertex(Graph *G, Vertex *V);
+void AddVertex(Graph *G, Vertex *V);
 void AddEdge(Vertex *V, Edge *E);
 void PrintGraph(Graph *G);
 

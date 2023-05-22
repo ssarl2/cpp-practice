@@ -64,7 +64,7 @@ void DestroyEdge(Edge *E)
     free(E);
 }
 
-void Addvertex(Graph *G, Vertex *V)
+void AddVertex(Graph *G, Vertex *V)
 {
     Vertex *VertexList = G->Vertices;
 
