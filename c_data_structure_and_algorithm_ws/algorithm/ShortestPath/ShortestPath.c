@@ -49,6 +49,7 @@ void Dijkstra(Graph *G, Vertex *StartVertex, Graph *ShortestPath)
 
             if (Fringes[TargetVertex->Index] == NULL && Weights[CurrentVertex->Index] + CurrentEdge->Weight < Weights[TargetVertex->Index])
             {
+                printf("CurrentVertex->Index : %d, %c -> %c weights %d + %d = %d, %d\n", CurrentVertex->Index, CurrentVertex->Data, TargetVertex->Data, Weights[CurrentVertex->Index], CurrentEdge->Weight, Weights[CurrentVertex->Index] + CurrentEdge->Weight, Weights[TargetVertex->Index]);
                 PQNode NewNode = {CurrentEdge->Weight, TargetVertex};
                 PQ_Enqueue(PQ, NewNode);
 
