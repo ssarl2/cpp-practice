@@ -6,6 +6,7 @@ typedef struct structLCSTable
 {
     int **Data;
 } LCSTable;
+void LCS_PrintTable(LCSTable *Table, char *X, char *Y, int LEN_X, int LEN_Y);
 
 int LCS(char *X, char *Y, int i, int j, LCSTable *Table)
 {
@@ -23,14 +24,27 @@ int LCS(char *X, char *Y, int i, int j, LCSTable *Table)
         for (n = 1; n <= j; n++)
         {
             if (X[m - 1] == Y[n - 1])
+            {
+                printf("n: %d, m: %d, %c == %c\n", n, m, X[m - 1], Y[n - 1]);
                 Table->Data[m][n] = Table->Data[m - 1][n - 1] + 1;
+            }
             else
             {
                 if (Table->Data[m][n - 1] >= Table->Data[m - 1][n])
+                {
+                    printf("n: %d, m: %d, %d >= %d\n", n, m, Table->Data[m][n - 1], Table->Data[m - 1][n]);
                     Table->Data[m][n] = Table->Data[m][n - 1];
+                }
                 else
+                {
+
+                    printf("n: %d, m: %d, %d < %d\n", n, m, Table->Data[m][n - 1], Table->Data[m - 1][n]);
                     Table->Data[m][n] = Table->Data[m - 1][n];
+                }
             }
+
+            LCS_PrintTable(Table, X, Y, i, j);
+            printf("\n");
         }
     }
 
