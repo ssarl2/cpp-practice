@@ -1,5 +1,21 @@
 #include "MazeSolver.h"
 
+void PrintMaze(MazeInfo *Maze, Position *Current, int x, int y, char mark)
+{
+    printf("Current position : %d, %d\n", Current->X, Current->Y);
+    for (int i = 0; i < Maze->RowSize; i++)
+    {
+        for (int j = 0; j < Maze->ColumnSize; j++)
+        {
+            if (i == Current->Y + y && j == Current->X + x)
+                printf("%c", mark);
+            else
+                printf("%c", Maze->Data[i][j]);
+        }
+        printf("\n");
+    }
+}
+
 int Solve(MazeInfo *Maze)
 {
     int i = 0;
@@ -38,9 +54,10 @@ int Solve(MazeInfo *Maze)
 
 int MoveTo(MazeInfo *Maze, Position *Current)
 {
-    int i = 0;
-    int Dirs[] = {NORTH, SOUTH, EASH, WEST};
+    PrintMaze(Maze, Current, 0, 0, '*');
 
+    int i = 0; // Breakpoint
+    int Dirs[] = {NORTH, SOUTH, EASH, WEST};
     Position Next;
 
     if (Maze->Data[Current->Y][Current->X] == GOAL)
@@ -105,7 +122,9 @@ int GetNextStep(MazeInfo *Maze, Position *Current, int Direction, Position *Next
         break;
     }
 
-    if (Maze->Data[Next->Y][Next->X] == WALL)
+    PrintMaze(Maze, Current, x, y, '!');
+
+    if (Maze->Data[Next->Y][Next->X] == WALL) // Breakpoint
         return FAIL;
     if (Maze->Data[Next->Y][Next->X] == MARKED)
         return FAIL;
