@@ -1,5 +1,29 @@
 #include "Huffman.h"
 
+void PrintToBinary(int target)
+{
+    for (int i = 7; i >= 0; i--)
+        printf("%d", (target >> i) & 1);
+}
+
+void PrintQueue(PriorityQueue *DebugPQ, int priority, unsigned char symbol)
+{
+    PQNode DebugNode;
+    DebugNode.Priority = priority;
+    DebugNode.Data = symbol;
+    PQ_Enqueue(DebugPQ, DebugNode);
+
+    printf("Huffman_BuildPrefixTree, Priority Queue symbol '%c' and priority %d added \n", symbol, priority);
+    printf("Huffman_BuildPrefixTree, Priority Queue: ");
+
+    for (int i = 0; i < DebugPQ->UsedSize; i++)
+    {
+        printf("(%c, %d) ", DebugPQ->Nodes[i].Data, DebugPQ->Nodes[i].Priority);
+    }
+
+    printf("\n\n");
+}
+
 HuffmanNode *Huffman_CreateNode(SymbolInfo NewData)
 {
     HuffmanNode *NewNode = (HuffmanNode *)malloc(sizeof(HuffmanNode));
@@ -27,7 +51,13 @@ void Huffman_DestroyTree(HuffmanNode *Node)
 
 void Huffman_AddBit(BitBuffer *Buffer, char Bit)
 {
-    UCHAR Mask = 0x80;
+    printf("Huffman_AddBit, Buffer->Size : %d, Bit : '%d'\n", Buffer->Size, Bit);
+    /**
+     * @brief If you are not familar to the expresion of 0x80
+     * or bit operation
+     * https://chat.openai.com/share/abbf8595-08c2-4774-bb41-f8f78d8f72a6
+     */
+    UCHAR Mask = 0x80; // Binary: 1000 0000
 
     if (Buffer->Size % 8 == 0)
     {
@@ -37,12 +67,32 @@ void Huffman_AddBit(BitBuffer *Buffer, char Bit)
 
     Mask >>= Buffer->Size % 8;
 
+    printf("Huffman_AddBit, Before: Buffer->Buffer[Buffer->Size / 8] : ");
+    PrintToBinary(Buffer->Buffer[Buffer->Size / 8]);
+    printf(", decimal notation : %d\n", Buffer->Buffer[Buffer->Size / 8]);
     if (Bit == 1)
+    {
+        printf("Huffman_AddBit,         Buffer->Buffer[Buffer->Size / 8] |= Mask\n");
+        printf("Huffman_AddBit,         ");
+        PrintToBinary(Buffer->Buffer[Buffer->Size / 8]);
+        printf(" |= ");
+        PrintToBinary(Mask);
         Buffer->Buffer[Buffer->Size / 8] |= Mask;
+    }
     else
+    {
+        printf("Huffman_AddBit,         Buffer->Buffer[Buffer->Size / 8] &= ~Mask\n");
+        printf("Huffman_AddBit,         ");
+        PrintToBinary(Buffer->Buffer[Buffer->Size / 8]);
+        printf(" &= ");
+        PrintToBinary(~Mask);
         Buffer->Buffer[Buffer->Size / 8] &= ~Mask;
+    }
 
-    Buffer->Size++;
+    printf("\nHuffman_AddBit, After : Buffer->Buffer[Buffer->Size / 8] : ");
+    PrintToBinary(Buffer->Buffer[Buffer->Size / 8]);
+    printf(", decimal notation : %d\n\n", Buffer->Buffer[Buffer->Size / 8]);
+    Buffer->Size++; // Breakpoint
 }
 
 void Huffman_Encode(HuffmanNode **Tree, UCHAR *Source, BitBuffer *Encoded, HuffmanCode CodeTable[MAX_CHAR])
@@ -73,9 +123,16 @@ void Huffman_Encode(HuffmanNode **Tree, UCHAR *Source, BitBuffer *Encoded, Huffm
         int BitCount = CodeTable[Source[i]].Size;
 
         for (j = 0; j < BitCount; j++)
+        {
+            printf("Huffman_Encode, AddBit of Source : '%c'\n", Source[i]);
             Huffman_AddBit(Encoded, CodeTable[Source[i]].Code[j]);
+        }
 
-        i++;
+        printf("Huffman_Encode, ");
+        Huffman_PrintBinary(Encoded);
+        printf("               <<----------- %d bits were added\n\n", BitCount);
+
+        i++; // Breakpoint
     }
 }
 
@@ -91,16 +148,31 @@ void Huffman_Decode(HuffmanNode *Tree, BitBuffer *Encoded, UCHAR *Decoded)
 
         if (Current->Left == NULL && Current->Right == NULL)
         {
-            Decoded[Index++] = Current->Data.Symbol;
+            printf("Huffman_Decode, Decoded char : %c\n\n", Current->Data.Symbol);
+            Decoded[Index++] = Current->Data.Symbol; // Breakpoint
             Current = Tree;
         }
 
         Mask >>= i % 8;
 
+        printf("Huffman_Decode, ");
+        PrintToBinary(Encoded->Buffer[i / 8]);
+        printf(" & ");
+        PrintToBinary(Mask);
+        printf(" = ");
+        PrintToBinary(Encoded->Buffer[i / 8] & Mask);
         if ((Encoded->Buffer[i / 8] & Mask) != Mask)
+        {
             Current = Current->Left;
+            printf(" Left");
+        }
         else
+        {
             Current = Current->Right;
+            printf(" Right");
+        }
+
+        printf("\n"); // Break point
     }
 
     Decoded[Index] = '\0';
@@ -111,6 +183,7 @@ void Huffman_BuildPrefixTree(HuffmanNode **Tree, SymbolInfo SymbolInfoTable[MAX_
     int i = 0;
     PQNode Result;
     PriorityQueue *PQ = PQ_Create(0);
+    PriorityQueue *DebugPQ = PQ_Create(0);
 
     for (i = 0; i < MAX_CHAR; i++)
     {
@@ -121,6 +194,7 @@ void Huffman_BuildPrefixTree(HuffmanNode **Tree, SymbolInfo SymbolInfoTable[MAX_
             NewNode.Priority = SymbolInfoTable[i].Frequency;
             NewNode.Data = BitNode;
             PQ_Enqueue(PQ, NewNode);
+            PrintQueue(DebugPQ, SymbolInfoTable[i].Frequency, BitNode->Data.Symbol);
         }
     }
 
@@ -134,6 +208,7 @@ void Huffman_BuildPrefixTree(HuffmanNode **Tree, SymbolInfo SymbolInfoTable[MAX_
         PQNode QLeft;
         PQNode QRight;
         PQNode NewNode;
+        PQNode DebugNode;
 
         PQ_Dequeue(PQ, &QLeft);
         PQ_Dequeue(PQ, &QRight);
@@ -151,6 +226,11 @@ void Huffman_BuildPrefixTree(HuffmanNode **Tree, SymbolInfo SymbolInfoTable[MAX_
         NewNode.Data = BitNode;
 
         PQ_Enqueue(PQ, NewNode);
+        PQ_Dequeue(DebugPQ, &DebugNode);
+        printf("Huffman_BuildPrefixTree, popped left data and priority: '%c', %d\n", DebugNode.Data, DebugNode.Priority);
+        PQ_Dequeue(DebugPQ, &DebugNode);
+        printf("Huffman_BuildPrefixTree, popped right data and priority: '%c', %d\n", DebugNode.Data, DebugNode.Priority);
+        PrintQueue(DebugPQ, BitNode->Data.Frequency, BitNode->Data.Symbol); // Breakpoint
     }
 
     PQ_Dequeue(PQ, &Result);
@@ -178,10 +258,15 @@ void Huffman_BuildCodeTable(HuffmanNode *Tree, HuffmanCode CodeTable[MAX_CHAR], 
     {
         int i;
 
+        printf("Huffman_BuildCodeTable, Making a bit of Tree->Data.Symbol : '%c'\n", Tree->Data.Symbol);
         for (i = 0; i < Size; i++)
+        {
             CodeTable[Tree->Data.Symbol].Code[i] = Code[i];
+            printf("Huffman_BuildCodeTable, CodeTable[Tree->Data.Symbol].Code[%d]:%d = Code[%d]:%d\n", i, CodeTable[Tree->Data.Symbol].Code[i], i, Code[i]);
+        }
 
         CodeTable[Tree->Data.Symbol].Size = Size;
+        printf("Huffman_BuildCodeTable, Size : %d\n\n", Size); // Breakpoint
     }
 }
 
