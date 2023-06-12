@@ -39,23 +39,21 @@ int main()
 
     std::vector<int> primeNumbers = getPrimeNumbers(N);
 
-    auto it = primeNumbers.begin();
-    while (*it < M)
+    int sum           = 0;
+    int first_element = 0;
+    for (const auto& p : primeNumbers)
     {
-        primeNumbers.erase(it);
-        if (primeNumbers.size() == 0)
-            break;
-        it = primeNumbers.begin();
+        if (p < M)
+            continue;
+        if (!first_element)
+            first_element = p;
+        sum += p;
     }
 
-    int sum = 0;
-    for (const auto& p : primeNumbers)
-        sum += p;
-
-    if (primeNumbers.size() == 0)
+    if (sum == 0)
         std::cout << -1 << std::endl;
     else
-        std::cout << sum << std::endl << primeNumbers.front() << std::endl;
+        std::cout << sum << std::endl << first_element << std::endl;
 
     return 0;
 }
